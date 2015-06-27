@@ -5,16 +5,10 @@ FROM php:5.6-apache
 MAINTAINER Cyrill Kulka
 
 
-## CONFIGURATION
-
-# Expose data directory
-VOLUME /var/html/Specific
+## PREPARE INSTALL
 
 # Version of Baikal
 ENV VERSION 0.2.7
-
-
-## PREPARE INSTALL
 
 WORKDIR /var/www
 
@@ -30,7 +24,9 @@ RUN apt-get update && apt-get install -y unzip
 RUN \
   curl -O http://baikal-server.com/get/baikal-flat-$VERSION.zip &&\
   unzip baikal-flat-$VERSION.zip &&\
+  \
   rm -rf html && mv baikal-flat html &&\
+  \
   touch html/Specific/ENABLE_INSTALL &&\
   chown -R www-data:www-data html
 
@@ -40,3 +36,10 @@ RUN \
 RUN \
   rm baikal-flat-$VERSION.zip &&\
   apt-get -y autoremove unzip && apt-get -y clean
+
+
+## IMAGE CONFIGURATION
+
+# Expose data directory
+VOLUME /var/www/html/Specific
+
