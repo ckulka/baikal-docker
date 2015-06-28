@@ -1,7 +1,7 @@
 This repository provides two dockerfiles for ready-to-go Baikal servers: basic non-ssl & an SSL version.
 
- - [baikal](https://github.com/ckulka/baikal-docker/baikal): a basic, non-ssl Baikal server
- - [baikal-ssl](https://github.com/ckulka/baikal-docker/baikal-ssl): extends baikal with HTTPS
+ - [baikal](https://github.com/ckulka/baikal-docker/tree/master/baikal), a basic non-ssl Baikal server
+ - [baikal-ssl](https://github.com/ckulka/baikal-docker/tree/master/baikal-ssl), extends baikal with HTTPS
 
 For further details, please see the README.md files in the subfolders.
 
