@@ -12,7 +12,7 @@ I follow the same naming scheme for the images as [Baikal](http://baikal-server.
 
 Baikal Server based on php:5.6-apache and Baikal 0.2.7
  - Exposes port 80
- - Data volume for ````/var/www/html/Specific```
+ - Data volume for ```/var/www/html/Specific```
 
 
 ### Usage
