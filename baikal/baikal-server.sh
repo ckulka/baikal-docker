@@ -12,7 +12,7 @@
 ### END INIT INFO
 
 # Docker image that is used
-IMAGE="ckulka/baikal:latest"
+IMAGE="ckulka/baikal:0.2.7"
 
 # Name of the runtime container & its data volume container
 NAME="baikal-server"
