@@ -27,8 +27,11 @@ RUN \
   \
   rm -rf html && mv baikal-flat html &&\
   \
+  service apache2 start &&\
+  curl http://localhost/admin/install/ &&\
   touch html/Specific/ENABLE_INSTALL &&\
-  chown -R www-data:www-data html
+  chown -R www-data:www-data html &&\
+  service apache2 stop
 
 
 ## IMAGE CLEANUP

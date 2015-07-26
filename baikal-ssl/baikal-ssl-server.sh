@@ -12,7 +12,7 @@
 ### END INIT INFO
 
 # Docker image that is used
-IMAGE="ckulka/baikal-ssl:latest"
+IMAGE="ckulka/baikal-ssl:0.2.7"
 
 # Name of the runtime container & its data volume container
 NAME="baikal-ssl-server"
