@@ -7,6 +7,7 @@ For more details, see https://github.com/ckulka/baikal-docker
 I follow the same naming scheme for the images as [Baikal](http://baikal-server.com/) themselves:
  - [latest](https://github.com/ckulka/baikal-docker/tree/master) (corresponds to 0.4.5)
  - [0.4.5](https://github.com/ckulka/baikal-docker/tree/0.4.5)
+ - [0.3.5](https://github.com/ckulka/baikal-docker/tree/0.3.5)
  - [0.2.7](https://github.com/ckulka/baikal-docker/tree/0.2.7)
 
 
