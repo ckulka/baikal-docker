@@ -5,19 +5,15 @@ FROM php:7-apache
 MAINTAINER Cyrill Kulka
 
 # Version of Baikal
-ENV VERSION 0.4.5
+ENV VERSION 0.2.7
 
 # Download & extract Baikal
 RUN apt-get update && apt-get install unzip &&\
-	curl --location --output /tmp/baikal.zip https://github.com/fruux/Baikal/releases/download/$VERSION/baikal-$VERSION.zip &&\
+	curl --location --output /tmp/baikal.zip https://github.com/fruux/Baikal/releases/download/$VERSION/baikal-flat-$VERSION.zip &&\
 	unzip -q /tmp/baikal.zip -d /var/www &&\
+	mkdir -p /var/www/baikal && mv /var/www/baikal-flat /var/www/baikal/html &&\
 	chown -R www-data:www-data /var/www &&\
 	rm /tmp/baikal.zip && apt-get autoremove -y unzip
-
-#	service apache2 start &&\
-#	curl http://localhost/admin/install/ &&\
-#	touch /var/www/baikal/html/Specific/ENABLE_INSTALL &&\
-#	service apache2 stop
 
 # Configure Apache + HTTPS
 COPY files/baikal.conf /etc/apache2/sites-enabled/000-default.conf
@@ -25,4 +21,4 @@ RUN a2enmod ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc
 
 # Expose HTTPS & data directory
 EXPOSE 443
-VOLUME /var/www/baikal/Specific
+VOLUME /var/www/baikal/html/Specific
