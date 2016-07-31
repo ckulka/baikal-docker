@@ -32,6 +32,10 @@ sudo systemctl enable baikal.service
 ```
 This automatically starts the service.
 
+### Persistent Data
+
+The image exposes the ```/var/www/baikal/Specific``` folder, which contains the persistent data. This folder should be part of a regular backup.
+
 ### SSL Certificates
 
 If you want to use your own certificates, either hide this container behind your own HTTPS proxy (e.g. nginx) or you mount your certificates into the container:
