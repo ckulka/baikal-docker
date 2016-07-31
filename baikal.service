@@ -1,0 +1,13 @@
+[Unit]
+Description=Service for the Baikal docker container
+Requires=docker
+After=docker
+
+[Service]
+Environment=COMPOSE_FILE=/etc/baikal/docker-compose.yml
+ExecStart=/usr/local/bin/docker-compose up
+ExecReload=/usr/local/bin/docker-compose restart --force-recreate
+ExecStop=/usr/local/bin/docker-compose stop
+
+[Install]
+WantedBy=multi-user.target

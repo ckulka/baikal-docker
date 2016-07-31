@@ -5,8 +5,9 @@ For more details, see https://github.com/ckulka/baikal-docker
 ### Supported Tags
 
 I follow the same naming scheme for the images as [Baikal](http://baikal-server.com/) themselves:
- - latest (corresponds to 0.4.5)
- - 0.4.5
+ - [latest](https://github.com/ckulka/baikal-docker/tree/master) (corresponds to 0.4.5)
+ - [0.4.5](https://github.com/ckulka/baikal-docker/tree/0.4.5)
+ - [0.2.7](https://github.com/ckulka/baikal-docker/tree/0.2.7)
 
 
 ### Run
@@ -22,9 +23,9 @@ docker-compose up baikal
 
 #### Systemd
 
-I also included a Systemd service file.
+I also included a [Systemd service file](https://github.com/ckulka/baikal-docker/blob/master/baikal.service).
 ```
-sudo curl -O https://github.com/ckulka/baikal-docker/blob/master/baikal.service
+sudo curl -o /etc/systemd/system/baikal.service https://github.com/ckulka/baikal-docker/blob/master/baikal.service
 # Adjust the location of the docker-compose.yml
 
 sudo systemctl enable baikal.service
