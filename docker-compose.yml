@@ -5,6 +5,7 @@ services:
     image: ckulka/baikal
     build: .
     ports:
+      - "80:80"
       - "443:443"
 
   backup:

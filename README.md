@@ -12,9 +12,9 @@ I follow the same naming scheme for the images as [Baikal](http://baikal-server.
 
 ### Run
 
-The following command will run Baikal, including HTTPS over self-signed certificates:
+The following command will run Baikal over HTTP & HTTPS:
 ```
-docker run --rm -it -p 443:443 -p 443:443 ckulka/baikal
+docker run --rm -it -p 80:80 -p 443:443 ckulka/baikal
 ```
 Alternatively, use the provided [docker-compose.yml](https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml) from the Git repository:
 ```
@@ -45,7 +45,7 @@ Alternatively, you can also provide your own Apache configuration  and specify d
 
 I backup my persistent data to AWS S3 (https://aws.amazon.com/de/s3).
 
-My docker-compose file: https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml
+Docker-compose file: https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml
 ```
 # On a regular basis, perform the backup
 docker-compose run --rm backup
