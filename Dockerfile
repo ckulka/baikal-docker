@@ -1,18 +1,18 @@
 # Set the base image
-FROM php:7-apache
+FROM php:5-apache
 
 # File Author / Maintainer
 MAINTAINER Cyrill Kulka
 
 # Version of Baikal
-ENV VERSION 0.4.5
+ENV VERSION 0.2.7
 
 # Download & extract Baikal
-RUN apt-get update && apt-get install unzip &&\
-	curl --location --output /tmp/baikal.zip https://github.com/fruux/Baikal/releases/download/$VERSION/baikal-$VERSION.zip &&\
-	unzip -q /tmp/baikal.zip -d /var/www &&\
+RUN curl --location --output /tmp/baikal.tgz https://github.com/fruux/Baikal/releases/download/$VERSION/baikal-regular-$VERSION.tgz &&\
+	gzip -dc /tmp/baikal.tgz | tar -xz --directory /var/www &&\
+	mv /var/www/baikal-regular /var/www/baikal &&\
 	chown -R www-data:www-data /var/www &&\
-	rm /tmp/baikal.zip && apt-get autoremove -y unzip
+	rm /tmp/baikal.tgz
 
 # Configure Apache + HTTPS
 COPY files/baikal.conf /etc/apache2/sites-enabled/000-default.conf
