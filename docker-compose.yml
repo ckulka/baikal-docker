@@ -15,6 +15,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=my-access-key-secret
       - AWS_DEFAULT_REGION=eu-central-1
       - BACKUP_LOCAL=/var/www/baikal/Specific
+      - BACKUP_S3=s3://my-bucket
     volumes_from:
       - baikal
     command: /opt/aws-s3-sync-backup.sh
