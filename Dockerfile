@@ -5,7 +5,7 @@ FROM php:7-apache
 MAINTAINER Cyrill Kulka
 
 # Version of Baikal
-ENV VERSION 0.4.5
+ENV VERSION 0.4.6
 
 # Download & extract Baikal
 RUN apt-get update && apt-get install unzip &&\
