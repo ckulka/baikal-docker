@@ -1,8 +1,10 @@
-# Set the base image
-FROM php:7-apache
+FROM php:5-apache
 
-# File Author / Maintainer
-MAINTAINER Cyrill Kulka
+LABEL maintainer="cyrill.kulka@gmail.com"
+LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
+LABEL version="0.4.6"
+LABEL repository="https://github.com/ckulka/baikal-docker"
+LABEL website="http://sabre.io/baikal/"
 
 # Version of Baikal
 ENV VERSION 0.4.6
