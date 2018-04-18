@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install unzip &&\
 
 # Configure Apache + HTTPS
 COPY files/baikal.conf /etc/apache2/sites-enabled/000-default.conf
-RUN a2enmod ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc/ssl/private/baikal.private.pem -out /etc/ssl/private/baikal.public.pem -days 3650 -nodes
+RUN a2enmod rewrite ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc/ssl/private/baikal.private.pem -out /etc/ssl/private/baikal.public.pem -days 3650 -nodes
 
 # Expose HTTPS & data directory
 EXPOSE 443
