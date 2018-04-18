@@ -22,10 +22,10 @@ The following command will run Baikal over HTTP & HTTPS:
 docker run --rm -it -p 80:80 -p 443:443 ckulka/baikal
 ```
 
-Alternatively, use the provided [docker-compose.yml](https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml) from the Git repository:
+Alternatively, use the provided [examples/docker-compose.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.yaml) from the Git repository:
 
 ```bash
-docker-compose up baikal
+docker-compose up
 ```
 
 ## Environment Variables
@@ -50,7 +50,7 @@ I also included a [Systemd service file](https://github.com/ckulka/baikal-docker
 
 ```bash
 sudo curl -o /etc/systemd/system/baikal.service https://github.com/ckulka/baikal-docker/blob/master/baikal.service
-# Adjust the location of the docker-compose.yml
+# Adjust the WorkingDirectory variable
 
 sudo systemctl enable baikal.service
 ```
@@ -59,26 +59,37 @@ This automatically starts the service.
 
 ## Persistent Data
 
-The image exposes the ```/var/www/baikal/Specific``` folder, which contains the persistent data. This folder should be part of a regular backup.
+The image exposes the `/var/www/baikal/Specific` folder, which contains the persistent data. This folder should be part of a regular backup.
 
 ## SSL Certificates
 
-If you want to use your own certificates, either hide this container behind your own HTTPS proxy (e.g. nginx) or you mount your certificates into the container:
+### Let's Encrypt
+
+[Traefik](https://traefik.io/) is a modern HTTP reverse proxy that supports Docker + [Let's Encrypt](https://letsencrypt.org) and manages its configuration automatically and dynamically.
+
+An example for Docker Compose can be found under [examples/docker-compose.letsencrypt.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.letsencrypt.yaml).
+
+### Static Certificates
+
+If you want to use your own certificates, either hide this container behind your own HTTPS proxy (e.g. [nginx](https://hub.docker.com/_/nginx/)) or you mount your certificates into the container:
 
 ```bash
 # The folder /etc/ssl/private/baikal contains the files baikal.public.pem and baikal.private.pem
-docker run --rm -it -p 80:80 -p 443:443 -v /etc/my-certs/baikal:/etc/ssl/private/:ro ckulka/rpi-baikal
+docker run --rm -it -p 80:80 -p 443:443 -v /etc/ssl/private/baikal:/etc/ssl/private/:ro ckulka/baikal
 ```
 
-Alternatively, you can also provide your own Apache configuration and specify different certificates (see [baikal-docker/files/baikal.conf](https://github.com/ckulka/baikal-docker/blob/master/files/baikal.conf)).
+Alternatively, you can also provide your own Apache configuration and specify different certificates (see [files/baikal.conf](https://github.com/ckulka/baikal-docker/blob/master/files/baikal.conf)).
 
 ## Backup to AWS S3
 
 I backup my persistent data to AWS S3 (<https://aws.amazon.com/de/s3>).
 
-Docker-compose file: <https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml>
+Docker-compose file: [examples/docker-compose.awss3.yaml]<https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.awss3.yaml>
 
 ```bash
+# Important: only start the baikal container
+docker-compose up baikal
+
 # On a regular basis, perform the backup
 docker-compose run --rm backup
 ```

@@ -5,10 +5,9 @@ After=docker
 
 [Service]
 WorkingDirectory=/etc/baikal
-#Environment=COMPOSE_FILE=/etc/baikal/docker-compose.yml
-ExecStart=/usr/local/bin/docker-compose up baikal
-ExecReload=/usr/local/bin/docker-compose restart --force-recreate baikal
-ExecStop=/usr/local/bin/docker-compose stop baikal
+ExecStart=/usr/local/bin/docker-compose up
+ExecReload=/usr/local/bin/docker-compose restart --force-recreate
+ExecStop=/usr/local/bin/docker-compose stop
 
 [Install]
 WantedBy=multi-user.target

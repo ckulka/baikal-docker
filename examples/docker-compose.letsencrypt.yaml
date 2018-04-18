@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  baikal:
+    image: ckulka/baikal:0.4.6
+    labels:
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host: dav.example.com"
+      traefik.port: 80
+    environment:
+      BAIKAL_SERVERNAME: dav.example.com
+    volumes:
+      - baikal:/var/www/baikal/Specific
+
+  # See https://docs.traefik.io/
+  traefik:
+    image: traefik:1.5-alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/ssl/private/acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: |
+      --defaultentrypoints='http,https'
+      --entrypoints='Name:http Address::80 Redirect.EntryPoint:https'
+      --entrypoints='Name:https Address::443 TLS'
+      --docker
+      --docker.exposedbydefault
+      --acme
+      --acme.acmelogging=true
+      --acme.email=admin@example.com
+      --acme.entrypoint=https
+      --acme.httpchallenge
+      --acme.httpchallenge.entrypoint=http
+      --acme.onhostrule=true
+      --acme.storage=/acme.json
+
+volumes:
+  baikal:
