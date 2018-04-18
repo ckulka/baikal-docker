@@ -28,7 +28,23 @@ Alternatively, use the provided [docker-compose.yml](https://github.com/ckulka/b
 docker-compose up baikal
 ```
 
-### Systemd
+## Environment Variables
+
+This image uses environment variables to set Apache's `ServerName` and `ServerAlias` directives.
+
+### `BAIKAL_SERVERNAME`
+
+This environment variable is used to set the global `ServerName` directive, e.g. `dav.example.io`.
+
+For more details, see [Apache Core Features: ServerName Directive](https://httpd.apache.org/docs/2.4/mod/core.html#servername).
+
+### `BAIKAL_SERVERALIAS`
+
+This environment variable is used to set the `ServerAlias` directive of the `VirtualHost`s, e.g. `dav.example.org dav.example.com`.
+
+For more details, see [Apache Core Features: ServerAlias Directive](https://httpd.apache.org/docs/2.4/mod/core.html#serveralias).
+
+## Systemd
 
 I also included a [Systemd service file](https://github.com/ckulka/baikal-docker/blob/master/baikal.service).
 
@@ -45,7 +61,7 @@ This automatically starts the service.
 
 The image exposes the ```/var/www/baikal/Specific``` folder, which contains the persistent data. This folder should be part of a regular backup.
 
-### SSL Certificates
+## SSL Certificates
 
 If you want to use your own certificates, either hide this container behind your own HTTPS proxy (e.g. nginx) or you mount your certificates into the container:
 
@@ -54,13 +70,13 @@ If you want to use your own certificates, either hide this container behind your
 docker run --rm -it -p 80:80 -p 443:443 -v /etc/my-certs/baikal:/etc/ssl/private/:ro ckulka/rpi-baikal
 ```
 
-Alternatively, you can also provide your own Apache configuration  and specify different certificates (see [baikal-docker/files/baikal.conf](https://github.com/ckulka/baikal-docker/blob/master/files/baikal.conf)).
+Alternatively, you can also provide your own Apache configuration and specify different certificates (see [baikal-docker/files/baikal.conf](https://github.com/ckulka/baikal-docker/blob/master/files/baikal.conf)).
 
 ## Backup to AWS S3
 
-I backup my persistent data to AWS S3 (https://aws.amazon.com/de/s3).
+I backup my persistent data to AWS S3 (<https://aws.amazon.com/de/s3>).
 
-Docker-compose file: https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml
+Docker-compose file: <https://github.com/ckulka/baikal-docker/blob/master/docker-compose.yml>
 
 ```bash
 # On a regular basis, perform the backup

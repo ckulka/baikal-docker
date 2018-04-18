@@ -23,3 +23,6 @@ RUN a2enmod ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc
 # Expose HTTPS & data directory
 EXPOSE 443
 VOLUME /var/www/baikal/Specific
+
+COPY files/start.sh /opt
+CMD [ "sh", "/opt/start.sh" ]
