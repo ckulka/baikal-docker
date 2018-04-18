@@ -1,4 +1,4 @@
-FROM php:5-apache
+FROM php:7.0-apache
 
 LABEL maintainer="cyrill.kulka@gmail.com"
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
