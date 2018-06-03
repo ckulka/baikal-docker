@@ -27,7 +27,7 @@ The following tags are available for both `amd64` and `arm32v7` platforms.
   - `experimental-nginx-amd64` ([master/Dockerfile.nginx-amd64](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-amd64))
   - `experimental-nginx-arm32v7` ([master/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-arm32v7))
 - `0.4.6`, `0.4.6-apache`, `apache`, `latest`
-  - `0.4.6-apache-amd64` ([0.4.6/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64))
+  - `0.4.6-apache-amd64`, `apache-amd64` ([0.4.6/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64))
   - `0.4.6-apache-arm32v7`, `apache-arm32v7` ([0.4.6/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7))
 - `0.4.6-nginx`, `nginx`
   - `0.4.6-nginx-amd64`, `nginx-amd64` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-amd64))
