@@ -25,8 +25,8 @@ RUN apt-get update && apt-get install -y \
   && sed -i 's/www-data/nginx/' /etc/php/7.0/fpm/pool.d/www.conf
 
 # Add Baikal & nginx configuration
-COPY --from=builder --chown=nginx:nginx /tmp/baikal /var/www
+COPY --from=builder --chown=nginx:nginx /tmp/baikal /var/www/baikal
 COPY files/nginx.conf /etc/nginx/conf.d/default.conf
 
-VOLUME /var/www/Specific
+VOLUME /var/www/baikal/Specific
 CMD /etc/init.d/php7.0-fpm start && nginx -g "daemon off;"

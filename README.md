@@ -1,25 +1,47 @@
 # Baikal
 
-This dockerfile provides a ready-to-go Baikal server.
+This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
 For more details, see <https://github.com/ckulka/baikal-docker>
 
-## Supported Tags
+## Supported tags and respective Dockerfile links
 
-I follow the same naming scheme for the images as [Baikal](http://baikal-server.com/) themselves:
+I follow the same version naming scheme as [Baikal](http://baikal-server.com/) themselves:
 
-- [latest](https://github.com/ckulka/baikal-docker/tree/master) (corresponds to 0.4.6)
-- [0.4.6](https://github.com/ckulka/baikal-docker/tree/0.4.6)
-- [0.4.5](https://github.com/ckulka/baikal-docker/tree/0.4.5)
-- [0.3.5](https://github.com/ckulka/baikal-docker/tree/0.3.5)
-- [0.2.7](https://github.com/ckulka/baikal-docker/tree/0.2.7)
+- `0.4.6`, `0.4.6-apache`, `latest`, `apache` ([Dockerfile](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile))
+- `0.4.6-nginx`, `nginx` ([Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx))
+- `0.4.6-arm32v7`, `arm32v7` ([Dockerfile.arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.arm32v7))
+- `0.4.5` ([Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.4.5))
+- `0.3.5` ([Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.3.5))
+- `0.2.7` ([Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.2.7))
 
-## Run
+## Quick reference
 
-The following command will run Baikal over HTTP & HTTPS:
+- **Where to file issues**:
+[https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
+- **Supported architectures** ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)):
+[`amd64`](https://hub.docker.com/r/amd64/alpine/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/) (only nginx)
+- **Image updates**:
+[PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
+- **Source of this description**:
+[https://github.com/ckulka/baikal-docker](https://github.com/ckulka/baikal-docker)
+
+## What is Baikal?
+
+From <http://sabre.io/baikal/>:
+
+>Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management.
+>
+>For more information, read the main website at baikal-server.com.
+>
+>Baikal is developed by Net Gusto and fruux.
+
+## How to use this image
+
+The following command will start Baikal:
 
 ```bash
-docker run --rm -it -p 80:80 -p 443:443 ckulka/baikal
+docker run --rm -it -p 80:80 ckulka/baikal:nginx
 ```
 
 Alternatively, use the provided [examples/docker-compose.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.yaml) from the Git repository:
@@ -28,25 +50,42 @@ Alternatively, use the provided [examples/docker-compose.yaml](https://github.co
 docker-compose up
 ```
 
-## Environment Variables
+Then you can hit <http://localhost> or <http://host-ip> in your browser and use Baikal.
 
-This image uses environment variables to set Apache's `ServerName` and `ServerAlias` directives.
+### Persistent Data
 
-### `BAIKAL_SERVERNAME`
+The image exposes the `/var/www/baikal/Specific` folder, which contains the persistent data. This folder should be part of a regular backup.
 
-This environment variable is used to set the global `ServerName` directive, e.g. `dav.example.io`.
+### Let's Encrypt + Traefik
 
-For more details, see [Apache Core Features: ServerName Directive](https://httpd.apache.org/docs/2.4/mod/core.html#servername).
+[Traefik](https://traefik.io/) is a modern HTTP reverse proxy that supports Docker + [Let's Encrypt](https://letsencrypt.org) and manages its configuration automatically and dynamically.
 
-### `BAIKAL_SERVERALIAS`
+An example for Docker Compose can be found at [examples/docker-compose.ssl.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.ssl.yaml).
 
-This environment variable is used to set the `ServerAlias` directive of the `VirtualHost`s, e.g. `dav.example.org dav.example.com`.
+This is my recommended approach, as your other containers can easily be added and you don't have to actively manage your certificates, Traefik creates new ones & replaces them when needed. Furthermore, since the image is an [official Docker image](https://hub.docker.com/_/traefik/), you won't have to worry as much about getting updates from a third party - aka me.
 
-For more details, see [Apache Core Features: ServerAlias Directive](https://httpd.apache.org/docs/2.4/mod/core.html#serveralias).
+I included an example Docker Compose file [examples/docker-compose.ssl.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.ssl.yaml) as a template.
 
-## Systemd
+For more details on the Traefik configuration, see [Traefik's Docker](https://docs.traefik.io/configuration/backends/docker/) and [Traefik's Let's Encrypt](https://docs.traefik.io/configuration/acme/) docs.
 
-I also included a [Systemd service file](https://github.com/ckulka/baikal-docker/blob/master/baikal.service).
+### Static Certificates
+
+If you want to use your own certificates, the recommended appraoch is to hide this container behind your own HTTPS proxy, e.g. with [Traefik's Static Certificates](https://docs.traefik.io/configuration/entrypoints/#static-certificates) or [nginx](https://hub.docker.com/_/nginx/).
+
+This way your other containers can easily be added and since the images are either official Docker images, e.g. [Traefik](https://hub.docker.com/_/traefik/) and [nginx](https://hub.docker.com/_/nginx/), or  directly come the maintainers, you won't have to worry as much about getting updates from a third party - aka me.
+
+Alternatively, if you're using the `apache` image variant, you can also mount your certificates into the container and expose the `443` port:
+
+```bash
+# The folder /etc/ssl/private/baikal contains the files baikal.public.pem and baikal.private.pem
+docker run --rm -it -p 80:80 -p 443:443 -v /etc/ssl/private/baikal:/etc/ssl/private/:ro ckulka/baikal:apache
+```
+
+I also included a Docker Compose template [examples/docker-compose.apache.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.apache.yaml)
+
+### Systemd
+
+To ensure Baikal is up after reboots, I also included a [Systemd service template](https://github.com/ckulka/baikal-docker/blob/master/baikal.service) which relies on the Docker Compose file to start all containers. Before you use it, make sure that the working directory matches your server setup.
 
 ```bash
 sudo curl -o /etc/systemd/system/baikal.service https://github.com/ckulka/baikal-docker/blob/master/baikal.service
@@ -55,36 +94,13 @@ sudo curl -o /etc/systemd/system/baikal.service https://github.com/ckulka/baikal
 sudo systemctl enable baikal.service
 ```
 
-This automatically starts the service.
+This automatically starts the service whenever your server (re)boots.
 
-## Persistent Data
+### Backup to AWS S3
 
-The image exposes the `/var/www/baikal/Specific` folder, which contains the persistent data. This folder should be part of a regular backup.
+I backup my persistent data to [AWS S3](https://aws.amazon.com/de/s3).
 
-## SSL Certificates
-
-### Let's Encrypt
-
-[Traefik](https://traefik.io/) is a modern HTTP reverse proxy that supports Docker + [Let's Encrypt](https://letsencrypt.org) and manages its configuration automatically and dynamically.
-
-An example for Docker Compose can be found under [examples/docker-compose.letsencrypt.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.letsencrypt.yaml).
-
-### Static Certificates
-
-If you want to use your own certificates, either hide this container behind your own HTTPS proxy (e.g. [nginx](https://hub.docker.com/_/nginx/)) or you mount your certificates into the container:
-
-```bash
-# The folder /etc/ssl/private/baikal contains the files baikal.public.pem and baikal.private.pem
-docker run --rm -it -p 80:80 -p 443:443 -v /etc/ssl/private/baikal:/etc/ssl/private/:ro ckulka/baikal
-```
-
-Alternatively, you can also provide your own Apache configuration and specify different certificates (see [files/baikal.conf](https://github.com/ckulka/baikal-docker/blob/master/files/baikal.conf)).
-
-## Backup to AWS S3
-
-I backup my persistent data to AWS S3 (<https://aws.amazon.com/de/s3>).
-
-Docker-compose file: [examples/docker-compose.awss3.yaml]<https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.awss3.yaml>
+Docker-compose file: [examples/docker-compose.awss3.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.awss3.yaml)
 
 ```bash
 # Important: only start the baikal container
@@ -93,3 +109,34 @@ docker-compose up baikal
 # On a regular basis, perform the backup
 docker-compose run --rm backup
 ```
+
+
+## Image Variants
+
+The `ckulka/baikal` images come in several flavors, each designed for a specific use case.
+
+### `ckulka/baikal:<version>`
+
+This is the defacto image. If you are unsure about what your needs are, you probably want to use this one.
+
+### `ckulka/baikal:apache`
+
+This image relies on Apache httpd and uses the [official PHP image](https://hub.docker.com/_/php/) that's packaged with the Apache web server.
+
+It also ships with HTTPS support and self-signed certificates, which can be replaced by user-provided certificates - for more details, see the *SSL Certificates: Static Certificates* section.
+
+This image uses environment variables to set Apache's `ServerName` and `ServerAlias` directives to avoid Apache httpd's warnings in the logs.
+
+The `BAIKAL_SERVERNAME` environment variable is used to set the global `ServerName` directive, e.g. `dav.example.io`. For more details, see [Apache Core Features: ServerName Directive](https://httpd.apache.org/docs/2.4/mod/core.html#servername).
+
+The `BAIKAL_SERVERALIAS` environment variable is used to set the `ServerAlias` directive of the `VirtualHost`s, e.g. `dav.example.org dav.example.com`. For more details, see [Apache Core Features: ServerAlias Directive](https://httpd.apache.org/docs/2.4/mod/core.html#serveralias).
+
+### `ckulka/baikal:nginx`
+
+This image relies on [nginx](https://www.nginx.com/) and uses the [official nginx image](https://hub.docker.com/_/nginx/).
+
+Compared to the Apache variant, it is significantly smaller (less than half the size), produces no warning messages out-of-the-box.
+
+### `ckulka/baikal:arm32v7`
+
+Same as the `ckulka/baikal:nginx`, but for arm32v7 platforms. Will be available through `ckulka/baikal:nginx` once [multi-arch leaves experimental status](https://blog.docker.com/2017/11/multi-arch-all-the-things/).

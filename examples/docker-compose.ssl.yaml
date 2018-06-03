@@ -1,0 +1,41 @@
+# Docker Compose file for a Baikal server with Let's Encrypt using Traefik (https://docs.traefik.io/)
+
+version: '2'
+services:
+  baikal:
+    image: ckulka/baikal:nginx
+    labels:
+      traefik.frontend.rule: "Host: dav.example.com"
+      traefik.port: 80
+    volumes:
+      - baikal:/var/www/baikal/Specific
+
+  # See https://docs.traefik.io/
+  traefik:
+    image: traefik:1.6-alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/ssl/private/acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - --defaultentrypoints=http,https
+      - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
+      - --entrypoints=Name:https Address::443 TLS
+      # - --accesslog
+      - --acme
+      # - --acme.acmelogging
+      # Staging CA server for testing/demo purposes
+      # - --acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --acme.email=admin@example.com
+      - --acme.entrypoint=https
+      - --acme.httpchallenge
+      - --acme.httpchallenge.entrypoint=http
+      - --acme.onhostrule=true
+      - --acme.storage=/acme.json
+      - --docker
+
+volumes:
+  baikal:

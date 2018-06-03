@@ -1,17 +1,13 @@
-version: '2'
+# Docker Compose file for a Baikal server
 
+version: '2'
 services:
   baikal:
-    image: ckulka/baikal:0.4.6
-    # environment:
-      # BAIKAL_SERVERNAME: dav.example.io
-      # BAIKAL_SERVERALIAS: dav.example.org dav.example.com
+    image: ckulka/baikal:nginx
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - baikal:/var/www/baikal/Specific
-      # - /etc/ssl/private/baikal:/etc/ssl/private
 
 volumes:
   baikal:
