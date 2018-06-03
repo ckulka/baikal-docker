@@ -8,9 +8,12 @@ For more details, see <https://github.com/ckulka/baikal-docker>
 
 I follow the same version naming scheme as [Baikal](http://baikal-server.com/) themselves:
 
+- `experimental`, `experimental-apache` ([master/Dockerfile](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile))
+- `experimental-arm32v7` ([master/Dockerfile.arm327v](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.arm327))
+- `experimental-nginx` ([master/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx))
 - `0.4.6`, `0.4.6-apache`, `latest`, `apache` ([0.4.6/Dockerfile](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile))
-- `0.4.6-nginx`, `nginx` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx))
 - `0.4.6-arm32v7`, `arm32v7` ([0.4.6/Dockerfile.arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.arm32v7))
+- `0.4.6-nginx`, `nginx` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx))
 - `0.4.5` ([0.4.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.4.5))
 - `0.3.5` ([0.3.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.3.5))
 - `0.2.7` ([0.2.7/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.2.7))
@@ -20,7 +23,7 @@ I follow the same version naming scheme as [Baikal](http://baikal-server.com/) t
 - **Where to file issues**:
 [https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
 - **Supported architectures** ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)):
-[`amd64`](https://hub.docker.com/r/amd64/alpine/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/)
+[`amd64`](https://hub.docker.com/r/amd64/nginx/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/)
 - **Image updates**:
 [PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
 - **Source of this description**:
@@ -131,12 +134,18 @@ The `BAIKAL_SERVERNAME` environment variable is used to set the global `ServerNa
 
 The `BAIKAL_SERVERALIAS` environment variable is used to set the `ServerAlias` directive of the `VirtualHost`s, e.g. `dav.example.org dav.example.com`. For more details, see [Apache Core Features: ServerAlias Directive](https://httpd.apache.org/docs/2.4/mod/core.html#serveralias).
 
+### `ckulka/baikal:arm32v7`
+
+This image relies on [nginx](https://www.nginx.com/) and uses the [official nginx image](https://hub.docker.com/r/arm32v7/nginx/).
+
+It will be available through `ckulka/baikal:nginx` once [multi-arch leaves experimental status](https://blog.docker.com/2017/11/multi-arch-all-the-things/).
+
+### `ckulka/baikal:experimental`
+
+This image builds the `master` branch from the source repository [ckulka/baikal-docker](https://github.com/ckulka/baikal-docker). Use at your own risk.
+
 ### `ckulka/baikal:nginx`
 
 This image relies on [nginx](https://www.nginx.com/) and uses the [official nginx image](https://hub.docker.com/_/nginx/).
 
 Compared to the Apache variant, it is significantly smaller (less than half the size) and produces no warning messages out-of-the-box.
-
-### `ckulka/baikal:arm32v7`
-
-Same as the `ckulka/baikal:nginx`, but for arm32v7 platforms. Will be available through `ckulka/baikal:nginx` once [multi-arch leaves experimental status](https://blog.docker.com/2017/11/multi-arch-all-the-things/).
