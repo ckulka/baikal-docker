@@ -6,17 +6,32 @@ For more details, see <https://github.com/ckulka/baikal-docker>
 
 ## Supported tags and respective Dockerfile links
 
-I follow the same version naming scheme as [Baikal](http://baikal-server.com/) themselves:
+I follow the same version naming scheme as [Baikal](http://baikal-server.com/) themselves.
 
-- `experimental`, `experimental-apache` ([master/Dockerfile](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile))
-- `experimental-arm32v7` ([master/Dockerfile.arm327v](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.arm327))
-- `experimental-nginx` ([master/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx))
-- `0.4.6`, `0.4.6-apache`, `latest`, `apache` ([0.4.6/Dockerfile](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile))
-- `0.4.6-arm32v7`, `arm32v7` ([0.4.6/Dockerfile.arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.arm32v7))
-- `0.4.6-nginx`, `nginx` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx))
+### Simple Tags
+
+The following tags are only available for `amd64` platforms.
+
 - `0.4.5` ([0.4.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.4.5))
 - `0.3.5` ([0.3.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.3.5))
 - `0.2.7` ([0.2.7/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.2.7))
+
+### Shared Tags
+
+The following tags are available for both `amd64` and `arm32v7` platforms.
+
+- `experimental`, `experimental-apache`
+  - `experimental-apache-amd64` ([master/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.apache-amd64))
+  - `experimental-apache-arm32v7` ([master/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.apache-arm32v7))
+- `experimental-nginx`
+  - `experimental-nginx-amd64` ([master/Dockerfile.nginx-amd64](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-amd64))
+  - `experimental-nginx-arm32v7` ([master/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-arm32v7))
+- `0.4.6`, `0.4.6-apache`, `apache`, `latest`
+  - `0.4.6-apache-amd64` ([0.4.6/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64))
+  - `0.4.6-apache-arm32v7`, `apache-arm32v7` ([0.4.6/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7))
+- `0.4.6-nginx`, `nginx`
+  - `0.4.6-nginx-amd64`, `nginx-amd64` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-amd64))
+  - `0.4.6-nginx-arm32v7`, `nginx-arm32v7` ([0.4.6/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-arm32v7))
 
 ## Quick reference
 

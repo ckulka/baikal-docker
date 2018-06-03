@@ -1,5 +1,5 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
-FROM debian:9-slim AS builder
+FROM arm32v7/debian:9-slim AS builder
 
 ENV VERSION 0.4.6
 
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y unzip && unzip -q /tmp/baikal.zip -d /t
 
 
 # Final Docker image
-FROM php:7.0-apache
+FROM arm32v7/php:7.0-apache
 
 LABEL maintainer="cyrill.kulka@gmail.com"
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
