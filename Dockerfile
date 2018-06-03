@@ -20,7 +20,7 @@ LABEL website="http://sabre.io/baikal/"
 COPY --from=builder --chown=www-data:www-data /tmp/baikal /var/www/baikal
 
 # Configure Apache + HTTPS
-COPY files/baikal.conf /etc/apache2/sites-enabled/000-default.conf
+COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc/ssl/private/baikal.private.pem -out /etc/ssl/private/baikal.public.pem -days 3650 -nodes
 
 # Expose HTTPS & data directory
