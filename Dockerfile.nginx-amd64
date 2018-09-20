@@ -19,6 +19,7 @@ LABEL website="http://sabre.io/baikal/"
 # Install dependencies: PHP & SQLite3
 RUN apt-get update && apt-get install -y \
     php7.0-fpm \
+    php7.0-mysql \
     php7.0-sqlite \
     sqlite3 \
   && rm -rf /var/lib/apt/lists/* \
