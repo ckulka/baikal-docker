@@ -16,9 +16,10 @@ LABEL version="0.4.6"
 LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
-# Install Baikal
+# Install Baikal and required dependencies
 COPY --from=builder /tmp/baikal /var/www/baikal
-RUN chown -R www-data:www-data /var/www/baikal
+RUN chown -R www-data:www-data /var/www/baikal &&\
+    docker-php-ext-install pdo pdo_mysql
 
 # Configure Apache + HTTPS
 COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
