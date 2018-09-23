@@ -4,6 +4,7 @@ version: '2'
 services:
   baikal:
     image: ckulka/baikal:nginx
+    restart: always
     ports:
       - "80:80"
     volumes:

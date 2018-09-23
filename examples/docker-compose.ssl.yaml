@@ -9,6 +9,7 @@ version: '2'
 services:
   baikal:
     image: ckulka/baikal:nginx
+    restart: always
     labels:
       traefik.frontend.rule: "Host: dav.example.com"
       traefik.port: 80
