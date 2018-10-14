@@ -3,6 +3,7 @@ version: '2'
 services:
   baikal:
     image: ckulka/baikal:0.4.6
+    restart: always
     # environment:
       # BAIKAL_SERVERNAME: dav.example.io
       # BAIKAL_SERVERALIAS: dav.example.org dav.example.com

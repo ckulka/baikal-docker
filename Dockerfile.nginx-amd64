@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     php7.0-dom \
     php7.0-fpm \
     php7.0-mbstring \
+    php7.0-mysql \
     php7.0-sqlite \
     php7.0-xmlwriter \
     sqlite3 \
