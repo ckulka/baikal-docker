@@ -12,6 +12,7 @@ I follow the same version naming scheme as [Baikal](http://baikal-server.com/) t
 
 The following tags are only available for `amd64` platforms.
 
+- `0.5.3` ([0.5.3/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.5.3))
 - `0.4.5` ([0.4.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.4.5))
 - `0.3.5` ([0.3.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.3.5))
 - `0.2.7` ([0.2.7/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.2.7))
@@ -26,12 +27,12 @@ The following tags are available for both `amd64` and `arm32v7` platforms.
 - `experimental-nginx`
   - `experimental-nginx-amd64` ([master/Dockerfile.nginx-amd64](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-amd64))
   - `experimental-nginx-arm32v7` ([master/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-arm32v7))
-- `0.4.6`, `0.4.6-apache`, `apache`, `latest`
-  - `0.4.6-apache-amd64`, `apache-amd64` ([0.4.6/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64))
-  - `0.4.6-apache-arm32v7`, `apache-arm32v7` ([0.4.6/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7))
-- `0.4.6-nginx`, `nginx`
-  - `0.4.6-nginx-amd64`, `nginx-amd64` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-amd64))
-  - `0.4.6-nginx-arm32v7`, `nginx-arm32v7` ([0.4.6/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-arm32v7))
+- `0.5.3`, `0.5.3-apache`, `apache`, `latest`
+  - `0.5.3-apache-amd64`, `apache-amd64` ([0.5.3/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.5.3/Dockerfile.apache-amd64))
+  - `0.5.3-apache-arm32v7`, `apache-arm32v7` ([0.5.3/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.5.3/Dockerfile.apache-arm32v7))
+- `0.5.3-nginx`, `nginx`
+  - `0.5.3-nginx-amd64`, `nginx-amd64` ([0.5.3/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.5.3/Dockerfile.nginx-amd64))
+  - `0.5.3-nginx-arm32v7`, `nginx-arm32v7` ([0.5.3/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.5.3/Dockerfile.nginx-arm32v7))
 
 ## Quick reference
 
