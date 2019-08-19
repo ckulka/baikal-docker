@@ -18,15 +18,15 @@ LABEL website="http://sabre.io/baikal/"
 
 # Install dependencies: PHP & SQLite3
 RUN apt-get update && apt-get install -y \
-    php7.0-dom \
-    php7.0-fpm \
-    php7.0-mbstring \
-    php7.0-mysql \
-    php7.0-sqlite \
-    php7.0-xmlwriter \
+    php7.3-dom \
+    php7.3-fpm \
+    php7.3-mbstring \
+    php7.3-mysql \
+    php7.3-sqlite \
+    php7.3-xmlwriter \
     sqlite3 \
   && rm -rf /var/lib/apt/lists/* \
-  && sed -i 's/www-data/nginx/' /etc/php/7.0/fpm/pool.d/www.conf
+  && sed -i 's/www-data/nginx/' /etc/php/7.3/fpm/pool.d/www.conf
 
 # Add Baikal & nginx configuration
 COPY --from=builder /tmp/baikal /var/www/baikal
