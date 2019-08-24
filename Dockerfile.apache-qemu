@@ -15,7 +15,7 @@ RUN tar zxvf qemu-3.0.0+resin-$QEMU_ARCH.tar.gz --strip-components 1
 
 
 # Final Docker image
-FROM $FROM_ARCH/php:7.2-apache
+FROM $FROM_ARCH/php:7.3-apache
 
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
 LABEL version="0.5.1"
