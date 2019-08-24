@@ -128,7 +128,6 @@ docker-compose up baikal
 docker-compose run --rm backup
 ```
 
-
 ## Image Variants
 
 The `ckulka/baikal` images come in several flavors, each designed for a specific use case.
