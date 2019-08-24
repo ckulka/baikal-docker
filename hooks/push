@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "Pushing $IMAGE_NAME-amd64"
 docker push $IMAGE_NAME-amd64
+
+echo "Pushing $IMAGE_NAME-arm32v7"
 docker push $IMAGE_NAME-arm32v7
+
+# echo "Pushing $IMAGE_NAME-arm64v8"
 # docker push $IMAGE_NAME-arm64v8

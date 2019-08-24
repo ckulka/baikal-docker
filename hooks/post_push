@@ -5,12 +5,34 @@
 curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
 chmod +x manifest-tool
 
-if [[ $DOCKER_TAG == *nginx ]]
+function generate_manifest {
+  cat > manifest-generated.yaml << EOF
+image: $1
+manifests:
+  - image: $2-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: $2-arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+EOF
+}
+
+echo "Pushing multi-arch manifest $IMAGE_NAME"
+generate_manifest $IMAGE_NAME $IMAGE_NAME
+./manifest-tool push from-spec manifest-generated.yaml
+
+if [ $DOCKER_TAG == "apache" ]
 then
-  echo "Pushing nginx multi-arch manifest"
-  ./manifest-tool push from-spec hooks/manifest-nginx.yaml
-else
-  echo "Pushing apache multi-arch manifest"
-  ./manifest-tool push from-spec hooks/manifest.yaml
-  ./manifest-tool push from-spec hooks/manifest-apache.yaml
+  echo "Pushing multi-arch manifest $DOCKER_REPO:latest"
+  generate_manifest "$DOCKER_REPO:latest" $IMAGE_NAME
+  ./manifest-tool push from-spec manifest-generated.yaml
+elif [[ $DOCKER_TAG == *-apache ]]
+then
+  echo "Pushing multi-arch manifest ${IMAGE_NAME/-apache/}"
+  generate_manifest ${IMAGE_NAME/-apache/} $IMAGE_NAME
+  ./manifest-tool push from-spec manifest-generated.yaml
 fi
