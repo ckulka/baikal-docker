@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker push $IMAGE_NAME .
+docker push $IMAGE_NAME-amd64
 docker push $IMAGE_NAME-arm32v7
 # docker push $IMAGE_NAME-arm64v8
