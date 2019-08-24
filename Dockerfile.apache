@@ -1,23 +1,21 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
-FROM arm32v7/debian:9-slim AS builder
+FROM alpine AS builder
 
-ENV VERSION 0.4.6
+ENV VERSION 0.5.1
 
-ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip /tmp/baikal.zip
-RUN apt-get update && apt-get install -y unzip && unzip -q /tmp/baikal.zip -d /tmp
-
+ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
+RUN apk add unzip && unzip -q baikal-$VERSION.zip
 
 # Final Docker image
-FROM arm32v7/php:7.0-apache
+FROM php:7.2-apache
 
-LABEL maintainer="cyrill.kulka@gmail.com"
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
-LABEL version="0.4.6"
+LABEL version="0.5.1"
 LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
 # Install Baikal and required dependencies
-COPY --from=builder /tmp/baikal /var/www/baikal
+COPY --from=builder baikal /var/www/baikal
 RUN chown -R www-data:www-data /var/www/baikal &&\
     docker-php-ext-install pdo pdo_mysql
 

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Building image for amd64 architecture"
+docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+
+echo "Building image for arm32v7 architecture"
+docker build \
+  --build-arg QEMU_ARCH=arm \
+  --build-arg FROM_ARCH=arm32v7 \
+  --file $DOCKERFILE_PATH-qemu \
+  --tag $IMAGE_NAME-arm32v7 .
+
+# echo "Building image for arm64v8 architecture"
+# docker build \
+#   --build-arg QEMU_ARCH=aarch64 \
+#   --build-arg FROM_ARCH=arm64v8 \
+#   --file $DOCKERFILE_PATH-qemu \
+#   --tag $IMAGE_NAME-arm64v8 .
