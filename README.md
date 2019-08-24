@@ -21,11 +21,13 @@ The following tags are only available for `amd64` platforms.
 The following tags are available for both `amd64` and `arm32v7` platforms.
 
 - `experimental`, `experimental-apache`
-  - `experimental-apache-amd64` ([master/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.apache-amd64))
-  - `experimental-apache-arm32v7` ([master/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.apache-arm32v7))
+  - `experimental-apache-amd64` ([master/apache.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile))
+  - `experimental-apache-arm32v7` ([master/apache-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/apache-qemu.dockerfile))
+  - `experimental-apache-arm64v8` ([master/apache-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/apache-qemu.dockerfile))
 - `experimental-nginx`
-  - `experimental-nginx-amd64` ([master/Dockerfile.nginx-amd64](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-amd64))
-  - `experimental-nginx-arm32v7` ([master/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/master/Dockerfile.nginx-arm32v7))
+  - `experimental-nginx-amd64` ([master/nginx.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile))
+  - `experimental-nginx-arm32v7` ([master/nginx-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile))
+  - `experimental-nginx-arm64v8` ([master/nginx-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile))
 - `0.4.6`, `0.4.6-apache`, `apache`, `latest`
   - `0.4.6-apache-amd64`, `apache-amd64` ([0.4.6/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64))
   - `0.4.6-apache-arm32v7`, `apache-arm32v7` ([0.4.6/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7))

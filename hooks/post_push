@@ -18,6 +18,11 @@ manifests:
       architecture: arm
       os: linux
       variant: v7
+  - image: $2-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v7
 EOF
 }
 

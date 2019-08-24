@@ -16,9 +16,9 @@ docker build \
   --file $DOCKERFILE_PATH_QEMU \
   --tag $IMAGE_NAME-arm32v7 .
 
-# echo "Building $IMAGE_NAME-arm64v8"
-# docker build \
-#   --build-arg QEMU_ARCH=aarch64 \
-#   --build-arg FROM_ARCH=arm64v8 \
-#   --file $DOCKERFILE_PATH_QEMU \
-#   --tag $IMAGE_NAME-arm64v8 .
+echo "Building $IMAGE_NAME-arm64v8"
+docker build \
+  --build-arg QEMU_ARCH=aarch64 \
+  --build-arg FROM_ARCH=arm64v8 \
+  --file $DOCKERFILE_PATH_QEMU \
+  --tag $IMAGE_NAME-arm64v8 .
