@@ -6,7 +6,7 @@ For more details, see <https://github.com/ckulka/baikal-docker>
 
 ## Supported tags and respective Dockerfile links
 
-I follow the same version naming scheme as [Baikal](http://baikal-server.com/) themselves.
+I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) themselves.
 
 ### Simple Tags
 
@@ -21,26 +21,34 @@ The following tags are only available for `amd64` platforms.
 The following tags are available for both `amd64` and `arm32v7` platforms.
 
 - `experimental`, `experimental-apache`
-  - `experimental-apache-amd64` ([master/apache.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile))
-  - `experimental-apache-arm32v7` ([master/apache-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/apache-qemu.dockerfile))
-  - `experimental-apache-arm64v8` ([master/apache-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/apache-qemu.dockerfile))
+  - [`experimental-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile)
+  - [`experimental-apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/master/apache-qemu.dockerfile)
+  - [`experimental-apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/master/apache-qemu.dockerfile)
 - `experimental-nginx`
-  - `experimental-nginx-amd64` ([master/nginx.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile))
-  - `experimental-nginx-arm32v7` ([master/nginx-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile))
-  - `experimental-nginx-arm64v8` ([master/nginx-qemu.dockerfile](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile))
-- `0.4.6`, `0.4.6-apache`, `apache`, `latest`
-  - `0.4.6-apache-amd64`, `apache-amd64` ([0.4.6/Dockerfile.apache-amd64](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64))
-  - `0.4.6-apache-arm32v7`, `apache-arm32v7` ([0.4.6/Dockerfile.apache-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7))
-- `0.4.6-nginx`, `nginx`
-  - `0.4.6-nginx-amd64`, `nginx-amd64` ([0.4.6/Dockerfile.nginx](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-amd64))
-  - `0.4.6-nginx-arm32v7`, `nginx-arm32v7` ([0.4.6/Dockerfile.nginx-arm32v7](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-arm32v7))
+  - [`experimental-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
+  - [`experimental-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile)
+  - [`experimental-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile)
+- `0.5.1`, `0.5.1-apache`, `apache`, `latest`
+  - [`0.5.1-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.1/apache.dockerfile)
+  - [`0.5.1-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.1/apache-qemu.dockerfile)
+  - [`0.5.1-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.1/apache-qemu.dockerfile)
+- `0.5.1-nginx`, `nginx`
+  - [`0.5.1-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.1/nginx.dockerfile)
+  - [`0.5.1-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.1/nginx-qemu.dockerfile)
+  - [`0.5.1-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.1/nginx-qemu.dockerfile)
+- `0.4.6`, `0.4.6-apache`
+  - [`0.4.6-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64)
+  - [`0.4.6-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7)
+- `0.4.6-nginx`
+  - [`0.4.6-nginx-amd64`, `nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-amd64)
+  - [`0.4.6-nginx-arm32v7`, `nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-arm32v7)
 
 ## Quick reference
 
 - **Where to file issues**:
 [https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
 - **Supported architectures** ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)):
-[`amd64`](https://hub.docker.com/r/amd64/nginx/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/)
+[`amd64`](https://hub.docker.com/r/amd64/nginx/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/), [`arm64v8`](https://hub.docker.com/r/arm64v8/nginx/)
 - **Image updates**:
 [PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
 - **Source of this description**:
