@@ -2,7 +2,7 @@
 
 This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
-For more details, see <https://github.com/ckulka/baikal-docker>
+For more details, see [ckulka/baikal-docker (GitHub)](https://github.com/ckulka/baikal-docker).
 
 ## Supported tags and respective Dockerfile links
 
@@ -56,7 +56,7 @@ The following tags are available for both `amd64` and `arm32v7` platforms.
 
 ## What is Baikal?
 
-From <http://sabre.io/baikal/>:
+From [sabre.io/baikal](http://sabre.io/baikal/):
 
 >Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management.
 >
@@ -78,7 +78,7 @@ Alternatively, use the provided [examples/docker-compose.yaml](https://github.co
 docker-compose up
 ```
 
-Then you can hit <http://localhost> or <http://host-ip> in your browser and use Baikal.
+Then you can hit [http://localhost](http://localhost) or [http://host-ip](http://host-ip) in your browser and use Baikal.
 
 ### Persistent Data
 

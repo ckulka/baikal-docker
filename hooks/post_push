@@ -22,7 +22,7 @@ manifests:
     platform:
       architecture: arm64
       os: linux
-      variant: v7
+      variant: v8
 EOF
 }
 
