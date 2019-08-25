@@ -1,7 +1,7 @@
 # Docker Compose file for a Baikal server with MariaDB 5
 # Based on issue https://github.com/ckulka/baikal-docker/issues/10
 
-version: '2'
+version: "2"
 services:
   baikal:
     image: ckulka/baikal:experimental-nginx
@@ -12,7 +12,7 @@ services:
       - baikal:/var/www/baikal/Specific
 
   db:
-    image: mariadb:5
+    image: mariadb:10
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: adalovelace
