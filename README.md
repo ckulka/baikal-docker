@@ -30,11 +30,19 @@ The following tags are support multiple architectures, e.g. `amd64`, `arm32v7` a
   - [`experimental-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
   - [`experimental-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile)
   - [`experimental-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/master/nginx-qemu.dockerfile)
-- `0.5.2`, `0.5.2-apache`, `apache`, `latest`
-  - [`0.5.2-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache.dockerfile)
-  - [`0.5.2-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache-qemu.dockerfile)
-  - [`0.5.2-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache-qemu.dockerfile)
-- `0.5.2-nginx`, `nginx`
+- `0.5.3`, `0.5.3-apache`, `apache`, `latest`
+  - [`0.5.3-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.3/apache.dockerfile)
+  - [`0.5.3-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.3/apache-qemu.dockerfile)
+  - [`0.5.3-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.3/apache-qemu.dockerfile)
+- `0.5.3-nginx`, `nginx`
+  - [`0.5.3-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.3/nginx.dockerfile)
+  - [`0.5.3-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.3/nginx-qemu.dockerfile)
+  - [`0.5.3-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.3/nginx-qemu.dockerfile)
+- `0.5.2`, `0.5.2-apache`
+  - [`0.5.2-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache.dockerfile)
+  - [`0.5.2-apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache-qemu.dockerfile)
+  - [`0.5.2-apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache-qemu.dockerfile)
+- `0.5.2-nginx`
   - [`0.5.2-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.2/nginx.dockerfile)
   - [`0.5.2-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.2/nginx-qemu.dockerfile)
   - [`0.5.2-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.2/nginx-qemu.dockerfile)
