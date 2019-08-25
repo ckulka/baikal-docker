@@ -1,10 +1,9 @@
 #!/bin/bash
 
-echo "Pushing $IMAGE_NAME-amd64"
-docker push $IMAGE_NAME-amd64
+# Custom build script to push images for all supported architectures.
 
-echo "Pushing $IMAGE_NAME-arm32v7"
-docker push $IMAGE_NAME-arm32v7
-
-echo "Pushing $IMAGE_NAME-arm64v8"
-docker push $IMAGE_NAME-arm64v8
+for arch in amd64 arm32v7 arm64v8
+do
+  echo "Pushing $IMAGE_NAME-$arch"
+  docker push $IMAGE_NAME-$arch
+done

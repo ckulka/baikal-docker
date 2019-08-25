@@ -1,24 +1,10 @@
 #!/bin/bash
 
+# Custom build script to build images for all supported architectures.
 # Example for IMAGE_NAME: ckulka/baikal:apache
 
-echo "Building $IMAGE_NAME-amd64"
-docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME-amd64 .
-
-echo "Determining Dockerfile for cross-compilation"
-DOCKERFILE_PATH_QEMU=${DOCKERFILE_PATH/.dockerfile/-qemu.dockerfile}
-echo "Using $DOCKERFILE_PATH_QEMU for cross-compilation"
-
-echo "Building $IMAGE_NAME-arm32v7"
-docker build \
-  --build-arg QEMU_ARCH=arm \
-  --build-arg FROM_ARCH=arm32v7 \
-  --file $DOCKERFILE_PATH_QEMU \
-  --tag $IMAGE_NAME-arm32v7 .
-
-echo "Building $IMAGE_NAME-arm64v8"
-docker build \
-  --build-arg QEMU_ARCH=aarch64 \
-  --build-arg FROM_ARCH=arm64v8 \
-  --file $DOCKERFILE_PATH_QEMU \
-  --tag $IMAGE_NAME-arm64v8 .
+for arch in amd64 arm32v7 arm64v8
+do
+  echo "Building $IMAGE_NAME-$arch"
+  docker build --build-arg FROM_ARCH=$arch --file $DOCKERFILE_PATH --tag $IMAGE_NAME-$arch .
+done
