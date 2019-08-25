@@ -1,5 +1,7 @@
 # Baikal
 
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ckulka/baikal) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ckulka/baikal) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8-informational)
+
 This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
 For more details, see [ckulka/baikal-docker (GitHub)](https://github.com/ckulka/baikal-docker).
@@ -18,7 +20,7 @@ The following tags are only available for `amd64` platforms.
 
 ### Shared Tags
 
-The following tags are available for both `amd64` and `arm32v7` platforms.
+The following tags are support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
 
 - `experimental`, `experimental-apache`
   - [`experimental-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile)
@@ -144,7 +146,11 @@ The `ckulka/baikal` images come in several flavors, each designed for a specific
 
 ### `ckulka/baikal:<version>`
 
-This is the defacto image. If you are unsure about what your needs are, you probably want to use this one.
+This is the defacto image, as follows the official guidelines the closest using Apache httpd.
+
+With that being said, it's worth checking out the `nginx` variant as it requires fewer resources, e.g. memory, and is a lot smaller in size.
+
+If you are unsure about what your needs are, you probably want to use this one though.
 
 ### `ckulka/baikal:apache`
 

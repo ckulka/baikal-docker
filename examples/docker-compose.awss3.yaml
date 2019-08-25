@@ -1,18 +1,14 @@
-version: '2'
+version: "2"
 
 services:
   baikal:
-    image: ckulka/baikal:0.4.6
+    image: ckulka/baikal:nginx
     restart: always
-    # environment:
-      # BAIKAL_SERVERNAME: dav.example.io
-      # BAIKAL_SERVERALIAS: dav.example.org dav.example.com
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - baikal:/var/www/baikal/Specific
-      # - /etc/ssl/private/baikal:/etc/ssl/private
 
   backup:
     image: ckulka/awscli:alpine
