@@ -1,0 +1,19 @@
+# Docker Compose file for a Baikal server
+
+version: '2'
+services:
+  baikal:
+    image: ckulka/baikal:nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - baikal:/var/www/baikal/Specific
+
+volumes:
+  baikal:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/foo/baikal/Specific
