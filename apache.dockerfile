@@ -3,7 +3,7 @@ ARG FROM_ARCH=amd64
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
 FROM alpine AS builder
 
-ENV VERSION 0.6.1
+ENV VERSION 0.7.0
 
 ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
@@ -16,10 +16,10 @@ RUN tar zxvf qemu-3.0.0+resin-aarch64.tar.gz --strip-components 1
 
 
 # Final Docker image
-FROM $FROM_ARCH/php:7.3-apache
+FROM $FROM_ARCH/php:7.4-apache
 
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
-LABEL version="0.6.1"
+LABEL version="0.7.0"
 LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
@@ -38,6 +38,7 @@ RUN a2enmod rewrite ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -key
 
 # Expose HTTPS & data directory
 EXPOSE 443
+VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
 
 COPY files/start.sh /opt

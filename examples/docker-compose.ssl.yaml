@@ -15,7 +15,8 @@ services:
       traefik.frontend.rule: "Host: dav.example.com"
       traefik.port: 80
     volumes:
-      - baikal:/var/www/baikal/Specific
+      - config:/var/www/baikal/config
+      - data:/var/www/baikal/Specific
 
   # See https://docs.traefik.io/
   traefik:
@@ -45,4 +46,5 @@ services:
       - --docker
 
 volumes:
-  baikal:
+  config:
+  data:

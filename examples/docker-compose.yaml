@@ -8,7 +8,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - baikal:/var/www/baikal/Specific
+      - config:/var/www/baikal/config
+      - data:/var/www/baikal/Specific
 
 volumes:
-  baikal:
+  config:
+  data:

@@ -8,10 +8,17 @@ services:
     ports:
       - "80:80"
     volumes:
-      - baikal:/var/www/baikal/Specific
+      - data:/var/www/baikal/Specific
+      - config:/var/www/baikal/config
 
 volumes:
-  baikal:
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/foo/baikal/config
+  data:
     driver: local
     driver_opts:
       type: none

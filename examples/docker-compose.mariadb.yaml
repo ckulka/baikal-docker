@@ -9,7 +9,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - baikal:/var/www/baikal/Specific
+      - config:/var/www/baikal/config
+      - data:/var/www/baikal/Specific
 
   db:
     image: mariadb:10
@@ -23,5 +24,6 @@ services:
       - db:/var/lib/mysql
 
 volumes:
-  baikal:
+  config:
+  data:
   db:

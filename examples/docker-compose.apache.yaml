@@ -11,8 +11,10 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - baikal:/var/www/baikal/Specific
+      - config:/var/www/baikal/Specific
+      - data:/var/www/baikal/Specific
       # - /etc/ssl/private/baikal:/etc/ssl/private
 
 volumes:
-  baikal:
+  config:
+  data:
