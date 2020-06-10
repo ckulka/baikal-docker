@@ -28,14 +28,17 @@ COPY --from=builder qemu-arm-static /usr/bin
 COPY --from=builder qemu-aarch64-static /usr/bin
 
 # Install dependencies: PHP & SQLite3
-RUN apt-get update && apt-get install -y \
-  php7.4-dom \
-  php7.4-fpm \
-  php7.4-mbstring \
-  php7.4-mysql \
-  php7.4-sqlite \
-  php7.4-xmlwriter \
-  sqlite3 \
+RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
+  echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list &&\
+  apt update &&\
+  apt install -y \
+    php7.4-dom \
+    php7.4-fpm \
+    php7.4-mbstring \
+    php7.4-mysql \
+    php7.4-sqlite \
+    php7.4-xmlwriter \
+    sqlite3 \
   && rm -rf /var/lib/apt/lists/* \
   && sed -i 's/www-data/nginx/' /etc/php/7.4/fpm/pool.d/www.conf
 
