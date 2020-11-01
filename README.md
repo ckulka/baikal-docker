@@ -30,7 +30,15 @@ The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `
   - [`experimental-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
   - [`experimental-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
   - [`experimental-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
-- `0.7.1`, `0.7.1-apache`, `apache`, `latest`
+- `0.7.2`, `0.7.2-apache`, `apache`, `latest`
+  - [`0.7.2-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
+  - [`0.7.2-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
+  - [`0.7.2-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
+- `0.7.2-nginx`, `nginx`
+  - [`0.7.2-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+  - [`0.7.2-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+  - [`0.7.2-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+- `0.7.1`, `0.7.1-apache`
   - [`0.7.1-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.1/apache.dockerfile)
   - [`0.7.1-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.1/apache.dockerfile)
   - [`0.7.1-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.1/apache.dockerfile)
