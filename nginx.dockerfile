@@ -32,6 +32,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list &&\
   apt update &&\
   apt install -y \
+  php7.4-curl \
   php7.4-dom \
   php7.4-fpm \
   php7.4-mbstring \

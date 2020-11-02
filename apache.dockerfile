@@ -30,7 +30,10 @@ COPY --from=builder qemu-aarch64-static /usr/bin
 # Install Baikal and required dependencies
 COPY --from=builder baikal /var/www/baikal
 RUN chown -R www-data:www-data /var/www/baikal &&\
-  docker-php-ext-install pdo pdo_mysql
+  apt-get update &&\
+  apt-get install libcurl4-openssl-dev &&\
+  rm -rf /var/lib/apt/lists/* &&\
+  docker-php-ext-install curl pdo pdo_mysql
 
 # Configure Apache + HTTPS
 COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
