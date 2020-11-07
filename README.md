@@ -10,96 +10,18 @@ For more details, see [ckulka/baikal-docker (GitHub)](https://github.com/ckulka/
 
 I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) themselves.
 
-### Simple Tags
-
-The following tags are only available for `amd64` platforms.
-
-- `0.4.5` ([0.4.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.4.5))
-- `0.3.5` ([0.3.5/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.3.5))
-- `0.2.7` ([0.2.7/Dockerfile](https://github.com/ckulka/baikal-docker/tree/0.2.7))
-
-### Shared Tags
-
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
 
-- `experimental`, `experimental-apache`
-  - [`experimental-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile)
-  - [`experimental-apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile)
-  - [`experimental-apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/master/apache.dockerfile)
-- `experimental-nginx`
-  - [`experimental-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
-  - [`experimental-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
-  - [`experimental-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/master/nginx.dockerfile)
 - `0.7.2`, `0.7.2-apache`, `apache`, `latest`
   - [`0.7.2-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
   - [`0.7.2-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
   - [`0.7.2-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
 - `0.7.2-nginx`, `nginx`
-  - [`0.7.2-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
-  - [`0.7.2-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
-  - [`0.7.2-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
-- `0.7.1`, `0.7.1-apache`
-  - [`0.7.1-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.1/apache.dockerfile)
-  - [`0.7.1-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.1/apache.dockerfile)
-  - [`0.7.1-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.1/apache.dockerfile)
-- `0.7.1-nginx`, `nginx`
-  - [`0.7.1-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.1/nginx.dockerfile)
-  - [`0.7.1-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.1/nginx.dockerfile)
-  - [`0.7.1-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.1/nginx.dockerfile)
-- `0.7.0`, `0.7.0-apache`
-  - [`0.7.0-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.0/apache.dockerfile)
-  - [`0.7.0-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.0/apache.dockerfile)
-  - [`0.7.0-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.0/apache.dockerfile)
-- `0.7.0-nginx`, `nginx`
-  - [`0.7.0-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.0/nginx.dockerfile)
-  - [`0.7.0-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.0/nginx.dockerfile)
-  - [`0.7.0-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.0/nginx.dockerfile)
-- `0.6.1`, `0.6.1-apache`
-  - [`0.6.1-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.6.1/apache.dockerfile)
-  - [`0.6.1-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.6.1/apache.dockerfile)
-  - [`0.6.1-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.6.1/apache.dockerfile)
-- `0.6.1-nginx`
-  - [`0.6.1-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.6.1/nginx.dockerfile)
-  - [`0.6.1-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.6.1/nginx.dockerfile)
-  - [`0.6.1-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.6.1/nginx.dockerfile)
-- `0.6.0`, `0.6.0-apache`
-  - [`0.6.0-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.6.0/apache.dockerfile)
-  - [`0.6.0-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.6.0/apache.dockerfile)
-  - [`0.6.0-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.6.0/apache.dockerfile)
-- `0.6.0-nginx`
-  - [`0.6.0-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.6.0/nginx.dockerfile)
-  - [`0.6.0-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.6.0/nginx.dockerfile)
-  - [`0.6.0-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.6.0/nginx.dockerfile)
-- `0.5.3`, `0.5.3-apache`
-  - [`0.5.3-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.3/apache.dockerfile)
-  - [`0.5.3-apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.3/apache-qemu.dockerfile)
-  - [`0.5.3-apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.3/apache-qemu.dockerfile)
-- `0.5.3-nginx`
-  - [`0.5.3-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.3/nginx.dockerfile)
-  - [`0.5.3-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.3/nginx-qemu.dockerfile)
-  - [`0.5.3-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.3/nginx-qemu.dockerfile)
-- `0.5.2`, `0.5.2-apache`
-  - [`0.5.2-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache.dockerfile)
-  - [`0.5.2-apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache-qemu.dockerfile)
-  - [`0.5.2-apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.2/apache-qemu.dockerfile)
-- `0.5.2-nginx`
-  - [`0.5.2-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.2/nginx.dockerfile)
-  - [`0.5.2-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.2/nginx-qemu.dockerfile)
-  - [`0.5.2-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.2/nginx-qemu.dockerfile)
-- `0.5.1`, `0.5.1-apache`
-  - [`0.5.1-apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.1/apache.dockerfile)
-  - [`0.5.1-apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.1/apache-qemu.dockerfile)
-  - [`0.5.1-apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.1/apache-qemu.dockerfile)
-- `0.5.1-nginx`
-  - [`0.5.1-nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.5.1/nginx.dockerfile)
-  - [`0.5.1-nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.5.1/nginx-qemu.dockerfile)
-  - [`0.5.1-nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.5.1/nginx-qemu.dockerfile)
-- `0.4.6`, `0.4.6-apache`
-  - [`0.4.6-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-amd64)
-  - [`0.4.6-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.apache-arm32v7)
-- `0.4.6-nginx`
-  - [`0.4.6-nginx-amd64`, `nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-amd64)
-  - [`0.4.6-nginx-arm32v7`, `nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.4.6/Dockerfile.nginx-arm32v7)
+  - [`0.7.2-nginx-amd64`, `nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+  - [`0.7.2-nginx-arm32v7`, `nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+  - [`0.7.2-nginx-arm64v8`, `nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+
+For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`.
 
 ## Quick reference
 
@@ -140,7 +62,9 @@ Then you can hit [http://localhost](http://localhost) or [http://host-ip](http:/
 
 ### Persistent Data
 
-The image exposes the `/var/www/baikal/Specific` folder, which contains the persistent data. This folder should be part of a regular backup.
+The image exposes the `/var/www/baikal/Specific` and `/var/www/baikal/config` folder, which contain the persistent data. This folder should be part of a regular backup.
+
+If want to use local folders instead of Docker volumes, see [examples/docker-compose.localvolumes.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.localvolumes.yaml) to avoid file permission issues.
 
 ### Let's Encrypt + Traefik
 
