@@ -12,6 +12,7 @@ services:
     image: ckulka/baikal:nginx
     restart: always
     labels:
+      traefik.enable: "true"
       traefik.frontend.rule: "Host: dav.example.com"
       traefik.port: 80
     volumes:
@@ -20,30 +21,31 @@ services:
 
   # See https://docs.traefik.io/
   traefik:
-    image: traefik:1.6-alpine
+    image: traefik:2.3
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
       - /etc/ssl/private/acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock
     command:
-      - --defaultentrypoints=http,https
-      - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
-      - --entrypoints=Name:https Address::443 TLS
-      # - --accesslog
-      - --acme
-      # - --acme.acmelogging
-      # Staging CA server for testing/demo purposes
-      # - --acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
-      - --acme.email=admin@example.com
-      - --acme.entrypoint=https
-      - --acme.httpchallenge
-      - --acme.httpchallenge.entrypoint=http
-      - --acme.onhostrule=true
-      - --acme.storage=/acme.json
-      - --docker
+      # See https://doc.traefik.io/traefik/observability/access-logs/
+      - --accesslog
+      # See https://doc.traefik.io/traefik/routing/entrypoints/#redirection
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      # See https://doc.traefik.io/traefik/https/acme/
+      - --certificatesresolvers.letsencrypt.acme.email=cyrill.kulka@gmail.com
+      - --certificatesresolvers.letsencrypt.acme.storage=/acme.json
+      # - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge
+
+      # https://doc.traefik.io/traefik/providers/docker/
+      - --providers.docker
+      - --providers.docker.exposedByDefault=false
 
 volumes:
   config:
