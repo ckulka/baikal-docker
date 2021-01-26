@@ -12,14 +12,14 @@ I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) the
 
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
 
-- `0.7.2`, `0.7.2-apache`, `apache`, `latest`
-  - [`0.7.2-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
-  - [`0.7.2-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
-  - [`0.7.2-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/apache.dockerfile)
-- `0.7.2-nginx`, `nginx`
-  - [`0.7.2-nginx-amd64`, `nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
-  - [`0.7.2-nginx-arm32v7`, `nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
-  - [`0.7.2-nginx-arm64v8`, `nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.7.2/nginx.dockerfile)
+- `0.8.0`, `0.8.0-apache`, `apache`, `latest`
+  - [`0.8.0-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
+  - [`0.8.0-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
+  - [`0.8.0-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
+- `0.8.0-nginx`, `nginx`
+  - [`0.8.0-nginx-amd64`, `nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
+  - [`0.8.0-nginx-arm32v7`, `nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
+  - [`0.8.0-nginx-arm64v8`, `nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
 For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`.
 
