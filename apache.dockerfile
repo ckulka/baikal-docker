@@ -31,7 +31,7 @@ COPY --from=builder qemu-aarch64-static /usr/bin
 COPY --from=builder baikal /var/www/baikal
 RUN chown -R www-data:www-data /var/www/baikal &&\
   apt-get update &&\
-  apt-get install libcurl4-openssl-dev &&\
+  apt-get install -y libcurl4-openssl-dev sendmail &&\
   rm -rf /var/lib/apt/lists/* &&\
   docker-php-ext-install curl pdo pdo_mysql
 

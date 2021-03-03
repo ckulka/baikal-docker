@@ -40,6 +40,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   php8.0-sqlite \
   php8.0-xmlwriter \
   sqlite3 \
+  sendmail \
   && rm -rf /var/lib/apt/lists/* \
   && sed -i 's/www-data/nginx/' /etc/php/8.0/fpm/pool.d/www.conf
 
