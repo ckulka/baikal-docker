@@ -31,9 +31,14 @@ COPY --from=builder qemu-aarch64-static /usr/bin
 COPY --from=builder baikal /var/www/baikal
 RUN chown -R www-data:www-data /var/www/baikal &&\
   apt-get update &&\
-  apt-get install -y libcurl4-openssl-dev sendmail &&\
+  apt-get install -y libcurl4-openssl-dev msmtp msmtp-mta &&\
   rm -rf /var/lib/apt/lists/* &&\
   docker-php-ext-install curl pdo pdo_mysql
+
+COPY files/msmtprc /etc/msmtprc
+RUN chown root:msmtp /etc/msmtprc && chmod 640 /etc/msmtprc
+
+#RUN echo 'set sendmail="/usr/bin/msmtp"' > /etc/mail.rc
 
 # Configure Apache + HTTPS
 COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
