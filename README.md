@@ -26,23 +26,23 @@ For earlier versions all the way back to version 0.2.7, please search in the [ta
 ## Quick reference
 
 - **Where to file issues**:
-[https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
+  [https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
 - **Supported architectures** ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)):
-[`amd64`](https://hub.docker.com/r/amd64/nginx/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/), [`arm64v8`](https://hub.docker.com/r/arm64v8/nginx/)
+  [`amd64`](https://hub.docker.com/r/amd64/nginx/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/), [`arm64v8`](https://hub.docker.com/r/arm64v8/nginx/)
 - **Image updates**:
-[PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
+  [PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
 - **Source of this description**:
-[https://github.com/ckulka/baikal-docker](https://github.com/ckulka/baikal-docker)
+  [https://github.com/ckulka/baikal-docker](https://github.com/ckulka/baikal-docker)
 
 ## What is Baikal?
 
 From [sabre.io/baikal](http://sabre.io/baikal/):
 
->Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management.
+> Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management.
 >
->For more information, read the main website at baikal-server.com.
+> For more information, read the main website at baikal-server.com.
 >
->Baikal is developed by Net Gusto and fruux.
+> Baikal is developed by Net Gusto and fruux.
 
 ## How to use this image
 
@@ -58,13 +58,13 @@ Alternatively, use the provided [examples/docker-compose.yaml](https://github.co
 docker-compose up
 ```
 
-Then you can hit [http://localhost](http://localhost) or [http://host-ip](http://host-ip) in your browser and use Baikal.
+You can now open [http://localhost](http://localhost) or [http://host-ip](http://host-ip) in your browser and use Baikal.
 
 ### Persistent Data
 
-The image exposes the `/var/www/baikal/Specific` and `/var/www/baikal/config` folder, which contain the persistent data. This folder should be part of a regular backup.
+The image exposes the `/var/www/baikal/Specific` and `/var/www/baikal/config` folders, which contain the persistent data. These folders should be part of a regular backup.
 
-If want to use local folders instead of Docker volumes, see [examples/docker-compose.localvolumes.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.localvolumes.yaml) to avoid file permission issues.
+If you want to use local folders instead of Docker volumes, see [examples/docker-compose.localvolumes.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.localvolumes.yaml) to avoid file permission issues.
 
 ### Let's Encrypt + Traefik
 
@@ -82,7 +82,7 @@ For more details on the Traefik configuration, see [Traefik's Docker](https://do
 
 If you want to use your own certificates, the recommended appraoch is to hide this container behind your own HTTPS proxy, e.g. with [Traefik's Static Certificates](https://docs.traefik.io/configuration/entrypoints/#static-certificates) or [nginx](https://hub.docker.com/_/nginx/).
 
-This way your other containers can easily be added and since the images are either official Docker images, e.g. [Traefik](https://hub.docker.com/_/traefik/) and [nginx](https://hub.docker.com/_/nginx/), or  directly come the maintainers, you won't have to worry as much about getting updates from a third party - aka me.
+This way your other containers can easily be added and since the images are either official Docker images, e.g. [Traefik](https://hub.docker.com/_/traefik/) and [nginx](https://hub.docker.com/_/nginx/), or directly come from the maintainers, you won't have to worry as much about getting updates from a third party - aka me. Security is important for all our internet facing workloads and using the official images makes keeping us safer just that much easier.
 
 Alternatively, if you're using the `apache` image variant, you can also mount your certificates into the container and expose the `443` port:
 
@@ -91,7 +91,7 @@ Alternatively, if you're using the `apache` image variant, you can also mount yo
 docker run --rm -it -p 80:80 -p 443:443 -v /etc/ssl/private/baikal:/etc/ssl/private/:ro ckulka/baikal:apache
 ```
 
-I also included a Docker Compose template [examples/docker-compose.apache.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.apache.yaml)
+I also included the Docker Compose template [examples/docker-compose.apache.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.apache.yaml) for this scenario.
 
 ### Systemd
 
@@ -136,7 +136,7 @@ If you are unsure about what your needs are, you probably want to use this one t
 
 This image relies on Apache httpd and uses the [official PHP image](https://hub.docker.com/_/php/) that's packaged with the Apache web server.
 
-It also ships with HTTPS support and self-signed certificates, which can be replaced by user-provided certificates - for more details, see the *SSL Certificates: Static Certificates* section.
+It also ships with HTTPS support and self-signed certificates, which can be replaced by user-provided certificates - for more details, see the _SSL Certificates: Static Certificates_ section.
 
 This image uses environment variables to set Apache's `ServerName` and `ServerAlias` directives to avoid Apache httpd's warnings in the logs.
 
