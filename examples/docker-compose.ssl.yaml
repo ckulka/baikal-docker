@@ -15,6 +15,12 @@ services:
       traefik.enable: "true"
       traefik.frontend.rule: "Host: dav.example.com"
       traefik.port: 80
+      # Required for iOS, see https://github.com/ckulka/baikal-docker/issues/37
+      traefik.http.middlewares.baikal-dav.redirectregex.regex: "https://(.*)/.well-known/(card|cal)dav"
+      traefik.http.middlewares.baikal-dav.redirectregex.replacement: "https://$$1/dav.php/"
+      traefik.http.middlewares.baikal-dav.redirectregex.permanent: "true"
+      traefik.http.routers.baikal.middlewares: "baikal-dav"
+
     volumes:
       - config:/var/www/baikal/config
       - data:/var/www/baikal/Specific
