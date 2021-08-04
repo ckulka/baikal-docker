@@ -1,73 +1,96 @@
-# Unraid Docker Baikal Installation
+# Unraid Docker Baikal Installation Guide
 
-**I have added a Baikal docker container template within Unraid. See the community apps section within your Unraid Server for easier installation.**
-**The template version uses the same docker container developed and maintained by @chulka and is merely a template to get it easily installed**
+If you would like to roll your own Baikal installation within Unraid straight from Docker Hub, this is the guide for you. Many thanks to [@Joshndroid](https://github.com/Joshndroid) for contributing this guide.
 
-If you would like to roll your own installation straight from docker hub please continue
+## Prerequisites
 
-This Unraid Docker Installation guide will mostly assume a few things;
-1.	You have docker enabled within Unraid
+This Unraid Docker Installation guide assumes a few things:
 
-2.	You have enabled community apps within Unraid
+1. Enabled Docker in Unraid (see [Docker Management](https://wiki.unraid.net/Manual/Docker_Management))
+1. Enabled [Community Applications (CA)](https://forums.unraid.net/topic/38582-plug-in-community-applications/) in Unraid
+1. Enabled ability to utilize Docker Hub for search results (see settings within the apps tab)
+1. (Optional) A reverse proxy container and network to allow for certificate handling & SSL connections
 
-3.	You have enabled within settings the ability to utilize dockerhub for search results (see settings within apps tab)
+**Installation Note** – You can change the Docker image tag in the repository in the later steps to one that is suitable for your setup. See [ckulka/baikal (Docker Hub)](https://hub.docker.com/r/ckulka/baikal/tags?page=1&ordering=last_updated) or [ckulka/baikal-docker (Github)](https://github.com/ckulka/baikal-docker) for a list of all available Docker image tags.
 
-4.	_OPTIONAL - You have a reverse proxy container and network to allow for certificate handling & SSL connections_
+**Further Installation Note** – If you utilise an external database such as [MariaDB](https://hub.docker.com/_/mariadb), please ensure that Baikal and the database can connect correctly:
 
-**Installation Note** – You can change the tag within the repo in the later steps to one that is suitable for your setup. See here for further https://github.com/ckulka/baikal-docker
+* the database and user are created
+* the database and Baikal containers are on the same network
 
-**Further installation Note** – If you’re choosing to utilise an external database such as mariadb, please ensure that you set this up correctly in that a database and user are all created as well as the network both Baikal and the mysql database are on in order for Baikal to connect and function correctly.
+## Installation
 
 With that in mind, the installation of Baikal is rather simple once you have the above setup.
 
-5.	Head over to apps and search for Baikal
+1. Head over to apps and search for "Baikal".
 
-6.	Click to begin the installation of Baikal within the search result. (_The repo is ckulka/baikal_)
+1. Click on the _ckulka/baikal_ repository within the search results to begin the installation of Baikal.
 
-7.	Set the toggle on the right in the template as ‘advanced view’ (_It defaults to basic view_)
+1. On the right in the template, switch from _Basic View_ to _Advanced View_.
 
-8.	Check that your satified with the tag that is being placed within your docker repo line to ensure your pulling the right version that you want. See here for further tags and their update history https://hub.docker.com/r/ckulka/baikal/tags?page=1&ordering=last_updated
+1. Ensure that the Docker image tag in your Docker repository line is the image variant you want.
 
-9.	Set your ‘Icon URL’ as https://raw.githubusercontent.com/sabre-io/sabre.io/master/source/img/baikal.png (_This will provide you with the Baikal logo_)
+   For more details, see _Image Variants_ and the _Tags_ tab in [ckulka/baikal (Docker Hub)](https://hub.docker.com/r/ckulka/baikal).
 
-10.	Set your ‘WebUI’ as http://[IP]:[PORT:80]/ (_This could be changed to whatever suits your local server port requirements - see below_)
+1. Set your _Icon URL_ to <https://raw.githubusercontent.com/sabre-io/sabre.io/master/source/img/baikal.png> (Baikal logo from the official maintainers).
 
-11.	Set ‘Extra Parameters’ as --restart=always
+1. Set your _WebUI_ to `http://[IP]:[PORT:80]/`
 
-12.	Set your network type as needed (_OPTIONAL - Set network type as your network that you utilize for your SSL certs (for me its proxnetwork)._)
+   Change this to whatever suits your local server port requirements - see below.
 
-13.	Add in your static IP address that you will utilize for Baikal. (_It makes it easier to get to your hosted instance_)
+1. Set _Extra Parameters_ to `--restart=always`.
 
-14.	Add in a ‘path’ as;
-*	Name – Config
-*	Container Path - /var/www/baikal/config
-*	Host Path - /mnt/user/appdata/baikal/config (_this could be changed to whatever suits your local server path requirements if your appdata path is different_)
-*	Default Value - /mnt/user/appdata/baikal/config (_see above_)
-*	Acccess Mode – Read/Write
-*	Description – Container Path: /var/www/baikal/config
+    This will restart the container automatically if it ever crashes.
 
-15.	Add in a ‘path’ as;
-*	Name – Specific
-*	Container Path - /var/www/baikal/Specific
-*	Host Path - /mnt/user/appdata/baikal/specific (_this could be changed to whatever suits your local server path requirements if your appdata path is different_)
-*	Default Value - /mnt/user/appdata/baikal/specific (_see above_)
-*	Acccess Mode – Read/Write
-*	Description – Container Path: /var/www/baikal/Specific
+1. (Optional) Set your network type as needed.
 
-16.	Now add in a ‘port’ as;
-*	Name – Port
-*	Container Port – 80
-*	Host Port – 80 (_this could be changed to whatever suits your local server port requirements if your 80 is already in use_)
-*	Default Value – 80 (_this could be changed to whatever suits your local server port requirements - as above_)
-*	Connection Type – TCP
-*	Description – Container Port: 80
+    For example, set it to the same one of your reverse proxy container that handles HTTPS termination and certificate renewal.
 
-17.	Click apply to download/install the container.
+1. Add in your static IP address that you will utilize for Baikal.
 
-20.	Start your Baikal docker container
+    This will make it easier to get to your hosted instance.
 
-21.	_OPTIONAL – Head over to your SSL cert provider container of choice and set-up as necessary to server certs to your Baikal instance for your domain._
+1. Add a new _path_ with
 
-22.	Head over to your webUI or domain and start the admin creation process.
+   * _Name_ is `Config`
+   * _Container Path_ is `/var/www/baikal/config`
+   * _Host Path_ is `/mnt/user/appdata/baikal/config` (change to where you store it on local server)
+   * _Default Value_ is `/mnt/user/appdata/baikal/config` (see above)
+   * _Acccess Mode_ is `Read/Write`
+   * _Description_ is `Container Path: /var/www/baikal/config`
 
-23.	You have the choice within the steps to utilise the sqlite database or an external mysql (_such as mariadb_). Just make sure your mysql database is on the same network as your Baikal server so you can easily access it. If your choosing to go the mysql method like I did you will need to conduct further setup within the mysql docker/installation in order for Baikal to function correctly.
+1. Add a new _path_ with
+
+   * _Name_ is `Specific`
+   * _Container Path_ is `/var/www/baikal/Specific`
+   * _Host Path_ is `/mnt/user/appdata/baikal/specific` (change to where you store it on local server)
+   * _Default Value_ is `/mnt/user/appdata/baikal/specific` (see above)
+   * _Acccess Mode_ is `Read/Write`
+   * _Description_ is `Container Path: /var/www/baikal/Specific`
+
+1. Now add in a _port_ with
+
+   * _Name_ is `Port`
+   * _Container Port_ is `80`
+   * _Host Port_ is `80` (change to the port where you want to expose Baikal over HTTP on your local server)
+   * _Default Value_ is `80` (see above)
+   * _Connection Type_ is `TCP`
+   * _Description_ is `Container Port: 80`
+
+1. Click _Apply_ to download and install the container.
+
+1. Start your Baikal docker container
+
+1. (Optional) Set up SSL
+
+    Head over to your SSL certificate provider container of choice and set-up as necessary to serve the certificates of your Baikal instance for your domain.
+
+1. Head over to your Baikal web interface and start the Baikal initialisation process.
+
+    You can access the web interface on the exposed port `http://[IP]:[PORT]`.
+
+    During the Baikal initialisation process, you can choose between a SQLite database or an external database such as [MariaDB](https://hub.docker.com/_/mariadb). When using an separate container as external database, make sure the Baikal and database container are on the same network.
+
+    If you are choosing to go with an external database container, you will need to set it up beforehand in order for Baikal to connect to it correctly, e.g. setting up the database user.
+
+Your Baikal instance now up all set, congratulations 🎉 🙌
