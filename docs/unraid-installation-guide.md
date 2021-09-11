@@ -1,6 +1,6 @@
 # Unraid Docker Baikal Installation Guide
 
-If you would like to roll your own Baikal installation within Unraid straight from Docker Hub, this is the guide for you. Many thanks to [@Joshndroid](https://github.com/Joshndroid) for contributing this guide.
+If you would like to roll your own Baikal installation within [Unraid](https://unraid.net/) straight from Docker Hub, this is the guide for you. Many thanks to [@Joshndroid](https://github.com/Joshndroid) for contributing this guide.
 
 ## Prerequisites
 
