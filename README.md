@@ -1,6 +1,6 @@
 # Baikal
 
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ckulka/baikal) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ckulka/baikal) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8-informational)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ckulka/baikal) [![docker build](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8-informational)
 
 This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
@@ -12,14 +12,10 @@ I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) the
 
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
 
-- `0.8.0`, `0.8.0-apache`, `apache`, `latest`
-  - [`0.8.0-apache-amd64`, `apache-amd64`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
-  - [`0.8.0-apache-arm32v7`, `apache-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
-  - [`0.8.0-apache-arm64v8`, `apache-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
-- `0.8.0-nginx`, `nginx`
-  - [`0.8.0-nginx-amd64`, `nginx-amd64`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
-  - [`0.8.0-nginx-arm32v7`, `nginx-arm32v7`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
-  - [`0.8.0-nginx-arm64v8`, `nginx-arm64v8`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
+- [`0.9.0`, `0.9.0-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
+- [`0.9.0-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
+- [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
+- [`0.8.0-nginx`,](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
 For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`.
 
@@ -70,7 +66,6 @@ If you want to use local folders instead of Docker volumes, see [examples/docker
 
 You can find more installation and configuration guides here:
 
-- [Multi-Arch Builds on Docker Hub](docs/multi-arch-builds-on-docker-hub.md)
 - [SSL Certificate Guide](docs/ssl-certificates-guide.md)
 - [systemd Guide](docs/systemd-guide.md)
 - [Unraid Installation Guide](docs/unraid-installation-guide.md)

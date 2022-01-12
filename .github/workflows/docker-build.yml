@@ -1,0 +1,81 @@
+# See
+# - https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+# - https://docs.github.com/en/actions/learn-github-actions/contexts
+# - https://github.com/docker/build-push-action/blob/master/docs/advanced/multi-platform.md
+name: docker build
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # See https://github.com/docker/setup-qemu-action
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      # See https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # See https://github.com/docker/login-action
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # Build Apache httpd images
+      - name: Build and push Apache httpd variant (experimental)
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v2
+        with:
+          file: apache.dockerfile
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          push: true
+          tags: |
+            ${{ github.repository }}:experimental-apache
+            ${{ github.repository }}:experimental
+
+      - name: Build and push Apache httpd variant (release)
+        if: github.event_name == 'release'
+        uses: docker/build-push-action@v2
+        with:
+          file: apache.dockerfile
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          push: true
+          tags: |
+            ${{ github.repository }}:${{ github.ref_name }}-apache
+            ${{ github.repository }}:${{ github.ref_name }}
+            ${{ github.repository }}:apache
+            ${{ github.repository }}:latest
+
+      # Build nginx images
+      - name: Build and push nginx variant (experimental)
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v2
+        with:
+          file: nginx.dockerfile
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          push: true
+          tags: ${{ github.repository }}:experimental-nginx
+
+      - name: Build and push nginx variant (release)
+        if: github.event_name == 'release'
+        uses: docker/build-push-action@v2
+        with:
+          file: nginx.dockerfile
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          push: true
+          tags: |
+            ${{ github.repository }}:${{ github.ref_name }}-nginx
+            ${{ github.repository }}:nginx
