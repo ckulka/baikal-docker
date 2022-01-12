@@ -12,8 +12,10 @@ I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) the
 
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
 
-- [`0.9.0`, `0.9.0-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
-- [`0.9.0-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
+- [`0.9.1`, `0.9.1-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
+- [`0.9.1-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
+- [`0.9.0`, `0.9.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
+- [`0.9.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
 - [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
 - [`0.8.0-nginx`,](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
