@@ -8,6 +8,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - .github/workflows/docker-build.yml
+      - "*.dockerfile"
+      - files/*
   release:
     types:
       - published

@@ -13,8 +13,8 @@ I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) the
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
 
 - [`0.9.0`, `0.9.0-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
-- [`0.9.0-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
-- [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
+- [`0.9.0-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
+- [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
 - [`0.8.0-nginx`,](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
 For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`.
@@ -24,7 +24,7 @@ For earlier versions all the way back to version 0.2.7, please search in the [ta
 - **Where to file issues**:
   [https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
 - **Supported architectures** ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)):
-  [`amd64`](https://hub.docker.com/r/amd64/nginx/), [`arm32v7`](https://hub.docker.com/r/arm32v7/nginx/), [`arm64v8`](https://hub.docker.com/r/arm64v8/nginx/)
+  `amd64`, `arm32v7`, `arm64v8`
 - **Image updates**:
   [PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
 - **Source of this description**:

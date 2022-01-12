@@ -1,0 +1,23 @@
+# Updates the Docker Hub description with the contents of the README.md file
+name: Docker Hub Description
+on:
+  release:
+    types:
+      - published
+    paths:
+      - README.md
+      - .github/workflows/dockerhub-description.yml
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ckulka/baikal-docker
+          short-description: ${{ github.event.repository.description }}
