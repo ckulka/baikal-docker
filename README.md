@@ -17,7 +17,7 @@ The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `
 - [`0.9.0`, `0.9.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
 - [`0.9.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
 - [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
-- [`0.8.0-nginx`,](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
+- [`0.8.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
 For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`.
 
@@ -68,9 +68,9 @@ If you want to use local folders instead of Docker volumes, see [examples/docker
 
 You can find more installation and configuration guides here:
 
-- [SSL Certificate Guide](docs/ssl-certificates-guide.md)
-- [systemd Guide](docs/systemd-guide.md)
-- [Unraid Installation Guide](docs/unraid-installation-guide.md)
+- [SSL Certificate Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/ssl-certificates-guide.md)
+- [systemd Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/systemd-guide.md)
+- [Unraid Installation Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/unraid-installation-guide.md)
 
 ## Image Variants
 
@@ -78,7 +78,7 @@ The `ckulka/baikal` images come in several flavors, each designed for a specific
 
 ### `ckulka/baikal:<version>`
 
-This is the defacto image, as follows the official guidelines the closest using Apache httpd.
+This is the defacto image and follows the official guidelines the closest using Apache httpd.
 
 With that being said, it's worth checking out the `nginx` variant as it requires fewer resources, e.g. memory, and is a lot smaller in size.
 
@@ -88,7 +88,7 @@ If you are unsure about what your needs are, you probably want to use this one t
 
 This image relies on Apache httpd and uses the [official PHP image](https://hub.docker.com/_/php/) that's packaged with the Apache web server.
 
-It also ships with HTTPS support and self-signed certificates, which can be replaced by user-provided certificates - for more details, see the _SSL Certificates: Static Certificates_ section.
+It also ships with HTTPS support and self-signed certificates, which can be replaced by user-provided certificates - for more details, see the [SSL Certificate Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/ssl-certificates-guide.md).
 
 This image uses environment variables to set Apache's `ServerName` and `ServerAlias` directives to avoid Apache httpd's warnings in the logs.
 
@@ -98,7 +98,7 @@ The `BAIKAL_SERVERALIAS` environment variable is used to set the `ServerAlias` d
 
 ### `ckulka/baikal:experimental`
 
-This image builds the `master` branch from the source repository [ckulka/baikal-docker](https://github.com/ckulka/baikal-docker). Use at your own risk.
+This image has the latest code from the source repository [ckulka/baikal-docker](https://github.com/ckulka/baikal-docker), mainly used for testing before a version is released. Use this at your own risk.
 
 ### `ckulka/baikal:nginx`
 

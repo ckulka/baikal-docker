@@ -10,7 +10,7 @@ This is my recommended approach, as your other containers can easily be added an
 
 I included an example Docker Compose file [examples/docker-compose.ssl.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.ssl.yaml) as a template.
 
-For more details on the Traefik configuration, see [Traefik's Docker](https://docs.traefik.io/configuration/backends/docker/) and [Traefik's Let's Encrypt](https://docs.traefik.io/configuration/acme/) docs.
+For more details on the Traefik configuration, see [Traefik's Docker](https://doc.traefik.io/traefik/providers/docker/) and [Traefik's Let's Encrypt](https://doc.traefik.io/traefik/https/acme/) docs.
 
 ## Static Certificates
 
