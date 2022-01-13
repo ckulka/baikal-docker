@@ -47,8 +47,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: |
-            ${{ github.repository }}:experimental-apache
-            ${{ github.repository }}:experimental
+            ckulka/baikal:experimental-apache
+            ckulka/baikal:experimental
 
       - name: Build and push Apache httpd variant (release)
         if: github.event_name == 'release'
@@ -58,10 +58,10 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: |
-            ${{ github.repository }}:${{ github.ref_name }}-apache
-            ${{ github.repository }}:${{ github.ref_name }}
-            ${{ github.repository }}:apache
-            ${{ github.repository }}:latest
+            ckulka/baikal:${{ github.ref_name }}-apache
+            ckulka/baikal:${{ github.ref_name }}
+            ckulka/baikal:apache
+            ckulka/baikal:latest
 
       # Build nginx images
       - name: Build and push nginx variant (experimental)
@@ -71,7 +71,7 @@ jobs:
           file: nginx.dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
-          tags: ${{ github.repository }}:experimental-nginx
+          tags: ckulka/baikal:experimental-nginx
 
       - name: Build and push nginx variant (release)
         if: github.event_name == 'release'
@@ -81,5 +81,5 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: |
-            ${{ github.repository }}:${{ github.ref_name }}-nginx
-            ${{ github.repository }}:nginx
+            ckulka/baikal:${{ github.ref_name }}-nginx
+            ckulka/baikal:nginx

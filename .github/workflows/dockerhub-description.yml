@@ -19,5 +19,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ckulka/baikal-docker
+          repository: ckulka/baikal
           short-description: ${{ github.event.repository.description }}
