@@ -1,6 +1,6 @@
 # Docker Compose file for a Baikal server
 
-version: '2'
+version: "2"
 services:
   baikal:
     image: ckulka/baikal:nginx
