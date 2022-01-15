@@ -7,7 +7,7 @@ ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSIO
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
 
 # Final Docker image
-FROM php:8.1-apache
+FROM php:8.0-apache
 
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
 LABEL version="0.9.1"
@@ -16,10 +16,10 @@ LABEL website="http://sabre.io/baikal/"
 
 # Install Baikal and required dependencies
 COPY --from=builder baikal /var/www/baikal
-RUN chown -R www-data:www-data /var/www/baikal      &&\
-  apt-get update                                    &&\
-  apt-get install -y libcurl4-openssl-dev sendmail  &&\
-  rm -rf /var/lib/apt/lists/*                       &&\
+RUN chown -R www-data:www-data /var/www/baikal            &&\
+  apt-get update                                          &&\
+  apt-get install -y libcurl4-openssl-dev msmtp msmtp-mta &&\
+  rm -rf /var/lib/apt/lists/*                             &&\
   docker-php-ext-install curl pdo pdo_mysql
 
 # Configure Apache + HTTPS
@@ -31,5 +31,5 @@ EXPOSE 443
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
 
-COPY files/start.sh /opt
-CMD [ "sh", "/opt/start.sh" ]
+COPY files/start-*.sh /opt
+CMD /opt/start-apache.sh

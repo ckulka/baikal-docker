@@ -72,6 +72,7 @@ If you want to use local folders instead of Docker volumes, see [examples/docker
 
 You can find more installation and configuration guides here:
 
+- [Email Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/email-guide.md)
 - [SSL Certificate Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/ssl-certificates-guide.md)
 - [systemd Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/systemd-guide.md)
 - [Unraid Installation Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/unraid-installation-guide.md)

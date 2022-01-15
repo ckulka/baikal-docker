@@ -1,5 +1,7 @@
 #!/bin/sh
 
+/opt/start-msmtp.sh
+
 # Inject ServerName and ServerAlias if specified
 APACHE_CONFIG="/etc/apache2/sites-available/000-default.conf"
 if [ ! -z ${BAIKAL_SERVERNAME+x} ]
