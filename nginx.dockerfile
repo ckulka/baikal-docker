@@ -29,7 +29,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     php8.1-sqlite3            \
     php8.1-xml                \
     sqlite3                   \
-    sendmail                  &&\
+    msmtp msmtp-mta           &&\
   rm -rf /var/lib/apt/lists/* &&\
   sed -i 's/www-data/nginx/' /etc/php/8.1/fpm/pool.d/www.conf &&\
   sed -i 's/^listen = .*/listen = \/var\/run\/php-fpm.sock/' /etc/php/8.1/fpm/pool.d/www.conf
