@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Build Apache httpd images
-      - name: Build and push Apache httpd variant (experimental)
+      - name: Build and push experimental image
         if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
@@ -51,7 +51,7 @@ jobs:
             ckulka/baikal:experimental-apache
             ckulka/baikal:experimental
 
-      - name: Build and push Apache httpd variant (release)
+      - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
         with:
@@ -87,7 +87,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Build Apache httpd images
-      - name: Build and push Apache httpd variant (experimental)
+      - name: Build and push experimental image
         if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
@@ -98,7 +98,7 @@ jobs:
             ckulka/baikal:experimental-apache-php8.0
             ckulka/baikal:experimental-php8.0
 
-      - name: Build and push Apache httpd variant (release)
+      - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
         with:
@@ -134,7 +134,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Build nginx images
-      - name: Build and push nginx variant (experimental)
+      - name: Build and push experimental image
         if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
@@ -143,7 +143,7 @@ jobs:
           push: true
           tags: ckulka/baikal:experimental-nginx
 
-      - name: Build and push nginx variant (release)
+      - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
         with:
@@ -177,20 +177,20 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Build nginx images
-      - name: Build and push nginx variant (experimental)
+      - name: Build and push experimental image
         if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
-          file: nginx.dockerfile
+          file: nginx-php8.0.dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: ckulka/baikal:experimental-nginx-php8.0
 
-      - name: Build and push nginx variant (release)
+      - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
         with:
-          file: nginx.dockerfile
+          file: nginx-php8.0.dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: |
