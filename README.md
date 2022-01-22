@@ -1,6 +1,6 @@
 # Baikal
 
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ckulka/baikal) [![docker build](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8-informational)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ckulka/baikal) [![docker build](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8%20%7C%20i386-informational)
 
 This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
@@ -10,23 +10,27 @@ For more details, see [ckulka/baikal-docker (GitHub)](https://github.com/ckulka/
 
 I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) themselves.
 
-The following tags support multiple architectures, e.g. `amd64`, `arm32v7` and `arm64v8`.
+The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm64v8` and `i386`.
 
-- [`0.9.1`, `0.9.1-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
-- [`0.9.1-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
+- [`0.9.1`, `0.9.1-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.1/apache.dockerfile)
+- [`0.9.1-php8.0`, `0.9.1-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.1/apache-php8.0.dockerfile)
+- [`0.9.1-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.1/nginx.dockerfile)
+- [`0.9.1-nginx-php8.0`, `nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.1/nginx-php8.0.dockerfile)
 - [`0.9.0`, `0.9.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
 - [`0.9.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
 - [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
 - [`0.8.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
-For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`.
+For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`. Version 0.9.0 and older do not support `i386`.
+
+The `*-php8.0` images address compatibility issue in some edge cases with version 0.9.1 and PHP 8.1, see [ckulka/baikal-docker #52](https://github.com/ckulka/baikal-docker/issues/52) and [sabre-io/vobject #561](https://github.com/sabre-io/vobject/pull/561).
 
 ## Quick reference
 
 - **Where to file issues**:
   [https://github.com/ckulka/baikal-docker/issues](https://github.com/ckulka/baikal-docker/issues)
 - **Supported architectures** ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)):
-  `amd64`, `arm32v7`, `arm64v8`
+  `amd64`, `arm32v7`, `arm64v8`, `i386`
 - **Image updates**:
   [PRs for ckulka/baikal-docker](https://github.com/ckulka/baikal-docker/pulls)
 - **Source of this description**:
@@ -80,7 +84,7 @@ The `ckulka/baikal` images come in several flavors, each designed for a specific
 
 This is the defacto image and follows the official guidelines the closest using Apache httpd.
 
-With that being said, it's worth checking out the `nginx` variant as it requires fewer resources, e.g. memory, and is a lot smaller in size.
+With that being said, it's worth checking out the `nginx` variant as it requires fewer resources and produces no warning messages out-of-the-box.
 
 If you are unsure about what your needs are, you probably want to use this one though.
 
