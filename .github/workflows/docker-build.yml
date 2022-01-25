@@ -51,6 +51,11 @@ jobs:
             ckulka/baikal:experimental-apache
             ckulka/baikal:experimental
 
+      # Get the release version by stripping build metadata from the release name
+      - name: Parse release tag
+        if: github.event_name == 'release'
+        run: echo DOCKER_RELEASE_TAG=${GITHUB_REF_NAME/+*/} >> $GITHUB_ENV
+
       - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
@@ -59,8 +64,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ github.ref_name }}-apache
-            ckulka/baikal:${{ github.ref_name }}
+            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-apache
+            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}
             ckulka/baikal:apache
             ckulka/baikal:latest
 
@@ -98,6 +103,11 @@ jobs:
             ckulka/baikal:experimental-apache-php8.0
             ckulka/baikal:experimental-php8.0
 
+      # Get the release version by stripping build metadata from the release name
+      - name: Parse release tag
+        if: github.event_name == 'release'
+        run: echo DOCKER_RELEASE_TAG=${GITHUB_REF_NAME/+*/} >> $GITHUB_ENV
+
       - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
@@ -106,8 +116,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ github.ref_name }}-apache-php8.0
-            ckulka/baikal:${{ github.ref_name }}-php8.0
+            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-apache-php8.0
+            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-php8.0
             ckulka/baikal:apache-php8.0
             ckulka/baikal:latest-php8.0
 
@@ -143,6 +153,11 @@ jobs:
           push: true
           tags: ckulka/baikal:experimental-nginx
 
+      # Get the release version by stripping build metadata from the release name
+      - name: Parse release tag
+        if: github.event_name == 'release'
+        run: echo DOCKER_RELEASE_TAG=${GITHUB_REF_NAME/+*/} >> $GITHUB_ENV
+
       - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
@@ -151,7 +166,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ github.ref_name }}-nginx
+            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-nginx
             ckulka/baikal:nginx
 
   build_nginx_php80:
@@ -186,6 +201,11 @@ jobs:
           push: true
           tags: ckulka/baikal:experimental-nginx-php8.0
 
+      # Get the release version by stripping build metadata from the release name
+      - name: Parse release tag
+        if: github.event_name == 'release'
+        run: echo DOCKER_RELEASE_TAG=${GITHUB_REF_NAME/+*/} >> $GITHUB_ENV
+
       - name: Build and push release image
         if: github.event_name == 'release'
         uses: docker/build-push-action@v2
@@ -194,5 +214,5 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ github.ref_name }}-nginx-php8.0
+            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-nginx-php8.0
             ckulka/baikal:nginx-php8.0
