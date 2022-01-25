@@ -15,7 +15,11 @@ services:
       traefik.enable: "true"
       traefik.frontend.rule: "Host: dav.example.com"
       traefik.port: 80
-      # Required for iOS, see https://github.com/ckulka/baikal-docker/issues/37
+      # Traefik middleware required for iOS, see https://github.com/ckulka/baikal-docker/issues/37.
+      # When using a Traefik provider file (YAML/TOML) instead of these labels, remove the escape
+      # character from "*.redirectregex.replacement" - it's only needed in Docker Compose YAML files:
+      # redirectRegex:
+      #   replacement: "https://$1/dav/php/
       traefik.http.middlewares.baikal-dav.redirectregex.regex: "https://(.*)/.well-known/(card|cal)dav"
       traefik.http.middlewares.baikal-dav.redirectregex.replacement: "https://$$1/dav.php/"
       traefik.http.middlewares.baikal-dav.redirectregex.permanent: "true"
