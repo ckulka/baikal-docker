@@ -1,9 +1,7 @@
 name: test
 
 on:
-  push:
-    branches-ignore:
-      - master
+  pull_request:
     paths:
       - .github/workflows/docker-test.yml
       - "*.dockerfile"
