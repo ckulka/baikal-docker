@@ -14,9 +14,13 @@ on:
       - package-lock.json
 
 jobs:
-  build_nginx:
-    name: Build Nginx image
+  test:
+    name: Test Docker image
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        dockerfile: [apache, apache-php8.0, nginx, nginx-php8.0]
 
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Build and start Baikal
-        run: docker run --rm -itd -p 80:80 --name baikal $(docker build -qf nginx.dockerfile .)
+        run: docker run --rm -dp 80:80 $(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)
 
       - name: Run Cypress tests
         run: npm run test
@@ -37,7 +41,7 @@ jobs:
       - name: Archive test results
         uses: actions/upload-artifact@v2
         with:
-          name: cypress-results
+          name: cypress-results-${{ matrix.dockerfile }}
           path: |
             cypress/screenshots
             cypress/videos
