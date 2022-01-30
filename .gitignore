@@ -1,1 +1,26 @@
 docker-compose.override.yml
+
+# Apple
+*.DS_Store
+.DS_Store
+
+# Cypress
+cypress/screenshots
+cypress/videos
+cypress/logs
+# Currently not needed
+cypress/plugins/
+cypress/support/
+
+# Node (see https://github.com/github/gitignore/blob/master/Node.gitignore)
+.npm/
+build/
+dist/
+**/node_modules/
+node_modules/
+jspm_packages/
+
+# Visual Studio Code (see https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore)
+.vscode/
+*.code-workspace
+.history/
