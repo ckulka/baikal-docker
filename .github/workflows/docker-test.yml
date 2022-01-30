@@ -1,0 +1,43 @@
+name: test
+
+on:
+  push:
+    branches-ignore:
+      - master
+    paths:
+      - .github/workflows/docker-test.yml
+      - "*.dockerfile"
+      - cypress/*
+      - cypress.json
+      - files/*
+      - package.json
+      - package-lock.json
+
+jobs:
+  build_nginx:
+    name: Build Nginx image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install Cypress dependencies
+        run: npm ci
+
+      - name: Build and start Baikal
+        run: docker run --rm -itd -p 80:80 --name baikal $(docker build -qf nginx.dockerfile .)
+
+      - name: Run Cypress tests
+        run: npm run test
+
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-results
+          path: |
+            cypress/screenshots
+            cypress/videos
