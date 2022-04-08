@@ -1,7 +1,7 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
 FROM alpine AS builder
 
-ENV VERSION 0.9.1
+ENV VERSION 0.9.2
 
 ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
@@ -10,7 +10,7 @@ RUN apk add unzip && unzip -q baikal-$VERSION.zip
 FROM nginx:1
 
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
-LABEL version="0.9.1"
+LABEL version="0.9.2"
 LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
@@ -36,8 +36,13 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 
 # Add Baikal & nginx configuration
 COPY --from=builder baikal /var/www/baikal
-RUN chown -R nginx:nginx /var/www/baikal
+RUN apt update \
+ && apt install -y \
+    msmtp msmtp-mta \
+ && rm -rf /var/lib/apt/lists/* \
+ && chown -R nginx:nginx /var/www/baikal
 COPY files/nginx.conf /etc/nginx/conf.d/default.conf
+COPY files/start*.sh /opt/
 
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
