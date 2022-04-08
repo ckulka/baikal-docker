@@ -18,13 +18,16 @@ LABEL website="http://sabre.io/baikal/"
 COPY --from=builder baikal /var/www/baikal
 RUN chown -R www-data:www-data /var/www/baikal            &&\
   apt-get update                                          &&\
-  apt-get install -y libcurl4-openssl-dev msmtp msmtp-mta &&\
+  apt-get install -y libcurl4-openssl-dev                 &&\
   rm -rf /var/lib/apt/lists/*                             &&\
   docker-php-ext-install curl pdo pdo_mysql
 
 # Configure Apache + HTTPS
 COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
-RUN a2enmod rewrite ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc/ssl/private/baikal.private.pem -out /etc/ssl/private/baikal.public.pem -days 3650 -nodes
+RUN apt update \
+ && apt install -y \
+    msmtp msmtp-mta \
+ && a2enmod rewrite ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc/ssl/private/baikal.private.pem -out /etc/ssl/private/baikal.public.pem -days 3650 -nodes
 
 # Expose HTTPS & data directory
 EXPOSE 443
