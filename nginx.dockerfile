@@ -41,4 +41,4 @@ COPY files/nginx.conf /etc/nginx/conf.d/default.conf
 
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
-CMD /etc/init.d/php8.1-fpm start && chown -R nginx:nginx /var/www/baikal/Specific && nginx -g "daemon off;"
+CMD /etc/init.d/php8.1-fpm start && chown -R nginx:nginx /var/www/baikal && nginx -g "daemon off;"
