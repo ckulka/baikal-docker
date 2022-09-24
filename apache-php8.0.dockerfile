@@ -15,9 +15,10 @@ LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
 # Install Baikal and required dependencies
-COPY --from=builder baikal /var/www/baikal
-RUN chown -R www-data:www-data /var/www/baikal      &&\
-  apt-get update                                    &&\
+RUN mkdir -p /usr/src/baikal
+COPY --from=builder baikal /usr/src/baikal
+
+RUN apt-get update                                  &&\
   apt-get install -y libcurl4-openssl-dev sendmail  &&\
   rm -rf /var/lib/apt/lists/*                       &&\
   docker-php-ext-install curl pdo pdo_mysql
@@ -32,4 +33,4 @@ VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
 
 COPY files/start.sh /opt
-CMD [ "sh", "/opt/start.sh" ]
+ENTRYPOINT  [ "sh", "/opt/start.sh", "apache" ]

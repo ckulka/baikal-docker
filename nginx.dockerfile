@@ -15,6 +15,9 @@ LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
 # Install dependencies: PHP (with libffi6 dependency) & SQLite3
+RUN mkdir -p /usr/src/baikal
+COPY --from=builder baikal /usr/src/baikal
+
 RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
   apt update                  &&\
   apt install -y lsb-release  &&\
@@ -35,10 +38,11 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   sed -i 's/^listen = .*/listen = \/var\/run\/php-fpm.sock/' /etc/php/8.1/fpm/pool.d/www.conf
 
 # Add Baikal & nginx configuration
-COPY --from=builder baikal /var/www/baikal
-RUN chown -R nginx:nginx /var/www/baikal
 COPY files/nginx.conf /etc/nginx/conf.d/default.conf
 
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
-CMD /etc/init.d/php8.1-fpm start && chown -R nginx:nginx /var/www/baikal/Specific && nginx -g "daemon off;"
+
+COPY files/start.sh /opt
+ENTRYPOINT  [ "sh", "/opt/start.sh", "nginx" ]
+
