@@ -15,9 +15,7 @@ LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
 # Install Baikal and required dependencies
-RUN mkdir -p /usr/src/baikal
-COPY --from=builder baikal /usr/src/baikal
-
+COPY --from=builder --chown=www-data:www-data baikal /var/www/baikal
 RUN apt-get update                                  &&\
   apt-get install -y libcurl4-openssl-dev sendmail  &&\
   rm -rf /var/lib/apt/lists/*                       &&\
@@ -32,5 +30,7 @@ EXPOSE 443
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
 
-COPY files/start.sh /opt
-ENTRYPOINT  [ "sh", "/opt/start.sh", "apache" ]
+COPY files/docker-entrypoint.sh /docker-entrypoint.sh
+COPY files/40-*.sh /docker-entrypoint.d/
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+CMD  [ "apache2-foreground" ]
