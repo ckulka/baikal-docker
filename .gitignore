@@ -10,7 +10,6 @@ cypress/videos
 cypress/logs
 # Currently not needed
 cypress/plugins/
-cypress/support/
 
 # Node (see https://github.com/github/gitignore/blob/master/Node.gitignore)
 .npm/
