@@ -1,6 +1,17 @@
 name: test
 
 on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/docker-test.yml
+      - "*.dockerfile"
+      - cypress/*
+      - cypress.json
+      - files/*
+      - package.json
+      - package-lock.json
   pull_request:
     paths:
       - .github/workflows/docker-test.yml
@@ -37,9 +48,8 @@ jobs:
         run: npm run test
 
       - name: Archive test results
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: cypress-results-${{ matrix.dockerfile }}
-          path: |
-            cypress/screenshots
-            cypress/videos
+          path: cypress/videos
