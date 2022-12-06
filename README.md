@@ -12,10 +12,14 @@ I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) the
 
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm64v8` and `i386`.
 
-- [`0.9.2`, `0.9.2-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache.dockerfile)
-- [`0.9.2-php8.0`, `0.9.2-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache-php8.0.dockerfile)
-- [`0.9.2-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx.dockerfile)
-- [`0.9.2-nginx-php8.0`, `nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx-php8.0.dockerfile)
+- [`0.9.3`, `0.9.3-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache.dockerfile)
+- [`0.9.3-php8.0`, `0.9.3-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache-php8.0.dockerfile)
+- [`0.9.3-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx.dockerfile)
+- [`0.9.3-nginx-php8.0`, `nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx-php8.0.dockerfile)
+- [`0.9.2`, `0.9.2-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache.dockerfile)
+- [`0.9.2-php8.0`, `0.9.2-apache-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache-php8.0.dockerfile)
+- [`0.9.2-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx.dockerfile)
+- [`0.9.2-nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx-php8.0.dockerfile)
 - [`0.9.1`, `0.9.1-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.1/apache.dockerfile)
 - [`0.9.1-php8.0`, `0.9.1-apache-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.1/apache-php8.0.dockerfile)
 - [`0.9.1-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.1/nginx.dockerfile)
