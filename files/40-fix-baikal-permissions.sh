@@ -5,14 +5,14 @@ ME=$(basename $0)
 
 if ! [ -d /var/www/baikal/Specific/db ]
 then
-  echo >&3 "$ME: info: Creating new Baikal database folder"
+  echo "$ME: info: Creating new Baikal database folder"
   mkdir -p /var/www/baikal/Specific/db
 fi
 
 # Detect if we're running in the Apache httpd image
 if [ ! -z ${APACHE_CONFDIR+x} ]
 then
-  echo >&3 "$ME: info: Adjusting Baikal file permissions for Apache httpd"
+  echo "$ME: info: Adjusting Baikal file permissions for Apache httpd"
   chown -R www-data:www-data /var/www/baikal
 
   # Inject ServerName and ServerAlias if specified
@@ -31,6 +31,6 @@ fi
 # Detect if we're running in the nginx image
 if [ ! -z ${NGINX_VERSION+x} ]
 then
-  echo >&3 "$ME: info: Adjusting Baikal file permissions for nginx"
+  echo "$ME: info: Adjusting Baikal file permissions for nginx"
   chown -R nginx:nginx /var/www/baikal
 fi

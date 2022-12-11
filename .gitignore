@@ -1,4 +1,5 @@
 docker-compose.override.yml
+examples/acme.json
 
 # Apple
 *.DS_Store
