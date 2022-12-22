@@ -31,6 +31,6 @@ VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
 
 COPY files/docker-entrypoint.sh /docker-entrypoint.sh
-COPY files/40-*.sh /docker-entrypoint.d/
+COPY files/docker-entrypoint.d/*.sh files/docker-entrypoint.d/httpd/ /docker-entrypoint.d/
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD  [ "apache2-foreground" ]

@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Based on /etc/docker-entrypoint.sh in nginx image
+# Based on /etc/docker-entrypoint.sh in nginx image.
+# Added to the Apache httpd Docker image, mimicking how Nginx runs setup scripts.
 
 set -e
 
