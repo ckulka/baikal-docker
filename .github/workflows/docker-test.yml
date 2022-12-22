@@ -8,7 +8,7 @@ on:
       - .github/workflows/docker-test.yml
       - "*.dockerfile"
       - cypress/*
-      - cypress.json
+      - cypress.config.ts
       - files/*
       - package.json
       - package-lock.json
@@ -17,7 +17,7 @@ on:
       - .github/workflows/docker-test.yml
       - "*.dockerfile"
       - cypress/*
-      - cypress.json
+      - cypress.config.ts
       - files/*
       - package.json
       - package-lock.json
@@ -32,9 +32,9 @@ jobs:
         dockerfile: [apache, apache-php8.0, nginx, nginx-php8.0]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
 
@@ -49,7 +49,9 @@ jobs:
 
       - name: Archive test results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: cypress-results-${{ matrix.dockerfile }}
-          path: cypress/videos
+          path: |
+            cypress/screenshots
+            cypress/videos
