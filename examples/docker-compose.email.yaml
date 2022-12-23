@@ -1,0 +1,29 @@
+# Docker Compose file for a Baikal server
+# See https://github.com/ckulka/baikal-docker/blob/master/docs/email-guide.md
+
+version: "2"
+services:
+  baikal:
+    image: ckulka/baikal:nginx
+    restart: always
+    environment:
+      MSMTPRC: |
+        defaults
+        auth           on
+        tls            on
+        tls_trust_file /etc/ssl/certs/ca-certificates.crt
+        account        default
+        host           <smtp host>
+        port           587
+        from           baikal@example.com
+        user           <user>
+        password       <password>
+    ports:
+      - "80:80"
+    volumes:
+      - config:/var/www/baikal/config
+      - data:/var/www/baikal/Specific
+
+volumes:
+  config:
+  data:

@@ -16,9 +16,11 @@ LABEL website="http://sabre.io/baikal/"
 
 # Install Baikal and required dependencies
 COPY --from=builder --chown=www-data:www-data baikal /var/www/baikal
-RUN apt-get update                                  &&\
-  apt-get install -y libcurl4-openssl-dev sendmail  &&\
-  rm -rf /var/lib/apt/lists/*                       &&\
+RUN apt-get update            &&\
+  apt-get install -y          \
+    libcurl4-openssl-dev      \
+    msmtp msmtp-mta           &&\
+  rm -rf /var/lib/apt/lists/* &&\
   docker-php-ext-install curl pdo pdo_mysql
 
 # Configure Apache + HTTPS
