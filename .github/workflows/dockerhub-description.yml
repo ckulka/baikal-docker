@@ -1,5 +1,6 @@
 # Updates the Docker Hub description with the contents of the README.md file
 name: Docker Hub Description
+
 on:
   release:
     types:
