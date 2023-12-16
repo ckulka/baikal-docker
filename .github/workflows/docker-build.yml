@@ -11,7 +11,7 @@ on:
     paths:
       - .github/workflows/docker-build.yml
       - "*.dockerfile"
-      - files/*
+      - files/**
   release:
     types:
       - published
