@@ -7,18 +7,18 @@ on:
     paths:
       - .github/workflows/docker-test.yml
       - "*.dockerfile"
-      - cypress/*
+      - cypress/**
       - cypress.config.ts
-      - files/*
+      - files/**
       - package.json
       - package-lock.json
   pull_request:
     paths:
       - .github/workflows/docker-test.yml
       - "*.dockerfile"
-      - cypress/*
+      - cypress/**
       - cypress.config.ts
-      - files/*
+      - files/**
       - package.json
       - package-lock.json
 
