@@ -48,8 +48,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:experimental-apache
-            ckulka/baikal:experimental
+            thomasjanker/baikal:experimental-apache
+            thomasjanker/baikal:experimental
 
       # Get the release version by stripping build metadata from the release name
       - name: Parse release tag
@@ -64,10 +64,10 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-apache
-            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}
-            ckulka/baikal:apache
-            ckulka/baikal:latest
+            thomasjanker/baikal:${{ env.DOCKER_RELEASE_TAG }}-apache
+            thomasjanker/baikal:${{ env.DOCKER_RELEASE_TAG }}
+            thomasjanker/baikal:apache
+            thomasjanker/baikal:latest
 
   build_apache_php80:
     name: Build Apache variant (PHP 8.0)
@@ -100,8 +100,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:experimental-apache-php8.0
-            ckulka/baikal:experimental-php8.0
+            thomasjanker/baikal:experimental-apache-php8.0
+            thomasjanker/baikal:experimental-php8.0
 
       # Get the release version by stripping build metadata from the release name
       - name: Parse release tag
@@ -116,10 +116,10 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-apache-php8.0
-            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-php8.0
-            ckulka/baikal:apache-php8.0
-            ckulka/baikal:latest-php8.0
+            thomasjanker/baikal:${{ env.DOCKER_RELEASE_TAG }}-apache-php8.0
+            thomasjanker/baikal:${{ env.DOCKER_RELEASE_TAG }}-php8.0
+            thomasjanker/baikal:apache-php8.0
+            thomasjanker/baikal:latest-php8.0
 
   build_nginx:
     name: Build nginx variant
@@ -151,7 +151,7 @@ jobs:
           file: nginx.dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
-          tags: ckulka/baikal:experimental-nginx
+          tags: thomasjanker/baikal:experimental-nginx
 
       # Get the release version by stripping build metadata from the release name
       - name: Parse release tag
@@ -166,8 +166,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-nginx
-            ckulka/baikal:nginx
+            thomasjanker/baikal:${{ env.DOCKER_RELEASE_TAG }}-nginx
+            thomasjanker/baikal:nginx
 
   build_nginx_php80:
     name: Build nginx variant (PHP 8.0)
@@ -199,7 +199,7 @@ jobs:
           file: nginx-php8.0.dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
-          tags: ckulka/baikal:experimental-nginx-php8.0
+          tags: thomasjanker/baikal:experimental-nginx-php8.0
 
       # Get the release version by stripping build metadata from the release name
       - name: Parse release tag
@@ -214,5 +214,5 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: |
-            ckulka/baikal:${{ env.DOCKER_RELEASE_TAG }}-nginx-php8.0
-            ckulka/baikal:nginx-php8.0
+            thomasjanker/baikal:${{ env.DOCKER_RELEASE_TAG }}-nginx-php8.0
+            thomasjanker/baikal:nginx-php8.0
