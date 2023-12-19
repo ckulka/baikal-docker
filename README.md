@@ -1,6 +1,6 @@
 # Baikal
 
-<!-- [![docker build](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml) [![test](https://github.com/ckulka/baikal-docker/actions/workflows/docker-test.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-test.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8%20%7C%20i386-informational)-->
+[![docker build](https://github.com/thomasjanker/baikal-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/thomasjanker/baikal-docker/actions/workflows/docker-build.yml)
 
 This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
