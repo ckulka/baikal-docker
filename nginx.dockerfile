@@ -22,6 +22,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   apt remove -y lsb-release   &&\
   apt update                  &&\
     apt install -y            \
+    vim                       \
     php8.1-curl               \
     php8.1-fpm                \
     php8.1-mbstring           \
