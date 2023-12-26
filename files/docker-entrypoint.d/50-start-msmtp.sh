@@ -7,5 +7,5 @@ if [ ! -z ${MSMTPRC+x} ]
 then
   echo "$MSMTPRC" > /etc/msmtprc
   chown root:msmtp /etc/msmtprc
-  chmod 640 /etc/msmtprc
+  chmod 644 /etc/msmtprc
 fi
