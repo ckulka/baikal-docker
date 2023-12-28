@@ -38,16 +38,51 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version-file: package.json
 
       - name: Install Cypress dependencies
         run: npm ci
 
-      - name: Build and start Baikal
-        run: docker run --rm -dp 80:80 $(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)
+      - name: Build Baikal image
+        id: build-baikal-image
+        run: echo "IMAGE_ID=$(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)" >> "$GITHUB_OUTPUT"
+
+      - name: Start Baikal container
+        run: docker run --rm -dp 80:80 --name baikal ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
 
       - name: Run Cypress tests
         run: npm run test
+
+      - name: Stop Baikal container
+        run: docker stop baikal
+
+      - name: Start Baikal container with MSMTP configuration
+        env:
+          MSMTPRC: |
+            # Set default values for all following accounts.
+            defaults
+            auth           on
+            tls            on
+            tls_trust_file /etc/ssl/certs/ca-certificates.crt
+            logfile        /dev/stdout
+
+            # Confiure mailtrap
+            account        mailtrap
+            host           sandbox.smtp.mailtrap.io
+            port           25
+            tls_starttls   on
+            from           baikal@example.com
+            user           ${{ secrets.MAILTRAP_USER }}
+            password       ${{ secrets.MAILTRAP_PASSWORD }}
+
+            # Set a default account
+            account default: mailtrap
+        run: |
+          docker run --rm -dp 80:80 --name baikal -e MSMTPRC=${{ env.MSMTPRC }} ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
+          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php baikal:/var/www/baikal/html/
+
+      - name: Run Cypress tests
+        run: npm run test -- --env MAILTRAP_TOKEN=${{ secrets.MAILTRAP_TOKEN }},MAILTRAP_ACCOUNTID=${{ secrets.MAILTRAP_ACCOUNTID }},MAILTRAP_INBOXID=${{ secrets.MAILTRAP_INBOXID }},MAILTRAP_SUBJECT='${{ github.sha }} - ${{ github.job }} attempt ${{ github.run_attempt }}' --config excludeSpecPattern='[]',screenshotsFolder=cypress/screenshots/mailtrap
 
       - name: Archive test results
         if: always()
