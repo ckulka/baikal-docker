@@ -22,7 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       # See https://github.com/docker/setup-qemu-action
       - name: Set up QEMU
@@ -74,7 +76,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       # See https://github.com/docker/setup-qemu-action
       - name: Set up QEMU
@@ -126,7 +130,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       # See https://github.com/docker/setup-qemu-action
       - name: Set up QEMU
@@ -174,19 +180,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
       # See https://github.com/docker/setup-qemu-action
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v3
 
       # See https://github.com/docker/setup-buildx-action
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
 
       # See https://github.com/docker/login-action
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -194,7 +198,7 @@ jobs:
       # Build nginx images
       - name: Build and push experimental image
         if: github.event_name == 'push'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           file: nginx-php8.0.dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
