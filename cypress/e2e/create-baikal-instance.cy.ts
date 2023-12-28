@@ -1,33 +1,37 @@
 describe("Create Baikal instance", () => {
-  it("Should initialise administrator password", () => {
+  const adminCredentials = "ilovecookies"
+
+  it("Should initialise Baikal", () => {
     cy.visit("localhost");
 
     cy.get("#overview > h1").should(
       "have.text",
       "Baïkal initialization wizard"
     );
-    cy.get("#admin_passwordhash").type("asdasd");
-    cy.get("#admin_passwordhash_confirm").type("asdasd");
-    cy.get("button[type='submit']").click();
-  });
 
-  it("Should initialise database", () => {
+    // Set administrator credentials
+    cy.get("#admin_passwordhash").type(adminCredentials);
+    cy.get("#admin_passwordhash_confirm").type(adminCredentials);
+    cy.get("button[type='submit']").click();
+
+    // Database setup
     cy.get("#overview > h1").should("have.text", "Baïkal Database setup");
     cy.get("button[type='submit']").click();
-  });
 
-  it("Should start Baikal", () => {
+    // Finalise initialisation
     cy.get("a.btn.btn-success")
       .should("have.text", "Start using Baïkal")
       .click();
+    cy.screenshot()
   });
 
   it("Should sign in as administrator", () => {
-    cy.get("input[name='password']").type("asdasd");
-    cy.get("button[type='submit']").should("have.text", "Authenticate").click();
-  });
+    cy.visit("localhost/admin")
 
-  it("Should show dashboard", () => {
+    cy.get("input[name='password']").type(adminCredentials);
+    cy.get("button[type='submit']").should("have.text", "Authenticate").click();
+
     cy.get("#overview > h1").should("have.text", "Dashboard");
+    cy.screenshot()
   });
 });
