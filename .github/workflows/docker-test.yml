@@ -48,13 +48,13 @@ jobs:
         run: echo "IMAGE_ID=$(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)" >> "$GITHUB_OUTPUT"
 
       - name: Start Baikal container
-        run: docker run --rm -dp 80:80 --name baikal ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
+        run: docker run --rm -dp 80:80 --name ${{ matrix.dockerfile }} ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
 
       - name: Run Cypress tests
         run: npm run test
 
       - name: Stop Baikal container
-        run: docker stop baikal
+        run: docker stop ${{ matrix.dockerfile }}
 
       - name: Start Baikal container with MSMTP configuration
         env:
@@ -78,8 +78,8 @@ jobs:
             # Set a default account
             account default: mailtrap
         run: |
-          docker run --rm -dp 80:80 --name baikal -e MSMTPRC=${{ env.MSMTPRC }} ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
-          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php baikal:/var/www/baikal/html/
+          docker run --rm -dp 80:80 -e MSMTPRC="$MSMTPRC" --name ${{ matrix.dockerfile }}-msmtp ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
+          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php ${{ matrix.dockerfile }}-msmtp:/var/www/baikal/html/
 
       - name: Run Cypress tests
         run: npm run test -- --env MAILTRAP_TOKEN=${{ secrets.MAILTRAP_TOKEN }},MAILTRAP_ACCOUNTID=${{ secrets.MAILTRAP_ACCOUNTID }},MAILTRAP_INBOXID=${{ secrets.MAILTRAP_INBOXID }},MAILTRAP_SUBJECT='${{ github.sha }} - ${{ github.job }} attempt ${{ github.run_attempt }}' --config excludeSpecPattern='[]',screenshotsFolder=cypress/screenshots/mailtrap
