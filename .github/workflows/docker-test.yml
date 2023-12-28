@@ -32,11 +32,13 @@ jobs:
         dockerfile: [apache, apache-php8.0, nginx, nginx-php8.0]
 
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: "16"
+          show-progress: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
       - name: Install Cypress dependencies
         run: npm ci
@@ -49,9 +51,7 @@ jobs:
 
       - name: Archive test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-results-${{ matrix.dockerfile }}
-          path: |
-            cypress/screenshots
-            cypress/videos
+          path: cypress/screenshots
