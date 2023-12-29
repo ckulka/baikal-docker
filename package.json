@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "Runs tests against the ckulka/baikal Docker image",
   "scripts": {
+    "format": "prettier . --write",
+    "lint": "prettier . --check",
     "test": "cypress run",
     "cypress:open": "cypress open"
   },

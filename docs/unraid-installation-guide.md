@@ -15,8 +15,8 @@ This Unraid Docker Installation guide assumes a few things:
 
 **Further Installation Note** – If you utilise an external database such as [MariaDB](https://hub.docker.com/_/mariadb), please ensure that Baikal and the database can connect correctly:
 
-* the database and user are created
-* the database and Baikal containers are on the same network
+- the database and user are created
+- the database and Baikal containers are on the same network
 
 ## Installation
 
@@ -40,42 +40,42 @@ With that in mind, the installation of Baikal is rather simple once you have the
 
 1. Set _Extra Parameters_ to `--restart=always`.
 
-    This will restart the container automatically if it ever crashes.
+   This will restart the container automatically if it ever crashes.
 
 1. (Optional) Set your network type as needed.
 
-    For example, set it to the same one of your reverse proxy container that handles HTTPS termination and certificate renewal.
+   For example, set it to the same one of your reverse proxy container that handles HTTPS termination and certificate renewal.
 
 1. Add in your static IP address that you will utilize for Baikal.
 
-    This will make it easier to get to your hosted instance.
+   This will make it easier to get to your hosted instance.
 
 1. Add a new _path_ with
 
-   * _Name_ is `Config`
-   * _Container Path_ is `/var/www/baikal/config`
-   * _Host Path_ is `/mnt/user/appdata/baikal/config` (change to where you store it on local server)
-   * _Default Value_ is `/mnt/user/appdata/baikal/config` (see above)
-   * _Acccess Mode_ is `Read/Write`
-   * _Description_ is `Container Path: /var/www/baikal/config`
+   - _Name_ is `Config`
+   - _Container Path_ is `/var/www/baikal/config`
+   - _Host Path_ is `/mnt/user/appdata/baikal/config` (change to where you store it on local server)
+   - _Default Value_ is `/mnt/user/appdata/baikal/config` (see above)
+   - _Acccess Mode_ is `Read/Write`
+   - _Description_ is `Container Path: /var/www/baikal/config`
 
 1. Add a new _path_ with
 
-   * _Name_ is `Specific`
-   * _Container Path_ is `/var/www/baikal/Specific`
-   * _Host Path_ is `/mnt/user/appdata/baikal/specific` (change to where you store it on local server)
-   * _Default Value_ is `/mnt/user/appdata/baikal/specific` (see above)
-   * _Acccess Mode_ is `Read/Write`
-   * _Description_ is `Container Path: /var/www/baikal/Specific`
+   - _Name_ is `Specific`
+   - _Container Path_ is `/var/www/baikal/Specific`
+   - _Host Path_ is `/mnt/user/appdata/baikal/specific` (change to where you store it on local server)
+   - _Default Value_ is `/mnt/user/appdata/baikal/specific` (see above)
+   - _Acccess Mode_ is `Read/Write`
+   - _Description_ is `Container Path: /var/www/baikal/Specific`
 
 1. Now add in a _port_ with
 
-   * _Name_ is `Port`
-   * _Container Port_ is `80`
-   * _Host Port_ is `80` (change to the port where you want to expose Baikal over HTTP on your local server)
-   * _Default Value_ is `80` (see above)
-   * _Connection Type_ is `TCP`
-   * _Description_ is `Container Port: 80`
+   - _Name_ is `Port`
+   - _Container Port_ is `80`
+   - _Host Port_ is `80` (change to the port where you want to expose Baikal over HTTP on your local server)
+   - _Default Value_ is `80` (see above)
+   - _Connection Type_ is `TCP`
+   - _Description_ is `Container Port: 80`
 
 1. Click _Apply_ to download and install the container.
 
@@ -83,14 +83,14 @@ With that in mind, the installation of Baikal is rather simple once you have the
 
 1. (Optional) Set up SSL
 
-    Head over to your SSL certificate provider container of choice and set-up as necessary to serve the certificates of your Baikal instance for your domain.
+   Head over to your SSL certificate provider container of choice and set-up as necessary to serve the certificates of your Baikal instance for your domain.
 
 1. Head over to your Baikal web interface and start the Baikal initialisation process.
 
-    You can access the web interface on the exposed port `http://[IP]:[PORT]`.
+   You can access the web interface on the exposed port `http://[IP]:[PORT]`.
 
-    During the Baikal initialisation process, you can choose between a SQLite database or an external database such as [MariaDB](https://hub.docker.com/_/mariadb). When using an separate container as external database, make sure the Baikal and database container are on the same network.
+   During the Baikal initialisation process, you can choose between a SQLite database or an external database such as [MariaDB](https://hub.docker.com/_/mariadb). When using an separate container as external database, make sure the Baikal and database container are on the same network.
 
-    If you are choosing to go with an external database container, you will need to set it up beforehand in order for Baikal to connect to it correctly, e.g. setting up the database user.
+   If you are choosing to go with an external database container, you will need to set it up beforehand in order for Baikal to connect to it correctly, e.g. setting up the database user.
 
 Your Baikal instance now up all set, congratulations 🎉 🙌

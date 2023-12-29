@@ -1,12 +1,12 @@
 describe("Create Baikal instance", () => {
-  const adminCredentials = "ilovecookies"
+  const adminCredentials = "ilovecookies";
 
   it("Should initialise Baikal", () => {
     cy.visit("localhost");
 
     cy.get("#overview > h1").should(
       "have.text",
-      "Baïkal initialization wizard"
+      "Baïkal initialization wizard",
     );
 
     // Set administrator credentials
@@ -22,16 +22,16 @@ describe("Create Baikal instance", () => {
     cy.get("a.btn.btn-success")
       .should("have.text", "Start using Baïkal")
       .click();
-    cy.screenshot()
+    cy.screenshot();
   });
 
   it("Should sign in as administrator", () => {
-    cy.visit("localhost/admin")
+    cy.visit("localhost/admin");
 
     cy.get("input[name='password']").type(adminCredentials);
     cy.get("button[type='submit']").should("have.text", "Authenticate").click();
 
     cy.get("#overview > h1").should("have.text", "Dashboard");
-    cy.screenshot()
+    cy.screenshot();
   });
 });
