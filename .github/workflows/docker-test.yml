@@ -82,7 +82,7 @@ jobs:
           docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php ${{ matrix.dockerfile }}-msmtp:/var/www/baikal/html/
 
       - name: Run Cypress tests
-        run: npm run test -- --env MAILTRAP_TOKEN=${{ secrets.MAILTRAP_TOKEN }},MAILTRAP_ACCOUNTID=${{ secrets.MAILTRAP_ACCOUNTID }},MAILTRAP_INBOXID=${{ secrets.MAILTRAP_INBOXID }},MAILTRAP_SUBJECT='${{ github.sha }} - ${{ github.job }} attempt ${{ github.run_attempt }}' --config excludeSpecPattern='[]',screenshotsFolder=cypress/screenshots/mailtrap
+        run: npm run test -- --env MAILTRAP_TOKEN=${{ secrets.MAILTRAP_TOKEN }},MAILTRAP_ACCOUNTID=${{ secrets.MAILTRAP_ACCOUNTID }},MAILTRAP_INBOXID=${{ secrets.MAILTRAP_INBOXID }} --config excludeSpecPattern='[]',screenshotsFolder=cypress/screenshots/mailtrap
 
       - name: Archive test results
         if: always()
