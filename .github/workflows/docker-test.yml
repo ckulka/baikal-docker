@@ -43,6 +43,9 @@ jobs:
       - name: Install Cypress dependencies
         run: npm ci
 
+      - name: Ensure files follow code style
+        run: npm run lint
+
       - name: Build Baikal image
         id: build-baikal-image
         run: echo "IMAGE_ID=$(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)" >> "$GITHUB_OUTPUT"
