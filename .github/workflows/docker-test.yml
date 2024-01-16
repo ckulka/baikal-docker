@@ -59,33 +59,24 @@ jobs:
       - name: Stop Baikal container
         run: docker stop ${{ matrix.dockerfile }}
 
+      - name: Build and run MailSlurper
+        run: |
+          IMAGE_ID=$(docker build -q 'https://github.com/mailslurper/mailslurper.git#release-1.15.0')
+          docker run --rm --detach --name mailslurper -p 8085:8085 -v ${{ github.workspace }}/cypress/fixtures/mailslurper-config.json:/config.json:ro $IMAGE_ID
+
       - name: Start Baikal container with MSMTP configuration
         env:
           MSMTPRC: |
-            # Set default values for all following accounts.
-            defaults
-            auth           on
-            tls            on
-            tls_trust_file /etc/ssl/certs/ca-certificates.crt
-            logfile        /dev/stdout
-
-            # Confiure mailtrap
-            account        mailtrap
-            host           sandbox.smtp.mailtrap.io
-            port           25
-            tls_starttls   on
-            from           baikal@example.com
-            user           ${{ secrets.MAILTRAP_USER }}
-            password       ${{ secrets.MAILTRAP_PASSWORD }}
-
-            # Set a default account
-            account default: mailtrap
+            account default
+            host    mailslurper
+            port    2500
+            from    baikal@example.com
         run: |
-          docker run --rm -dp 80:80 -e MSMTPRC="$MSMTPRC" --name ${{ matrix.dockerfile }}-msmtp ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
-          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php ${{ matrix.dockerfile }}-msmtp:/var/www/baikal/html/
+          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mailslurper --name ${{ matrix.dockerfile }} ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
+          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php ${{ matrix.dockerfile }}:/var/www/baikal/html/
 
-      - name: Run Cypress tests
-        run: npm run test -- --env MAILTRAP_TOKEN=${{ secrets.MAILTRAP_TOKEN }},MAILTRAP_ACCOUNTID=${{ secrets.MAILTRAP_ACCOUNTID }},MAILTRAP_INBOXID=${{ secrets.MAILTRAP_INBOXID }} --config excludeSpecPattern='[]',screenshotsFolder=cypress/screenshots/mailtrap
+      - name: Run Cypress tests incl. MSMTP
+        run: CYPRESS_MSMTP_ENABLED=TRUE npm run test
 
       - name: Archive test results
         if: always()
