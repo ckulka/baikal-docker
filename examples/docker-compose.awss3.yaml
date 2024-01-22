@@ -26,8 +26,8 @@ services:
       - data:/mnt/Specific
     command: sh /opt/aws-s3-sync-backup.sh
 
-# To manually backup, run docker-compose run --rm backup
-# To manually restore, run docker-compose run --rm backup sh /opt/aws-s3-sync-restore.sh
+# To manually backup, run docker compose run --rm backup
+# To manually restore, run docker compose run --rm backup sh /opt/aws-s3-sync-restore.sh
 
 volumes:
   config:

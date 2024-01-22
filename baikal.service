@@ -5,9 +5,9 @@ After=docker
 
 [Service]
 WorkingDirectory=/etc/baikal
-ExecStart=/usr/local/bin/docker-compose up
-ExecReload=/usr/local/bin/docker-compose restart --force-recreate
-ExecStop=/usr/local/bin/docker-compose stop
+ExecStart=/usr/local/bin/docker compose up
+ExecReload=/usr/local/bin/docker compose restart --force-recreate
+ExecStop=/usr/local/bin/docker compose stop
 
 [Install]
 WantedBy=multi-user.target
