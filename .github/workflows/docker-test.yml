@@ -4,25 +4,27 @@ on:
   push:
     branches:
       - master
-    paths:
-      - .github/workflows/docker-test.yml
-      - "*.dockerfile"
-      - cypress/**
-      - cypress.config.ts
-      - files/**
-      - package.json
-      - package-lock.json
   pull_request:
-    paths:
-      - .github/workflows/docker-test.yml
-      - "*.dockerfile"
-      - cypress/**
-      - cypress.config.ts
-      - files/**
-      - package.json
-      - package-lock.json
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+
+      - name: Install Cypress dependencies
+        run: npm ci
+
+      - name: Ensure files follow code style
+        run: npm run lint
+
   test:
     name: Test Docker image
     runs-on: ubuntu-latest
@@ -43,15 +45,12 @@ jobs:
       - name: Install Cypress dependencies
         run: npm ci
 
-      - name: Ensure files follow code style
-        run: npm run lint
-
       - name: Build Baikal image
-        id: build-baikal-image
+        id: build
         run: echo "IMAGE_ID=$(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)" >> "$GITHUB_OUTPUT"
 
       - name: Start Baikal container
-        run: docker run --rm -dp 80:80 --name ${{ matrix.dockerfile }} ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
+        run: docker run --rm -dp 80:80 --name ${{ matrix.dockerfile }} ${{ steps.build.outputs.IMAGE_ID }}
 
       - name: Run Cypress tests
         run: npm run test
@@ -72,7 +71,7 @@ jobs:
             port    2500
             from    baikal@example.com
         run: |
-          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mailslurper --name ${{ matrix.dockerfile }} ${{ steps.build-baikal-image.outputs.IMAGE_ID }}
+          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mailslurper --name ${{ matrix.dockerfile }} ${{ steps.build.outputs.IMAGE_ID }}
           docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php ${{ matrix.dockerfile }}:/var/www/baikal/html/
 
       - name: Run Cypress tests incl. MSMTP
