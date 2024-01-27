@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        dockerfile: [apache, apache-php8.0, nginx, nginx-php8.0]
+        dockerfile: [apache, nginx]
 
     steps:
       - uses: actions/checkout@v4
