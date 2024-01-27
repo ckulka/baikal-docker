@@ -2,9 +2,10 @@
 #
 # The acme.json file must exist before you run docker compose up.
 #
-# 1. Adjust host in line 14
+# 1. Adjust host in line 17
 # 2. Create acme.json: touch /etc/ssl/private/acme.json
-# 3. Start the stack: docker compose -f docker compose.ssl.yaml up
+# 3. Adjust file permissions: chmod 600 /etc/ssl/private/acme.json
+# 4. Start the stack: docker compose -f docker compose.ssl.yaml up
 
 version: "2"
 services:
@@ -12,48 +13,47 @@ services:
     image: ckulka/baikal:nginx
     restart: always
     labels:
-      traefik.enable: "true"
-      traefik.frontend.rule: "Host: dav.example.com"
-      traefik.port: 80
+      traefik.enable: true
+      traefik.http.routers.baikal.rule: Host(`dav.example.com`)
+      traefik.http.routers.baikal.tls: true
       # Traefik middleware required for iOS, see https://github.com/ckulka/baikal-docker/issues/37.
-      # When using a Traefik provider file (YAML/TOML) instead of these labels, remove the escape
-      # character from "*.redirectregex.replacement" - it's only needed in Docker Compose YAML files:
-      # redirectRegex:
-      #   replacement: "https://$1/dav/php/
-      traefik.http.middlewares.baikal-dav.redirectregex.regex: "https://(.*)/.well-known/(card|cal)dav"
-      traefik.http.middlewares.baikal-dav.redirectregex.replacement: "https://$$1/dav.php/"
-      traefik.http.middlewares.baikal-dav.redirectregex.permanent: "true"
-      traefik.http.routers.baikal.middlewares: "baikal-dav"
-
+      traefik.http.routers.baikal.middlewares: baikal-dav
+      traefik.http.middlewares.baikal-dav.redirectregex.regex: https://(.*)/.well-known/(card|cal)dav
+      traefik.http.middlewares.baikal-dav.redirectregex.replacement: https://$$1/dav.php/
+      traefik.http.middlewares.baikal-dav.redirectregex.permanent: true
     volumes:
       - config:/var/www/baikal/config
       - data:/var/www/baikal/Specific
 
-  # See https://docs.traefik.io/
+  # See https://doc.traefik.io/traefik/v2.10/
   traefik:
-    image: traefik:2.3
+    image: traefik:2.10
     restart: always
     ports:
       - 80:80
       - 443:443
     volumes:
-      - /etc/ssl/private/acme.json:/acme.json
-      - /var/run/docker.sock:/var/run/docker.sock
+      - type: bind
+        source: /etc/ssl/private/acme.json
+        target: /acme.json
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
     command:
-      # See https://doc.traefik.io/traefik/observability/access-logs/
+      # See https://doc.traefik.io/traefik/v2.10/observability/access-logs/
       - --accesslog
-      # See https://doc.traefik.io/traefik/routing/entrypoints/#redirection
+      # See https://doc.traefik.io/traefik/v2.10/routing/entrypoints/#redirection
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
       - --entrypoints.web.http.redirections.entryPoint.to=websecure
       - --entrypoints.web.http.redirections.entryPoint.scheme=https
-      # See https://doc.traefik.io/traefik/https/acme/
-      - --certificatesresolvers.letsencrypt.acme.email=cyrill.kulka@gmail.com
+      # See https://doc.traefik.io/traefik/v2.10/https/acme/
+      - --certificatesresolvers.letsencrypt.acme.email=your-email@example.com
       - --certificatesresolvers.letsencrypt.acme.storage=/acme.json
-      # - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
       - --certificatesresolvers.letsencrypt.acme.tlschallenge
 
-      # https://doc.traefik.io/traefik/providers/docker/
+      # https://doc.traefik.io/traefik/v2.10/providers/docker/
       - --providers.docker
       - --providers.docker.exposedByDefault=false
 
