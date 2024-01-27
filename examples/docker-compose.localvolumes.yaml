@@ -1,6 +1,6 @@
 # Docker Compose file for a Baikal server with local mounts instead of Docker volumes
 
-# Before you start docker-compose up, make sure that you have prepared
+# Before you start docker compose up, make sure that you have prepared
 # the local folders to avoid file permission issues with
 #
 # mkdir -p config Specific/db

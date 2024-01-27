@@ -1,10 +1,10 @@
 # Docker Compose file for a Baikal server with Let's Encrypt using Traefik (https://docs.traefik.io/)
 #
-# The acme.json file must exist before you run docker-compose up.
+# The acme.json file must exist before you run docker compose up.
 #
 # 1. Adjust host in line 14
 # 2. Create acme.json: touch /etc/ssl/private/acme.json
-# 3. Start the stack: docker-compose -f docker-compose.ssl.yaml up
+# 3. Start the stack: docker compose -f docker compose.ssl.yaml up
 
 version: "2"
 services:

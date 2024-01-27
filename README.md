@@ -69,7 +69,7 @@ docker run --rm -it -p 80:80 ckulka/baikal:nginx
 Alternatively, use the provided [examples/docker-compose.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.yaml) from the Git repository:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 You can now open [http://localhost](http://localhost) or [http://host-ip](http://host-ip) in your browser and use Baikal.
