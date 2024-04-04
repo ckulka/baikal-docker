@@ -14,6 +14,8 @@ The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm
 
 - [`0.9.5`, `0.9.5-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtpfix/apache.dockerfile)
 - [`0.9.5-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtpfix/nginx.dockerfile)
+- [`0.9.5-apache-php8.2`, `apache-php8.2`, `0.9.5-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtp/apache-php8.2.dockerfile)
+- [`0.9.5-nginx-php8.2`, `nginx-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtpfix/nginx-php8.2.dockerfile)
 - [`0.9.4`, `0.9.4-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/apache.dockerfile)
 - [`0.9.4-php8.0`, `0.9.4-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/apache-php8.0.dockerfile)
 - [`0.9.4-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/nginx.dockerfile)
