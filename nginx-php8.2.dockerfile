@@ -22,12 +22,12 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   apt remove -y lsb-release   &&\
   apt update                  &&\
     apt install -y            \
-    php8.1-curl               \
-    php8.1-fpm                \
-    php8.1-mbstring           \
-    php8.1-mysql              \
-    php8.1-sqlite3            \
-    php8.1-xml                \
+    php8.2-curl               \
+    php8.2-fpm                \
+    php8.2-mbstring           \
+    php8.2-mysql              \
+    php8.2-sqlite3            \
+    php8.2-xml                \
     sqlite3                   \
     msmtp msmtp-mta           &&\
   rm -rf /var/lib/apt/lists/* &&\
