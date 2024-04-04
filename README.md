@@ -12,10 +12,10 @@ I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) the
 
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm64v8` and `i386`.
 
-- [`0.9.5`, `0.9.5-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtpfix/apache.dockerfile)
-- [`0.9.5-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtpfix/nginx.dockerfile)
+- [`0.9.5`, `0.9.5-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.5/apache.dockerfile)
 - [`0.9.5-apache-php8.2`, `apache-php8.2`, `0.9.5-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtp/apache-php8.2.dockerfile)
-- [`0.9.5-nginx-php8.2`, `nginx-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5+msmtpfix/nginx-php8.2.dockerfile)
+- [`0.9.5-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.5/nginx.dockerfile)
+- [`0.9.5-nginx-php8.2`, `nginx-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5/nginx-php8.2.dockerfile)
 - [`0.9.4`, `0.9.4-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/apache.dockerfile)
 - [`0.9.4-php8.0`, `0.9.4-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/apache-php8.0.dockerfile)
 - [`0.9.4-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/nginx.dockerfile)
@@ -34,8 +34,6 @@ The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm
 - [`0.9.1-nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.1/nginx-php8.0.dockerfile)
 - [`0.9.0`, `0.9.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
 - [`0.9.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
-- [`0.8.0`, `0.8.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.8.0/apache.dockerfile)
-- [`0.8.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.8.0/nginx.dockerfile)
 
 For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`. Version 0.9.0 and older do not support `i386`.
 
