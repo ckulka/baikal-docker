@@ -10,7 +10,7 @@ RUN apk add unzip && unzip -q baikal-$VERSION.zip
 FROM nginx:1
 
 LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
-LABEL version="0.9.4"
+LABEL version="0.9.5"
 LABEL repository="https://github.com/ckulka/baikal-docker"
 LABEL website="http://sabre.io/baikal/"
 
