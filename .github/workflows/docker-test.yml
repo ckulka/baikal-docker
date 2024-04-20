@@ -18,6 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
+          cache: npm
 
       - name: Install Cypress dependencies
         run: npm ci
@@ -31,7 +32,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        dockerfile: [apache, nginx]
+        dockerfile:
+          - apache
+          - apache-php8.2
+          - nginx
+          - nginx-php8.2
 
     steps:
       - uses: actions/checkout@v4
@@ -41,16 +46,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
+          cache: npm
 
       - name: Install Cypress dependencies
         run: npm ci
 
-      - name: Build Baikal image
+      - name: Build Docker image
         id: build
-        run: echo "IMAGE_ID=$(docker build -qf ${{ matrix.dockerfile }}.dockerfile .)" >> "$GITHUB_OUTPUT"
+        run: docker build -f ${{ matrix.dockerfile }}.dockerfile -t baikal-image .
 
       - name: Start Baikal container
-        run: docker run --rm -dp 80:80 --name ${{ matrix.dockerfile }} ${{ steps.build.outputs.IMAGE_ID }}
+        run: docker run --rm -dp 80:80 --name ${{ matrix.dockerfile }} baikal-image
 
       - name: Run Cypress tests
         run: npm run test
@@ -60,8 +66,8 @@ jobs:
 
       - name: Build and run MailSlurper
         run: |
-          IMAGE_ID=$(docker build -q 'https://github.com/mailslurper/mailslurper.git#release-1.15.0')
-          docker run --rm --detach --name mailslurper -p 8085:8085 -v ${{ github.workspace }}/cypress/fixtures/mailslurper-config.json:/config.json:ro $IMAGE_ID
+          docker build -q 'https://github.com/mailslurper/mailslurper.git#release-1.15.0' -t mailslurper
+          docker run --rm --detach --name mailslurper -p 8085:8085 -v ${{ github.workspace }}/cypress/fixtures/mailslurper-config.json:/config.json:ro mailslurper
 
       - name: Start Baikal container with MSMTP configuration
         env:
@@ -71,8 +77,8 @@ jobs:
             port    2500
             from    baikal@example.com
         run: |
-          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mailslurper --name ${{ matrix.dockerfile }} ${{ steps.build.outputs.IMAGE_ID }}
-          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php ${{ matrix.dockerfile }}:/var/www/baikal/html/
+          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mailslurper --name baikal baikal-image
+          docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php baikal:/var/www/baikal/html/
 
       - name: Run Cypress tests incl. MSMTP
         run: CYPRESS_MSMTP_ENABLED=TRUE npm run test
