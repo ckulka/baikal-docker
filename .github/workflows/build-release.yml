@@ -9,6 +9,8 @@ on:
     types:
       - published
 
+  workflow_dispatch:
+
 jobs:
   parse_release_tag:
     if: github.event_name == 'release'
