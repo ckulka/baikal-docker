@@ -10,6 +10,13 @@ on:
         description: Tags to apply to the image
         required: true
         type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        description: DockerHub username
+        required: true
+      DOCKERHUB_PASSWORD:
+        description: DockerHub password
+        required: true
 
 jobs:
   build:

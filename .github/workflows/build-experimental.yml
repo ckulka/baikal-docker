@@ -1,0 +1,51 @@
+# See
+# - https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+# - https://docs.github.com/en/actions/learn-github-actions/contexts
+# - https://github.com/docker/build-push-action/blob/master/docs/advanced/multi-platform.md
+name: Build experimental images
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/docker-build.yml
+      - "*.dockerfile"
+      - files/**
+
+jobs:
+  apache:
+    name: Apache
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      dockerfile: apache.dockerfile
+      tags: |
+        ckulka/baikal:experimental-apache
+        ckulka/baikal:experimental
+    secrets: inherit
+
+  apache_php82:
+    name: Apache (PHP 8.2)
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      dockerfile: apache-php8.2.dockerfile
+      tags: |
+        ckulka/baikal:experimental-apache-php8.2
+        ckulka/baikal:experimental-php8.2
+    secrets: inherit
+
+  nginx:
+    name: Nginx
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      dockerfile: nginx.dockerfile
+      tags: ckulka/baikal:experimental-nginx
+    secrets: inherit
+
+  nginx_php82:
+    name: Apache (PHP 8.2)
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      dockerfile: nginx-php8.2.dockerfile
+      tags: ckulka/baikal:experimental-nginx-php8.2
+    secrets: inherit
