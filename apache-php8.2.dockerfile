@@ -9,11 +9,6 @@ RUN apk add unzip && unzip -q baikal-$VERSION.zip
 # Final Docker image
 FROM php:8.2-apache
 
-LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
-LABEL version="0.9.5"
-LABEL repository="https://github.com/ckulka/baikal-docker"
-LABEL website="http://sabre.io/baikal/"
-
 # Install Baikal and required dependencies
 COPY --from=builder --chown=www-data:www-data baikal /var/www/baikal
 RUN apt-get update            &&\

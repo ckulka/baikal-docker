@@ -29,6 +29,7 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache.dockerfile
+      baikal-version: ${{ github.ref_name }}
       tags: |
         ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-apache
         ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}
@@ -42,6 +43,7 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache-php8.2.dockerfile
+      baikal-version: ${{ github.ref_name }}
       tags: |
         ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-apache-php8.2
         ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-php8.2
@@ -54,6 +56,7 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx.dockerfile
+      baikal-version: ${{ github.ref_name }}
       tags: |
         ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-nginx
         ckulka/baikal:nginx
@@ -65,5 +68,6 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx-php8.2.dockerfile
+      baikal-version: ${{ github.ref_name }}
       tags: ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-nginx-php8.2
     secrets: inherit

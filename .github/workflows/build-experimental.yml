@@ -19,6 +19,7 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache.dockerfile
+      baikal-version: experimental
       tags: |
         ckulka/baikal:experimental-apache
         ckulka/baikal:experimental
@@ -29,6 +30,7 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache-php8.2.dockerfile
+      baikal-version: experimental
       tags: |
         ckulka/baikal:experimental-apache-php8.2
         ckulka/baikal:experimental-php8.2
@@ -39,6 +41,7 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx.dockerfile
+      baikal-version: experimental
       tags: ckulka/baikal:experimental-nginx
     secrets: inherit
 
@@ -47,5 +50,6 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx-php8.2.dockerfile
+      baikal-version: experimental
       tags: ckulka/baikal:experimental-nginx-php8.2
     secrets: inherit
