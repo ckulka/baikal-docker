@@ -9,11 +9,6 @@ RUN apk add unzip && unzip -q baikal-$VERSION.zip
 # Final Docker image
 FROM nginx:1
 
-LABEL description="Baikal is a Cal and CardDAV server, based on sabre/dav, that includes an administrative interface for easy management."
-LABEL version="0.9.5"
-LABEL repository="https://github.com/ckulka/baikal-docker"
-LABEL website="http://sabre.io/baikal/"
-
 # Install dependencies: PHP (with libffi6 dependency) & SQLite3
 RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
   apt update                  &&\
