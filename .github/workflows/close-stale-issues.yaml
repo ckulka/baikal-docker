@@ -1,0 +1,21 @@
+name: Close stale issues
+on:
+  schedule:
+    - cron: 30 1 * * *
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          include-only-assigned: true
+          stale-issue-message: This issue looks inactive, I will close it in 7 days.
+          close-issue-message: Closing this issue due to inactivity.
+          stale-pr-message: This PR looks inactive, I will close it in 7 days.
+          close-pr-message: Closing this PR due to inactivity.
+          exempt-issue-labels: exclude-stale-bot
+          exempt-pr-labels: exclude-stale-bot
+          debug-only: true
