@@ -7,6 +7,10 @@ on:
         description: Path to the Dockerfile
         required: true
         type: string
+      ref:
+        description: Git reference to test
+        default: ${{ github.ref }}
+        type: string
 
 jobs:
   test:
@@ -14,6 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.ref }}
           show-progress: false
 
       - uses: actions/setup-node@v4

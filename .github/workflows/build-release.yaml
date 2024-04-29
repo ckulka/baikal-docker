@@ -9,19 +9,16 @@ on:
     types:
       - published
 
-  workflow_dispatch:
-
 jobs:
   parse_release_tag:
-    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.parse-release-tag.outputs.tag }}
+      baikal-version: ${{ steps.parse-release-tag.outputs.BAIKAL_VERSION }}
     steps:
       # Get the release version by stripping build metadata from the release name
       - name: Parse release tag
         id: parse-release-tag
-        run: echo tag=${GITHUB_REF_NAME/+*/} >> "$GITHUB_OUTPUT"
+        run: echo BAIKAL_VERSION=${GITHUB_REF_NAME/+*/} >> "$GITHUB_OUTPUT"
 
   apache:
     name: Apache
@@ -29,12 +26,10 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache.dockerfile
-      baikal-version: ${{ github.ref_name }}
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
       tags: |
-        ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-apache
-        ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}
-        ckulka/baikal:apache
-        ckulka/baikal:latest
+        ckulka/baikal:${{ needs.parse_release_tag.outputs.baikal-version }}-apache
+        ckulka/baikal:${{ needs.parse_release_tag.outputs.baikal-version }}
     secrets: inherit
 
   apache_php82:
@@ -43,11 +38,10 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache-php8.2.dockerfile
-      baikal-version: ${{ github.ref_name }}
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
       tags: |
-        ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-apache-php8.2
-        ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-php8.2
-        ckulka/baikal:apache-php8.2
+        ckulka/baikal:${{ needs.parse_release_tag.outputs.baikal-version }}-apache-php8.2
+        ckulka/baikal:${{ needs.parse_release_tag.outputs.baikal-version }}-php8.2
     secrets: inherit
 
   nginx:
@@ -56,10 +50,8 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx.dockerfile
-      baikal-version: ${{ github.ref_name }}
-      tags: |
-        ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-nginx
-        ckulka/baikal:nginx
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
+      tags: ckulka/baikal:${{ needs.parse_release_tag.outputs.baikal-version }}-nginx
     secrets: inherit
 
   nginx_php82:
@@ -68,6 +60,6 @@ jobs:
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx-php8.2.dockerfile
-      baikal-version: ${{ github.ref_name }}
-      tags: ckulka/baikal:${{ needs.parse_release_tag.outputs.tag }}-nginx-php8.2
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
+      tags: ckulka/baikal:${{ needs.parse_release_tag.outputs.baikal-version }}-nginx-php8.2
     secrets: inherit
