@@ -1,0 +1,36 @@
+name: PR review
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+
+      - name: Install Cypress dependencies
+        run: npm ci
+
+      - name: Ensure files follow code style
+        run: npm run lint
+
+  test:
+    uses: ./.github/workflows/test-job.yaml
+    with:
+      dockerfile: ${{ matrix.dockerfile }}
+    strategy:
+      fail-fast: true
+      matrix:
+        dockerfile:
+          - apache
+          - apache-php8.2
+          - nginx
+          - nginx-php8.2
