@@ -10,7 +10,7 @@ describe("Send mail with PHP", () => {
         },
       }).should((response) => {
         expect(response.body.totalRecords).to.eql(1);
-        let mail = response.body.mailItems[0];
+        const mail = response.body.mailItems[0];
         expect(mail.fromAddress).to.eql("baikal@example.com");
         expect(mail.toAddresses).to.eql(["to@example.com"]);
         expect(mail.body).to.eql("Email sent with PHP mail()\n");
