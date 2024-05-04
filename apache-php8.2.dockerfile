@@ -21,6 +21,7 @@ RUN apt-get update            &&\
 # Configure Apache + HTTPS
 COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite ssl && openssl req -x509 -newkey rsa:2048 -subj "/C=  " -keyout /etc/ssl/private/baikal.private.pem -out /etc/ssl/private/baikal.public.pem -days 3650 -nodes
+RUN sed 's/expose_php = On/expose_php = Off/g' /usr/local/etc/php/php.ini-production > /usr/local/etc/php/php.ini
 
 # Expose HTTPS & data directory
 EXPOSE 443
