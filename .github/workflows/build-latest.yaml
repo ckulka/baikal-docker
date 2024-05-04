@@ -1,0 +1,117 @@
+# See
+# - https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+# - https://docs.github.com/en/actions/learn-github-actions/contexts
+# - https://github.com/docker/build-push-action/blob/master/docs/advanced/multi-platform.md
+name: Build release images
+
+on:
+  # Rebuild every week on Sunday at 8:20 UTC
+  schedule:
+    - cron: 20 8 * * 0
+
+  # Build when a release is published
+  release:
+    types:
+      - published
+
+  # Allow manually triggered rebuilds
+  workflow_dispatch:
+
+jobs:
+  parse_release_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ steps.parse-release-tag.outputs.REF_NAME }}
+      baikal-version: ${{ steps.parse-release-tag.outputs.BAIKAL_VERSION }}
+    steps:
+      - name: Parse release tag
+        id: parse-release-tag
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]
+          then
+            # Get the release version by stripping build metadata from the release name
+            echo Parsing tag from release ref $REF_NAME
+            REF_NAME=$GITHUB_REF_NAME
+          else
+            # Get the latest release version from the GitHub API
+            echo Parsing tag from latest release ref $REF_NAME
+            REF_NAME=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name')
+          fi
+
+          BAIKAL_VERSION=${REF_NAME/+*/}
+          echo Parsed Baikal version $BAIKAL_VERSION from release $REF_NAME
+          echo REF_NAME=$REF_NAME >> "$GITHUB_OUTPUT"
+          echo BAIKAL_VERSION=$BAIKAL_VERSION >> "$GITHUB_OUTPUT"
+
+  test:
+    name: ${{ matrix.dockerfile }}
+    needs: parse_release_tag
+    uses: ./.github/workflows/test-job.yaml
+    with:
+      dockerfile: ${{ matrix.dockerfile }}
+      ref: ${{ needs.parse_release_tag.outputs.ref }}
+    strategy:
+      fail-fast: true
+      matrix:
+        dockerfile:
+          - apache
+          - apache-php8.2
+          - nginx
+          - nginx-php8.2
+
+  apache:
+    name: Apache
+    needs:
+      - parse_release_tag
+      - test
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      ref: ${{ needs.parse_release_tag.outputs.ref }}
+      dockerfile: apache.dockerfile
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
+      tags: |
+        ckulka/baikal:apache
+        ckulka/baikal:latest
+    secrets: inherit
+
+  apache_php82:
+    name: Apache (PHP 8.2)
+    needs:
+      - parse_release_tag
+      - test
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      ref: ${{ needs.parse_release_tag.outputs.ref }}
+      dockerfile: apache-php8.2.dockerfile
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
+      image-revision: ${{ needs.parse_release_tag.outputs.ref }}
+      tags: ckulka/baikal:apache-php8.2
+    secrets: inherit
+
+  nginx:
+    name: Nginx
+    needs:
+      - parse_release_tag
+      - test
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      ref: ${{ needs.parse_release_tag.outputs.ref }}
+      dockerfile: nginx.dockerfile
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
+      image-revision: ${{ needs.parse_release_tag.outputs.ref }}
+      tags: ckulka/baikal:nginx
+    secrets: inherit
+
+  nginx_php82:
+    name: Nginx (PHP 8.2)
+    needs:
+      - parse_release_tag
+      - test
+    uses: ./.github/workflows/build-job.yaml
+    with:
+      ref: ${{ needs.parse_release_tag.outputs.ref }}
+      dockerfile: nginx-php8.2.dockerfile
+      image-version: ${{ needs.parse_release_tag.outputs.baikal-version }}
+      image-revision: ${{ needs.parse_release_tag.outputs.ref }}
+      tags: ckulka/baikal:nginx-php8.2
+    secrets: inherit

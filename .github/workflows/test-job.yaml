@@ -1,46 +1,24 @@
-name: test
+name: Test job
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  workflow_call:
+    inputs:
+      dockerfile:
+        description: Path to the Dockerfile
+        required: true
+        type: string
+      ref:
+        description: Git reference to test
+        default: ${{ github.ref }}
+        type: string
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          show-progress: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
-          cache: npm
-
-      - name: Install Cypress dependencies
-        run: npm ci
-
-      - name: Ensure files follow code style
-        run: npm run lint
-
   test:
-    name: Test Docker image
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        dockerfile:
-          - apache
-          - apache-php8.2
-          - nginx
-          - nginx-php8.2
-
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.ref }}
           show-progress: false
 
       - uses: actions/setup-node@v4
@@ -53,16 +31,16 @@ jobs:
 
       - name: Build Docker image
         id: build
-        run: docker build -f ${{ matrix.dockerfile }}.dockerfile -t baikal-image .
+        run: docker build -f ${{ inputs.dockerfile }}.dockerfile -t baikal-image .
 
       - name: Start Baikal container
-        run: docker run --rm -dp 80:80 --name ${{ matrix.dockerfile }} baikal-image
+        run: docker run --rm -dp 80:80 --name ${{ inputs.dockerfile }} baikal-image
 
       - name: Run Cypress tests
         run: npm run test
 
       - name: Stop Baikal container
-        run: docker stop ${{ matrix.dockerfile }}
+        run: docker stop ${{ inputs.dockerfile }}
 
       - name: Build and run MailSlurper
         run: |
@@ -87,5 +65,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-results-${{ matrix.dockerfile }}
+          name: cypress-results-${{ inputs.dockerfile }}
           path: cypress/screenshots

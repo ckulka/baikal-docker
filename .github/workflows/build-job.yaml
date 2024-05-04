@@ -10,9 +10,17 @@ on:
         description: Tags to apply to the image
         required: true
         type: string
-      baikal-version:
-        description: Baikal version
+      image-version:
+        description: Value for org.opencontainers.image.version label
         required: true
+        type: string
+      image-revision:
+        description: Value for org.opencontainers.image.revision label
+        default: ${{ github.sha }}
+        type: string
+      ref:
+        description: Git reference to build
+        default: ${{ github.ref }}
         type: string
     secrets:
       DOCKERHUB_USERNAME:
@@ -28,6 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.ref }}
           show-progress: false
 
       # See https://github.com/docker/setup-qemu-action
@@ -58,8 +67,8 @@ jobs:
             org.opencontainers.image.url=https://hub.docker.com/r/ckulka/baikal
             org.opencontainers.image.documentation=https://github.com/ckulka/baikal-docker
             org.opencontainers.image.source=https://github.com/ckulka/baikal-docker
-            org.opencontainers.image.version=${{ inputs.baikal-version }}
-            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ inputs.image-version }}
+            org.opencontainers.image.revision=${{ inputs.image-revision }}
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.title=Baikal
             org.opencontainers.image.description=Ready-to-go Baikal server

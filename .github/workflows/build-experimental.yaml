@@ -5,21 +5,42 @@
 name: Build experimental images
 
 on:
+  # Rebuild every quarter on Sunday at 8:20 UTC
+  schedule:
+    - cron: 20 8 * 1/3 0
+
+  # Build on push to master
   push:
     branches:
       - master
     paths:
-      - .github/workflows/docker-build.yml
+      - .github/workflows/build-experimental.yaml
       - "*.dockerfile"
       - files/**
 
+# Run the automated tests first, then publish the images if the tests pass
 jobs:
+  test:
+    name: ${{ matrix.dockerfile }}
+    uses: ./.github/workflows/test-job.yaml
+    with:
+      dockerfile: ${{ matrix.dockerfile }}
+    strategy:
+      fail-fast: true
+      matrix:
+        dockerfile:
+          - apache
+          - apache-php8.2
+          - nginx
+          - nginx-php8.2
+
   apache:
     name: Apache
+    needs: test
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache.dockerfile
-      baikal-version: experimental
+      image-version: experimental
       tags: |
         ckulka/baikal:experimental-apache
         ckulka/baikal:experimental
@@ -27,10 +48,11 @@ jobs:
 
   apache_php82:
     name: Apache (PHP 8.2)
+    needs: test
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: apache-php8.2.dockerfile
-      baikal-version: experimental
+      image-version: experimental
       tags: |
         ckulka/baikal:experimental-apache-php8.2
         ckulka/baikal:experimental-php8.2
@@ -38,18 +60,20 @@ jobs:
 
   nginx:
     name: Nginx
+    needs: test
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx.dockerfile
-      baikal-version: experimental
+      image-version: experimental
       tags: ckulka/baikal:experimental-nginx
     secrets: inherit
 
   nginx_php82:
-    name: Apache (PHP 8.2)
+    name: Nginx (PHP 8.2)
+    needs: test
     uses: ./.github/workflows/build-job.yaml
     with:
       dockerfile: nginx-php8.2.dockerfile
-      baikal-version: experimental
+      image-version: experimental
       tags: ckulka/baikal:experimental-nginx-php8.2
     secrets: inherit
