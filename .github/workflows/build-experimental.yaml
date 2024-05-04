@@ -18,6 +18,10 @@ on:
       - "*.dockerfile"
       - files/**
 
+concurrency:
+  group: build-experimental-images
+  cancel-in-progress: true
+
 # Run the automated tests first, then publish the images if the tests pass
 jobs:
   test:

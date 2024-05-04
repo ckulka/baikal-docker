@@ -6,6 +6,10 @@ on:
     types:
       - published
 
+concurrency:
+  group: dockerhub-description
+  cancel-in-progress: true
+
 jobs:
   update:
     runs-on: ubuntu-latest

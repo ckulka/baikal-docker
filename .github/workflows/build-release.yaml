@@ -9,6 +9,10 @@ on:
     types:
       - published
 
+concurrency:
+  group: build-release-images
+  cancel-in-progress: true
+
 jobs:
   parse_release_tag:
     runs-on: ubuntu-latest
