@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 
-let config = {
+const config = {
   e2e: {
     supportFile: false,
     screenshotsFolder: "cypress/screenshots",

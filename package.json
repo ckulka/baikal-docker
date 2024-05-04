@@ -3,21 +3,21 @@
   "version": "0.0.1",
   "description": "Runs tests against the ckulka/baikal Docker image",
   "scripts": {
-    "format": "prettier . --write",
-    "lint": "prettier . --check",
+    "prettier:check": "prettier . --check",
+    "prettier:fix": "prettier . --write",
+    "lint": "eslint .",
+    "eslint:fix": "eslint . --fix",
     "test": "cypress run",
     "cypress:open": "cypress open"
   },
   "license": "MIT",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
     "cypress": "^13.8.1",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0"
   },
   "engines": {
     "node": "^18.17.1"
