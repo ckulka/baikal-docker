@@ -18,4 +18,3 @@ jobs:
           close-pr-message: Closing this PR due to inactivity.
           exempt-issue-labels: exclude-stale-bot
           exempt-pr-labels: exclude-stale-bot
-          debug-only: true
