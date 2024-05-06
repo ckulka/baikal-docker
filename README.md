@@ -1,6 +1,6 @@
 # Baikal
 
-[![docker build](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-build.yml) [![test](https://github.com/ckulka/baikal-docker/actions/workflows/docker-test.yml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/docker-test.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8%20%7C%20i386-informational)
+[![Latest images](https://github.com/ckulka/baikal-docker/actions/workflows/build-latest.yaml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/build-latest.yaml) [![Experimental images](https://github.com/ckulka/baikal-docker/actions/workflows/build-experimental.yaml/badge.svg)](https://github.com/ckulka/baikal-docker/actions/workflows/build-experimental.yaml) ![Docker Pulls](https://img.shields.io/docker/pulls/ckulka/baikal) ![Docker Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20arm32v7%20%7C%20arm64v8%20%7C%20i386-informational)
 
 This dockerfile provides a ready-to-go [Baikal server](http://sabre.io/baikal/).
 
@@ -8,14 +8,21 @@ For more details, see [ckulka/baikal-docker (GitHub)](https://github.com/ckulka/
 
 ## Supported tags and respective Dockerfile links
 
+Tags without a version are [weekly re-builds](https://github.com/ckulka/baikal-docker/actions/workflows/build-latest.yaml) to include the latest base image with the most recent updates:
+
+- `latest` and `apache` are re-builds of the latest `*-apache` version
+- `apache-php8.2` are re-builds of the latest `*-apache-php8.2` version
+- `nginx` are re-builds of the latest `*-nginx` version
+- `nginx-php8.2` are re-builds of the latest `*-nginx-php8.2` version
+
 I follow the same version naming scheme as [Baikal](http://sabre.io/baikal/) themselves.
 
 The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm64v8` and `i386`.
 
-- [`0.9.5`, `0.9.5-apache`, `apache`, `latest`](https://github.com/ckulka/baikal-docker/blob/0.9.5/apache.dockerfile)
-- [`0.9.5-apache-php8.2`, `apache-php8.2`, `0.9.5-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5/apache-php8.2.dockerfile)
-- [`0.9.5-nginx`, `nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.5/nginx.dockerfile)
-- [`0.9.5-nginx-php8.2`, `nginx-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5/nginx-php8.2.dockerfile)
+- [`0.9.5`, `0.9.5-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.5/apache.dockerfile)
+- [`0.9.5-apache-php8.2`, `0.9.5-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5/apache-php8.2.dockerfile)
+- [`0.9.5-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.5/nginx.dockerfile)
+- [`0.9.5-nginx-php8.2`](https://github.com/ckulka/baikal-docker/blob/0.9.5/nginx-php8.2.dockerfile)
 - [`0.9.4`, `0.9.4-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/apache.dockerfile)
 - [`0.9.4-php8.0`, `0.9.4-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/apache-php8.0.dockerfile)
 - [`0.9.4-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.4+msmtpfix/nginx.dockerfile)
@@ -24,20 +31,8 @@ The following tags support multiple architectures, e.g. `amd64`, `arm32v7`, `arm
 - [`0.9.3-php8.0`, `0.9.3-apache-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.3+msmtp/apache-php8.0.dockerfile)
 - [`0.9.3-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.3+msmtp/nginx.dockerfile)
 - [`0.9.3-nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.3+msmtp/nginx-php8.0.dockerfile)
-- [`0.9.2`, `0.9.2-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache.dockerfile)
-- [`0.9.2-php8.0`, `0.9.2-apache-php8.0`, `apache-php8.0`, `latest-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/apache-php8.0.dockerfile)
-- [`0.9.2-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx.dockerfile)
-- [`0.9.2-nginx-php8.0`, `nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.2/nginx-php8.0.dockerfile)
-- [`0.9.1`, `0.9.1-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.1/apache.dockerfile)
-- [`0.9.1-php8.0`, `0.9.1-apache-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.1/apache-php8.0.dockerfile)
-- [`0.9.1-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.1/nginx.dockerfile)
-- [`0.9.1-nginx-php8.0`](https://github.com/ckulka/baikal-docker/blob/0.9.1/nginx-php8.0.dockerfile)
-- [`0.9.0`, `0.9.0-apache`](https://github.com/ckulka/baikal-docker/blob/0.9.0/apache.dockerfile)
-- [`0.9.0-nginx`](https://github.com/ckulka/baikal-docker/blob/0.9.0/nginx.dockerfile)
 
 For earlier versions all the way back to version 0.2.7, please search in the [tags](https://hub.docker.com/r/ckulka/baikal/tags) tab. Version 0.4.5 and older are only available for `amd64`. Version 0.9.0 and older do not support `i386`.
-
-The `*-php8.0` images address compatibility issue in some edge cases with version 0.9.1 and PHP 8.1, see [ckulka/baikal-docker #52](https://github.com/ckulka/baikal-docker/issues/52) and [sabre-io/vobject #561](https://github.com/sabre-io/vobject/pull/561).
 
 ## Quick reference
 

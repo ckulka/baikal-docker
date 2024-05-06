@@ -2,7 +2,7 @@
 # - https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
 # - https://docs.github.com/en/actions/learn-github-actions/contexts
 # - https://github.com/docker/build-push-action/blob/master/docs/advanced/multi-platform.md
-name: Build release images
+name: Latest images
 
 on:
   # Rebuild every week on Sunday at 8:20 UTC
