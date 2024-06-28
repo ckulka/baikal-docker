@@ -62,6 +62,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
           push: true
           tags: ${{ inputs.tags }}
+          build-args: VERSION=${{ inputs.image-version }}
+          # TODO github.event.created_at does not seem to work
           labels: |
             org.opencontainers.image.created=${{ github.event.created_at }}
             org.opencontainers.image.url=https://hub.docker.com/r/ckulka/baikal
