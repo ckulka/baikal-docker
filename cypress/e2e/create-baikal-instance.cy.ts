@@ -9,6 +9,12 @@ describe("Create Baikal instance", () => {
       "Baïkal initialization wizard",
     );
 
+    // Assert the correct Baikal version was installed
+    cy.get("#overview > p.lead").should(
+      "have.text",
+      `Configure your new Baïkal ${Cypress.env("BAIKAL_VERSION")} installation.`,
+    );
+
     // Set administrator credentials
     cy.get("#admin_passwordhash").type(adminCredentials);
     cy.get("#admin_passwordhash_confirm").type(adminCredentials);

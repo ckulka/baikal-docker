@@ -16,6 +16,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      # Get the latest release version from the GitHub API
+      - name: Parse release tag
+        id: parse-release-tag
+        run: |
+          echo Parsing tag from latest release ref $REF_NAME
+          REF_NAME=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name')
+          echo Latest release ref is $REF_NAME
+          BAIKAL_VERSION=${REF_NAME/+*/}
+          echo Parsed Baikal version $BAIKAL_VERSION from release $REF_NAME
+          echo BAIKAL_VERSION=$BAIKAL_VERSION >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
@@ -31,13 +42,20 @@ jobs:
 
       - name: Build Docker image
         id: build
-        run: docker build -f ${{ inputs.dockerfile }}.dockerfile -t baikal-image .
+        run: >
+          docker build
+          --file ${{ inputs.dockerfile }}.dockerfile
+          --build-arg VERSION=${{ steps.parse-release-tag.outputs.BAIKAL_VERSION }}
+          --tag baikal-image
+          .
 
       - name: Start Baikal container
         run: docker run --rm -dp 80:80 --name ${{ inputs.dockerfile }} baikal-image
 
       - name: Run Cypress tests
         run: npm run test
+        env:
+          CYPRESS_BAIKAL_VERSION: ${{ steps.parse-release-tag.outputs.BAIKAL_VERSION }}
 
       - name: Stop Baikal container
         run: docker stop ${{ inputs.dockerfile }}
@@ -59,7 +77,10 @@ jobs:
           docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php baikal:/var/www/baikal/html/
 
       - name: Run Cypress tests incl. MSMTP
-        run: CYPRESS_MSMTP_ENABLED=TRUE npm run test
+        run: npm run test
+        env:
+          CYPRESS_MSMTP_ENABLED: TRUE
+          CYPRESS_BAIKAL_VERSION: ${{ steps.parse-release-tag.outputs.BAIKAL_VERSION }}
 
       - name: Archive test results
         if: always()
