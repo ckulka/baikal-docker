@@ -7,7 +7,7 @@ ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSIO
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
 
 # Final Docker image
-FROM php:8.1-apache
+FROM php:8.3-apache
 
 # Install Baikal and required dependencies
 COPY --from=builder --chown=www-data:www-data baikal /var/www/baikal
