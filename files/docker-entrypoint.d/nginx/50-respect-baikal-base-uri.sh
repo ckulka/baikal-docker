@@ -25,13 +25,20 @@ fi
 
 echo "$ME: info: Found Baikal base URI '$BASE_URI', updating Nginx configuration."
 
+# Remove surrounding quotes (single and double) and trailing slashes
+BASE_URI=$(echo $BASE_URI | sed 's/"//g')
+BASE_URI=$(echo $BASE_URI | sed "s/'//g")
+BASE_URI=$(echo $BASE_URI | sed 's/\/$//g')
 
-# Create the multiline text file using a heredoc
+# Create the nginx configuration snippet to rewrite the URL
 cat <<EOF > /tmp/snippet.txt
 
   # Remove URL prefix from the URL when Baikal is served from a sub path
   location ^~ $BASE_URI {
-    rewrite ^$BASE_URI/(.*)$ /\$1 last;
+    rewrite ^ / last;
+  }
+  location ^~ $BASE_URI/ {
+    rewrite ^$BASE_URI(.*)$ /\$1 last;
     rewrite ^ / last;
   }
 EOF
@@ -42,4 +49,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Insert the snippet into the Nginx configuration
 sed -i '/charset utf-8;/r /tmp/snippet.txt' /etc/nginx/conf.d/default.conf
+sed -i 's/# internal;/internal;/' /etc/nginx/conf.d/default.conf
+rm /tmp/snippet.txt
