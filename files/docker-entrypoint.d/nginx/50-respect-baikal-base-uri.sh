@@ -30,7 +30,7 @@ BASE_URI=$(echo $BASE_URI | sed 's/"//g')
 BASE_URI=$(echo $BASE_URI | sed "s/'//g")
 BASE_URI=$(echo $BASE_URI | sed 's/\/$//g')
 
-# Create the nginx configuration snippet to rewrite the URL
+# Create the "location" nginx configuration snippet to rewrite the URL
 cat <<EOF > /tmp/snippet.txt
 
   # Remove URL prefix from the URL when Baikal is served from a sub path
@@ -49,7 +49,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Insert the snippet into the Nginx configuration
+# Insert the "location" snippet into the Nginx configuration
 sed -i '/charset utf-8;/r /tmp/snippet.txt' /etc/nginx/conf.d/default.conf
-sed -i 's/# internal;/internal;/' /etc/nginx/conf.d/default.conf
 rm /tmp/snippet.txt
+
+sed -i 's/# internal;/internal;/' /etc/nginx/conf.d/default.conf
+
+# Update the rewrite rules for the CalDAV and CardDAV well-known URLs
+sed -i "s|rewrite ^/.well-known/caldav /dav.php redirect;|rewrite ^$BASE_URI/.well-known/caldav $BASE_URI/dav.php redirect;|" /etc/nginx/conf.d/default.conf
+sed -i "s|rewrite ^/.well-known/carddav /dav.php redirect;|rewrite ^$BASE_URI/.well-known/carddav $BASE_URI/dav.php redirect;|" /etc/nginx/conf.d/default.conf
