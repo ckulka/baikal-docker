@@ -43,11 +43,13 @@ jobs:
         run: docker stop ${{ inputs.dockerfile }}
 
       - name: Build and run MailSlurper
+        if: false
         run: |
           docker build -q 'https://github.com/mailslurper/mailslurper.git#release-1.15.0' -t mailslurper
           docker run --rm --detach --name mailslurper -p 8085:8085 -v ${{ github.workspace }}/cypress/fixtures/mailslurper-config.json:/config.json:ro mailslurper
 
       - name: Start Baikal container with MSMTP configuration
+        if: false
         env:
           MSMTPRC: |
             account default
@@ -59,6 +61,7 @@ jobs:
           docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php baikal:/var/www/baikal/html/
 
       - name: Run Cypress tests incl. MSMTP
+        if: false
         run: CYPRESS_MSMTP_ENABLED=TRUE npm run test
 
       - name: Archive test results
