@@ -23,3 +23,4 @@ fi
 # Replace the Plugin.php file with the one with the Home Assistant fix
 echo "$ME: info: Applying Home Assistant fix"
 cp /docker-entrypoint.d/Plugin-with-home-assistant-fix.php /var/www/baikal/vendor/sabre/dav/lib/CalDAV/Plugin.php
+echo "$ME: info: Applied Home Assistant fix"

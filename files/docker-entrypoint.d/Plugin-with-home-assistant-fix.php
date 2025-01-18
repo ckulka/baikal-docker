@@ -713,7 +713,7 @@ class Plugin extends DAV\ServerPlugin
             return;
         }
 
-        // We're onyl interested in ICalendarObject nodes that are inside of a
+        // We're only interested in ICalendarObject nodes that are inside of a
         // real calendar. This is to avoid triggering validation and scheduling
         // for non-calendars (such as an inbox).
         list($parent) = Uri\split($path);
@@ -906,7 +906,7 @@ class Plugin extends DAV\ServerPlugin
     }
 
     /**
-     * This method is triggered whenever a subsystem reqeuests the privileges
+     * This method is triggered whenever a subsystem requests the privileges
      * that are supported on a particular node.
      */
     public function getSupportedPrivilegeSet(INode $node, array &$supportedPrivilegeSet)
