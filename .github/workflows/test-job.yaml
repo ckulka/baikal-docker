@@ -39,8 +39,34 @@ jobs:
       - name: Run Cypress tests
         run: npm run test
 
+      - name: Assert Home Assistant fix is not applied by default
+        run: |
+          HA_FIX=$(sha1sum files/docker-entrypoint.d/Plugin-with-home-assistant-fix.php | awk '{print $1}')
+          ACTUAL=$(docker exec ${{ inputs.dockerfile }} sha1sum /var/www/baikal/vendor/sabre/dav/lib/CalDAV/Plugin.php | awk '{print $1}')
+
+          if [ "$ACTUAL" == "$HA_FIX" ]; then
+            echo "::error file=files/docker-entrypoint.d/30-apply-home-assistant-fix.sh:: Home Assistant fix was applied, even though it was not enabled."
+            exit 1
+          fi
+
       - name: Stop Baikal container
         run: docker stop ${{ inputs.dockerfile }}
+
+      - name: Assert Home Assistant fix is applied
+        run: |
+          # Start Baikal with Home Assistant fix enabled
+          docker run --rm -d --name baikal-ha -e APPLY_HOME_ASSISTANT_FIX=true baikal-image
+
+          # Assert Home Assistant fix is applied
+          EXPECTED=$(sha1sum files/docker-entrypoint.d/Plugin-with-home-assistant-fix.php | awk '{print $1}')
+          ACTUAL=$(docker exec baikal-ha sha1sum /var/www/baikal/vendor/sabre/dav/lib/CalDAV/Plugin.php | awk '{print $1}')
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "::error file=files/docker-entrypoint.d/30-apply-home-assistant-fix.sh:: Home Assistant fix was not applied, even though it was enabled."
+            exit 1
+          fi
+
+          # Stop Baikal
+          docker stop baikal-ha
 
       - name: Build and run MailSlurper
         if: false
