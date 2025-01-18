@@ -21,6 +21,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     php8.2-fpm                \
     php8.2-mbstring           \
     php8.2-mysql              \
+    php8.2-pgsql              \
     php8.2-sqlite3            \
     php8.2-xml                \
     sqlite3                   \
