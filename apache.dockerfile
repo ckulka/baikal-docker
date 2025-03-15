@@ -14,9 +14,10 @@ COPY --from=builder --chown=www-data:www-data baikal /var/www/baikal
 RUN apt-get update            &&\
   apt-get install -y          \
     libcurl4-openssl-dev      \
-    msmtp msmtp-mta           &&\
+    msmtp msmtp-mta           \
+    libpq-dev                 &&\
   rm -rf /var/lib/apt/lists/* &&\
-  docker-php-ext-install curl pdo pdo_mysql
+  docker-php-ext-install curl pdo pdo_mysql pdo_pgsql pgsql
 
 # Configure Apache + HTTPS
 COPY files/apache.conf /etc/apache2/sites-enabled/000-default.conf
