@@ -56,10 +56,14 @@ jobs:
         run: |
           # Start Baikal with Home Assistant fix enabled
           docker run --rm -d --name baikal-ha -e APPLY_HOME_ASSISTANT_FIX=true baikal-image
+          sleep 3s
+          docker logs baikal-ha
 
           # Assert Home Assistant fix is applied
           EXPECTED=$(sha1sum files/docker-entrypoint.d/Plugin-with-home-assistant-fix.php | awk '{print $1}')
+          echo "Expected: $EXPECTED"
           ACTUAL=$(docker exec baikal-ha sha1sum /var/www/baikal/vendor/sabre/dav/lib/CalDAV/Plugin.php | awk '{print $1}')
+          echo "Actual: $ACTUAL"
           if [ "$ACTUAL" != "$EXPECTED" ]; then
             echo "::error file=files/docker-entrypoint.d/30-apply-home-assistant-fix.sh:: Home Assistant fix was not applied, even though it was enabled."
             exit 1
@@ -68,26 +72,24 @@ jobs:
           # Stop Baikal
           docker stop baikal-ha
 
-      - name: Build and run MailSlurper
-        if: false
+      - name: Build and run local mail server
+        working-directory: cypress/fixtures
         run: |
-          docker build -q 'https://github.com/mailslurper/mailslurper.git#release-1.15.0' -t mailslurper
-          docker run --rm --detach --name mailslurper -p 8085:8085 -v ${{ github.workspace }}/cypress/fixtures/mailslurper-config.json:/config.json:ro mailslurper
+          docker build -t mail-server -f mail-server.dockerfile .
+          docker run --rm -d --name mail-server -p 8025:8025 -p 8080:8080 mail-server
 
       - name: Start Baikal container with MSMTP configuration
-        if: false
         env:
           MSMTPRC: |
             account default
-            host    mailslurper
-            port    2500
+            host    mail-server
+            port    8025
             from    baikal@example.com
         run: |
-          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mailslurper --name baikal baikal-image
+          docker run --rm --detach -p 80:80 -e MSMTPRC="$MSMTPRC" --link mail-server --name baikal baikal-image
           docker cp ${{ github.workspace }}/cypress/fixtures/mail-test.php baikal:/var/www/baikal/html/
 
       - name: Run Cypress tests incl. MSMTP
-        if: false
         run: CYPRESS_MSMTP_ENABLED=TRUE npm run test
 
       - name: Archive test results
