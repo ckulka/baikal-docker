@@ -12,12 +12,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^14.2.0",
-    "eslint": "^9.22.0",
+    "cypress": "^14.2.1",
+    "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
     "prettier": "^3.5.3",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.1"
+    "typescript-eslint": "^8.29.0"
   },
   "engines": {
     "node": "^20.11.1"
