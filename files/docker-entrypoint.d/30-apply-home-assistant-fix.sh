@@ -16,7 +16,7 @@ CHECKSUM="22e5ac3311fa112e702363920ce86d90256aacc6  /var/www/baikal/vendor/sabre
 if ! echo $CHECKSUM | sha1sum --check --status - ;
 then
   echo "$ME: info: Plugin.php differs from the packaged version"
-  exit 1
+  exit 0
 fi
 
 
