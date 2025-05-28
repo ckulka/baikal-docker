@@ -26,3 +26,10 @@ docker run --rm -it -p 80:80 -p 443:443 -v /etc/ssl/private/baikal:/etc/ssl/priv
 ```
 
 I also included the Docker Compose template [examples/docker-compose.apache.yaml](https://github.com/ckulka/baikal-docker/blob/master/examples/docker-compose.apache.yaml) for this scenario.
+
+If you're using the `nginx` variant and would like to mount your certificates, you can do something like this:
+
+```bash
+# The folder /etc/nginx/ssl contains the files nginx.crt and nginx.key
+docker run --rm -it -p 80:80 -p 443:443 -v /etc/ssl/private/baikal:/etc/nginx/ssl/:ro ckulka/baikal:nginx
+```

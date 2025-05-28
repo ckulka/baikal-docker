@@ -13,6 +13,7 @@ FROM nginx:1
 RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
   apt update                  &&\
   apt install -y lsb-release  &&\
+  apt install -y libcurl4-openssl-dev      &&\
   echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list &&\
   apt remove -y lsb-release   &&\
   apt update                  &&\
@@ -35,5 +36,9 @@ COPY files/docker-entrypoint.d/*.sh files/docker-entrypoint.d/*.php files/docker
 COPY --from=builder --chown=nginx:nginx baikal /var/www/baikal
 COPY files/nginx.conf /etc/nginx/conf.d/default.conf
 
+RUN mkdir /etc/nginx/ssl
+RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -subj "/C=/ST=/L=/O=/CN=" -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+
 VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
+VOLUME /etc/nginx/ssl
