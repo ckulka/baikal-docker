@@ -91,3 +91,11 @@ services:
 ```
 
 See [examples/docker-compose.sendmail-gmail.yaml](../examples/docker-compose.email-gmail.yaml) for a starter template.
+
+## Known issues
+
+### Baikal username is not an email address
+
+@deathblade666 found out that Baikal uses the username as the email address, see <https://github.com/ckulka/baikal-docker/issues/290#issuecomment-3136438356>.
+
+Until the issue is fixed, your usernames must also be their email addresses, otherwise they will not receive email invitations.
