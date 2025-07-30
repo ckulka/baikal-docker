@@ -6,11 +6,30 @@ In order to send out emails, you need a working SMTP service - you can host your
 
 The entire email configuration is stored in the `MSMTPRC` environment variable.
 
+> [!Tip]
+> After you have set up your configuration, you can run a quick test by sending an email from the command line.
+>
+> This is especially helpful when you do not receive emails from Baikal and you want to narrow down the error.
+>
+> 1. Start your Baikal container with the SMTP configuration
+> 1. Open a command prompt inside the Baikal container
+>
+>    ```sh
+>    docker exec -it <conatiner_name> /bin/sh
+>    ```
+>
+> 1. Send an email
+>
+>    ```sh
+>    echo "Hello world." | msmtp -a default your-email-address@example.com
+>    ```
+
 ## Generic SMTP server
 
 If you have an SMTP server without security in place, i.e. no authentication or SSL/TLS/STARTTLS, then you only have to configure the SMTP server name. Needless to say it's highly recommended to have authentication and TLS in place.
 
 ```yaml
+# docker-compose.yaml
 services:
   baikal:
     image: ckulka/baikal:nginx
@@ -25,6 +44,7 @@ services:
 If you have TLS and authentication in place, add the following configuration parameters:
 
 ```yaml
+# docker-compose.yaml
 services:
   baikal:
     image: ckulka/baikal:nginx
@@ -52,6 +72,7 @@ If you use Gmail as your SMTP server, you have to first allow less secure apps (
 Once that is done, use the following configuration:
 
 ```yaml
+# docker-compose.yaml
 services:
   baikal:
     image: ckulka/baikal:nginx
