@@ -7,10 +7,13 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - config:/var/www/baikal/config
       - data:/var/www/baikal/Specific
+      - ssl:/etc/nginx/ssl
 
 volumes:
   config:
   data:
+  ssl:
