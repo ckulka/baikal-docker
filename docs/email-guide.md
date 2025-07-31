@@ -67,7 +67,17 @@ See [examples/docker-compose.email.yaml](../examples/docker-compose.email.yaml) 
 
 ## Gmail
 
-If you use Gmail as your SMTP server, you have to first allow less secure apps (sendmail) to use Gmail, see [Less secure apps & your Google Account](https://support.google.com/accounts/answer/6010255?hl=en#zippy=).
+> [!IMPORTANT]
+> Username/password authentication using seems to be no longer available.
+>
+> For more details, see [Less secure apps & your Google Account](https://support.google.com/accounts/answer/6010255).
+
+If you use Gmail as your SMTP server, you have create an app password:
+
+1. Enable two-factor authentication (2FA): <https://myaccount.google.com/signinoptions/twosv>
+2. Create an app password: <https://myaccount.google.com/u/0/apppasswords>
+
+For more details on app passwords, see [Sign in with app passwords](https://support.google.com/accounts/answer/185833).
 
 Once that is done, use the following configuration:
 
