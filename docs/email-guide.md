@@ -94,8 +94,10 @@ See [examples/docker-compose.sendmail-gmail.yaml](../examples/docker-compose.ema
 
 ## Known issues
 
-### Baikal username is not an email address
+### DAVx5 but usernames are not an emails
 
-@deathblade666 found out that Baikal uses the username as the email address, see <https://github.com/ckulka/baikal-docker/issues/290#issuecomment-3136438356>.
+When using DAVx5, then your Baikal usernames must be email addresses, otherwise email invitations will not be sent out.
 
-Until the issue is fixed, your usernames must also be their email addresses, otherwise they will not receive email invitations.
+For more details, see <https://manual.davx5.com/accounts_collections.html#account-names>.
+
+Kodus to @deathblade666 for finding this out in <https://github.com/ckulka/baikal-docker/issues/290#issuecomment-3136438356>.
