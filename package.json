@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^14.3.0",
+    "cypress": "^15.0.0",
     "eslint": "^9.24.0",
     "eslint-config-prettier": "^10.1.2",
     "prettier": "^3.5.3",
