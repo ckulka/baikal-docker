@@ -7,7 +7,6 @@
 # 3. Adjust file permissions: chmod 600 /etc/ssl/private/acme.json
 # 4. Start the stack: docker compose -f docker compose.ssl.yaml up
 
-version: "2"
 services:
   baikal:
     image: ckulka/baikal:nginx

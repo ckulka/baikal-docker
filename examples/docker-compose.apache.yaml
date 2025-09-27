@@ -1,5 +1,3 @@
-version: "2"
-
 services:
   baikal:
     image: ckulka/baikal:apache
