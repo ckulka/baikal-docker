@@ -1,7 +1,7 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
 FROM alpine AS builder
 
-ENV VERSION 0.10.1
+ENV VERSION 0.11.1
 
 ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
@@ -30,6 +30,7 @@ VOLUME /var/www/baikal/config
 VOLUME /var/www/baikal/Specific
 
 COPY files/docker-entrypoint.sh /docker-entrypoint.sh
+COPY files/favicon.ico /var/www/baikal/html
 COPY files/docker-entrypoint.d/*.sh files/docker-entrypoint.d/*.php files/docker-entrypoint.d/httpd/ /docker-entrypoint.d/
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD  [ "apache2-foreground" ]

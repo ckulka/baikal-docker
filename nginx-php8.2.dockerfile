@@ -1,7 +1,7 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
 FROM alpine AS builder
 
-ENV VERSION 0.10.1
+ENV VERSION 0.11.1
 
 ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
@@ -33,6 +33,7 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 # Add Baikal & nginx configuration
 COPY files/docker-entrypoint.d/*.sh files/docker-entrypoint.d/*.php files/docker-entrypoint.d/nginx/ /docker-entrypoint.d/
 COPY --from=builder --chown=nginx:nginx baikal /var/www/baikal
+COPY files/favicon.ico /var/www/baikal/html
 COPY files/nginx.conf /etc/nginx/conf.d/default.conf
 
 VOLUME /var/www/baikal/config
