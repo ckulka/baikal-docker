@@ -6,7 +6,7 @@ services:
     image: ckulka/baikal:nginx
     restart: always
     ports:
-      - "80:80"
+      - "8090:80"
     volumes:
       - config:/var/www/baikal/config
       - data:/var/www/baikal/Specific
