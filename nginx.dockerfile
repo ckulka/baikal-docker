@@ -1,7 +1,7 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
 FROM alpine AS builder
 
-ENV VERSION 0.10.1
+ENV VERSION 0.13.0
 
 ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
@@ -17,13 +17,13 @@ RUN curl -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   apt remove -y lsb-release   &&\
   apt update                  &&\
     apt install -y            \
-    php8.1-curl               \
-    php8.1-fpm                \
-    php8.1-mbstring           \
-    php8.1-mysql              \
-    php8.1-pgsql              \
-    php8.1-sqlite3            \
-    php8.1-xml                \
+    php8.3-curl               \
+    php8.3-fpm                \
+    php8.3-mbstring           \
+    php8.3-mysql              \
+    php8.3-pgsql              \
+    php8.3-sqlite3            \
+    php8.3-xml                \
     sqlite3                   \
     msmtp msmtp-mta           &&\
   rm -rf /var/lib/apt/lists/* &&\

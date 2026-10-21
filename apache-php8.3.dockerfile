@@ -1,13 +1,13 @@
 # Multi-stage build, see https://docs.docker.com/develop/develop-images/multistage-build/
 FROM alpine AS builder
 
-ENV VERSION 0.10.1
+ENV VERSION 0.13.0
 
 ADD https://github.com/sabre-io/Baikal/releases/download/$VERSION/baikal-$VERSION.zip .
 RUN apk add unzip && unzip -q baikal-$VERSION.zip
 
 # Final Docker image
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 # Install Baikal and required dependencies
 COPY --from=builder --chown=www-data:www-data baikal /var/www/baikal
