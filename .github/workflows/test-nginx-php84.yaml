@@ -1,0 +1,41 @@
+name: Nginx PHP 8.4 smoke test
+
+on:
+  pull_request:
+    paths:
+      - nginx-php8.4.dockerfile
+      - files/**
+      - .github/workflows/test-nginx-php84.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -f nginx-php8.4.dockerfile -t baikal-php84 .
+      - name: Check PHP version and extensions
+        run: |
+          docker run --rm --entrypoint php baikal-php84 -r '
+            if (PHP_MAJOR_VERSION !== 8 || PHP_MINOR_VERSION !== 4) exit(1);
+            foreach (["curl", "mbstring", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "dom"] as $extension) {
+              if (!extension_loaded($extension)) exit(1);
+            }
+          '
+      - name: Start Nginx and PHP-FPM
+        run: |
+          docker run -d --name baikal-php84 -p 127.0.0.1:8080:80 baikal-php84
+          docker exec baikal-php84 nginx -t
+          curl --fail --location --retry 10 --retry-all-errors --retry-delay 2 \
+            http://127.0.0.1:8080/ -o /tmp/baikal.html
+          grep -q 'Baïkal initialization wizard' /tmp/baikal.html
+      - name: Container logs
+        if: always()
+        run: docker logs baikal-php84
+      - name: Clean up
+        if: always()
+        run: docker rm -fv baikal-php84

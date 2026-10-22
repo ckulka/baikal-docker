@@ -83,6 +83,7 @@ When the container starts, the startup script `/docker-entrypoint.d/40-fix-baika
 
 You can find more installation and configuration guides here:
 
+- [Nginx / PHP 8.4 source build and upgrade guide](docs/nginx-php84-upgrade.md)
 - [Email Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/email-guide.md)
 - [Home Assistant Fix](https://github.com/ckulka/baikal-docker/blob/master/docs/home-assistant-fix.md)
 - [SSL Certificate Guide](https://github.com/ckulka/baikal-docker/blob/master/docs/ssl-certificates-guide.md)
